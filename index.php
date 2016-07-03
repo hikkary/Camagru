@@ -6,6 +6,10 @@
 	<title>Camagru</title>
 </head>
 <body>
+<div id="header">
+<img src="img/headerfp.png" width="100%">
+</div>	
+
 <div id="logo">
 <img src="img/logo.png">
 </div>
