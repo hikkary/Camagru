@@ -27,6 +27,7 @@
 <input id="password" type="password" placeholder="Mot de passe">
 <input id="sub" type="submit" name="s'inscrire">
 <div id="footer">
+<a href="app.php">app</a>
 <img src="img/yjuni.png">
 </div>
 </form>
