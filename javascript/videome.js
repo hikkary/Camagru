@@ -47,7 +47,7 @@
   function takepicture() {
     canvas.width = width ;
     canvas.height = height;
-    canvas.getContext('2d').drawImage(video, 0, 0, width/2, height/2); //	context.drawImage(img,x,y,width,height);
+    canvas.getContext('2d').drawImage(video, 0, 0, width, height); //	context.drawImage(img,x,y,width,height);
     var data = canvas.toDataURL('image/png');
     photo.setAttribute('src', data);
   }

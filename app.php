@@ -11,13 +11,21 @@
 <div id = top-app>
 <img src="img/logo.png" >
 <i class="fa fa-times" aria-hidden="true"></i>
-<p>Deconnexion</p>
+<!-- <p>Deconnexion</p> -->
 </img>	
 </div>
+<div id ="bv">
+<div id ="v">
+<!-- <img src="img/gcam.png"> -->
 <video id="video"></video>
+<img src="img/nphoto.png" id="photo" alt="photo">
+</div>
+</div>
 <button id="startbutton">Hiro ni naritai</button>
-<canvas id="canvas"></canvas>
-<img src="http://placekitten.com/g/320/261" id="photo" alt="photo">
+
+<canvas id="canvas">
+
+</canvas>
 </body>
 	<script type="text/javascript" src="javascript/videome.js"></script>
 </html>
