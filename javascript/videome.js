@@ -20,12 +20,12 @@
       audio: false // et je coupe le son
     },
     function(stream) {
-      // if (navigator.mozGetUserMedia) {
-      //   video.mozSrcObject = stream;
-      // } else {
+      if (navigator.mozGetUserMedia) {
+        video.mozSrcObject = stream;
+      } else {
         var vendorURL = window.URL || window.webkitURL;
         video.src = vendorURL.createObjectURL(stream);
-      // }
+      }
       video.play();
     },
     function(err) {

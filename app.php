@@ -19,7 +19,11 @@
 <div id ="v">
 <!-- <img src="img/gcam.png"> -->
 <video id="video"></video>
+
+<canvas id="canvas"></canvas>
 <img src="img/nphoto.png" id="photo" alt="photo">
+
+
 <button id="startbutton">
 <i id="camera" class="fa fa-camera" aria-hidden="true"></i>
 </button>
@@ -28,10 +32,11 @@
 </button>
 </div>
 </div>
-<canvas id="canvas"></canvas>
+
 <div id="montage">
 <p>Ace</p>
 </div>
 </body>
 	<script type="text/javascript" src="javascript/videome.js"></script>
+	<script type="text/javascript" src="javascript/paint.js"></script>
 </html>
