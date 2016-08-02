@@ -6,6 +6,9 @@
       canvas       = document.querySelector('#canvas'),
       photo        = document.querySelector('#photo'),
       startbutton  = document.querySelector('#startbutton'),
+      corbeille	   = document.querySelector('#corbeille'),
+      retardateur	   = document.querySelector('#retardateur'),
+    
       width = 720,
       height = 0; // on definira sa plus tard
 
@@ -49,12 +52,38 @@
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height); //	context.drawImage(img,x,y,width,height);
     var data = canvas.toDataURL('image/png');
-    photo.setAttribute('src', data);
+    // photo.setAttribute('src', data);
   }
+
+  function clearcanvas(){
+    canvas        = document.querySelector('#canvas'),
+    context = canvas.getContext("2d");
+     canvas.width = width ;
+    canvas.height = height;
+    // photo.setAttribute('src', "../img/nphoto.png");
+  	// photo = NULL;
+  	context.clearRect(0,0,width,height);
+  }
+
 
   startbutton.addEventListener('click', function(ev){
       takepicture();// on appelle la fonction takepicture quand on cliq srr le bouton
     ev.preventDefault();
   }, false);
+
+  retardateur.addEventListener('click', function(ev){
+     setTimeout(function()
+     {
+      	takepicture();// on appelle la fonction takepicture quand on cliq srr le bouton
+    	ev.preventDefault();
+  	}, 3000);
+  }, false);
+
+
+  corbeille.addEventListener('click', function(ev){
+  	clearcanvas();
+  	ev.preventDefault();
+  }, false);
+
 
 })();

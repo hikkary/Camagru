@@ -23,6 +23,9 @@
 <canvas id="canvas"></canvas>
 <img src="img/nphoto.png" id="photo" alt="photo">
 
+<button id="retardateur">
+	<i class="fa fa-clock-o" aria-hidden="true"></i>
+</button>
 
 <button id="startbutton">
 <i id="camera" class="fa fa-camera" aria-hidden="true"></i>
@@ -30,6 +33,13 @@
 <button id="upload">
 <i class="fa fa-arrow-up" aria-hidden="true"></i>
 </button>
+<button id="corbeille">
+<i class="fa fa-trash" aria-hidden="true"></i>
+</button>
+<button id="sauvegarder">
+	<i class="fa fa-floppy-o" aria-hidden="true"></i>
+</button>
+
 </div>
 </div>
 
