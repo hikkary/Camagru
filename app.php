@@ -36,10 +36,11 @@
 <button id="corbeille">
 <i class="fa fa-trash" aria-hidden="true"></i>
 </button>
-<button id="sauvegarder">
+<a id="sauvegarder">
+<button >
 	<i class="fa fa-floppy-o" aria-hidden="true"></i>
 </button>
-
+</a>
 </div>
 </div>
 

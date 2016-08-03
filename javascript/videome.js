@@ -7,8 +7,9 @@
       photo        = document.querySelector('#photo'),
       startbutton  = document.querySelector('#startbutton'),
       corbeille	   = document.querySelector('#corbeille'),
-      retardateur	   = document.querySelector('#retardateur'),
-    
+      retardateur  = document.querySelector('#retardateur'),
+  	  sauvegarder  = document.querySelector('#sauvegarder'),
+
       width = 720,
       height = 0; // on definira sa plus tard
 
@@ -47,41 +48,64 @@
     }
   }, false);
 
-  function takepicture() {
-    canvas.width = width ;
+  // function download(sauvegarder, canvas)
+  // {
+ 	// 	window.location.assign(sauvegarder); 	
+  //  }
+
+  function takepicture(sauvegarder) {
+  	
+  	// console.log(d);
+  	var ladate = new Date();
+  	var jour = ladate.getDate();
+  	var mois = ladate.getMonth() + 1;
+  	var an = ladate.getFullYear();
+  	var heure = ladate.getHours();
+  	var min = ladate.getMinutes();
+  	var sec = ladate.getSeconds();
+  	canvas.width = width ;
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height); //	context.drawImage(img,x,y,width,height);
     var data = canvas.toDataURL('image/png');
+  	sauvegarder.setAttribute('href', data);
+  	sauvegarder.setAttribute('download', "CamHero "+jour+"-"+mois+"-"+an+" "+heure+"h"+min+"m"+sec);
+  
     // photo.setAttribute('src', data);
   }
 
-  function clearcanvas(){
-    canvas        = document.querySelector('#canvas'),
+  function clearcanvas(sauvegarder){
+    canvas  = document.querySelector('#canvas'),
     context = canvas.getContext("2d");
-     canvas.width = width ;
+    canvas.width = width ;
     canvas.height = height;
-    // photo.setAttribute('src', "../img/nphoto.png");
-  	// photo = NULL;
-  	context.clearRect(0,0,width,height);
+    context.clearRect(0,0,width,height);
+    sauvegarder.removeAttribute('href');
   }
 
 
+
+
   startbutton.addEventListener('click', function(ev){
-      takepicture();// on appelle la fonction takepicture quand on cliq srr le bouton
+      takepicture(sauvegarder);// on appelle la fonction takepicture quand on cliq srr le bouton
     ev.preventDefault();
   }, false);
 
   retardateur.addEventListener('click', function(ev){
      setTimeout(function()
      {
-      	takepicture();// on appelle la fonction takepicture quand on cliq srr le bouton
+      	takepicture(sauvegarder);// on appelle la fonction takepicture quand on cliq srr le bouton
     	ev.preventDefault();
   	}, 3000);
   }, false);
 
+  // sauvegarder.addEventListener('click', function(ev){
+  //     download(sauvegarder, canvas);// on appelle la fonction takepicture quand on cliq srr le bouton
+  //   ev.preventDefault();
+  // }, false);
+
 
   corbeille.addEventListener('click', function(ev){
-  	clearcanvas();
+  	clearcanvas(sauvegarder);
   	ev.preventDefault();
   }, false);
 
