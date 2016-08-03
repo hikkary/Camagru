@@ -17,12 +17,14 @@
 </div>
 <div id ="bv">
 <div id ="v">
-<!-- <img src="img/gcam.png"> -->
 <video id="video"></video>
+<img id="ncam" src="img/ncam.png"> 
 
 <canvas id="canvas"></canvas>
 <img src="img/nphoto.png" id="photo" alt="photo">
-
+<button id="cam">
+<i class="fa fa-video-camera" aria-hidden="true"></i>
+</button>
 <button id="retardateur">
 	<i class="fa fa-clock-o" aria-hidden="true"></i>
 </button>

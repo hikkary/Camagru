@@ -9,6 +9,10 @@
       corbeille	   = document.querySelector('#corbeille'),
       retardateur  = document.querySelector('#retardateur'),
   	  sauvegarder  = document.querySelector('#sauvegarder'),
+  	  cam  = document.querySelector('#cam'),
+  	  k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
+ 	  n = 0,
+  	  // clavier 	   = event.which,
 
       width = 720,
       height = 0; // on definira sa plus tard
@@ -44,6 +48,7 @@
       video.setAttribute('height', height);
       canvas.setAttribute('width', width);
       canvas.setAttribute('height', height);
+      console.log(video.getAttribute('src'));
       streaming = true;
     }
   }, false);
@@ -82,14 +87,24 @@
     sauvegarder.removeAttribute('href');
   }
 
-
-
-
-  startbutton.addEventListener('click', function(ev){
+// prise de photo
+ startbutton.addEventListener('click', function(ev){
       takepicture(sauvegarder);// on appelle la fonction takepicture quand on cliq srr le bouton
     ev.preventDefault();
   }, false);
 
+//ecoute du clavier
+ document.addEventListener("keydown",function(ev){
+ 	// alert(event.keyCode);
+ 	if (event.keyCode==13){
+			takepicture(sauvegarder);
+	}
+	if (event.keyCode==46){
+			clearcanvas(sauvegarder);
+	}
+ },true);
+
+// photo apres 3 seconde
   retardateur.addEventListener('click', function(ev){
      setTimeout(function()
      {
@@ -103,11 +118,24 @@
   //   ev.preventDefault();
   // }, false);
 
-
+  //effacer le canvas
   corbeille.addEventListener('click', function(ev){
   	clearcanvas(sauvegarder);
   	ev.preventDefault();
   }, false);
 
+  //arreter le flux video REGLER CE PB 
+  cam.addEventListener('click', function(ev){
+  	navigator.getMedia({audio:false, video:true},
+  	function(stream){
+  		var track = stream.getTracks()[0];
+  		track.stop();
+  	},
+  	 function(err) {
+      console.log("An error occured! " + err);
+    });
+
+
+  },false)
 
 })();
