@@ -18,11 +18,16 @@
 <div id ="bv">
 <div id ="v">
 <video id="video"></video>
+<div id ="newcanvas">
+	
+</div>
+
 <img id="ncam" src="img/ncam.png"> 
 
 <canvas id="canvas"></canvas>
 <img src="img/nphoto.png" id="photo" alt="photo">
 <button id="cam">
+<i id="stop" class="fa fa-ban" aria-hidden="true"></i>
 <i class="fa fa-video-camera" aria-hidden="true"></i>
 </button>
 <button id="retardateur">
@@ -47,7 +52,7 @@
 </div>
 
 <div id="montage">
-<p>Ace</p>
+<img id="m1" src="mask/prev-iron-man.png">
 </div>
 </body>
 	<script type="text/javascript" src="javascript/videome.js"></script>

@@ -10,7 +10,10 @@
       retardateur  = document.querySelector('#retardateur'),
   	  sauvegarder  = document.querySelector('#sauvegarder'),
   	  cam  = document.querySelector('#cam'),
-  	  k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
+  	  stop = document.querySelector('#stop'),
+      mask = document.querySelector('#m1'),
+      create = document.querySelector('#newcanvas'),
+      k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
  	  n = 0,
   	  // clavier 	   = event.which,
 
@@ -28,13 +31,21 @@
       audio: false // et je coupe le son
     },
     function(stream) {
-      if (navigator.mozGetUserMedia) {
-        video.mozSrcObject = stream;
-      } else {
+      // if (navigator.mozGetUserMedia) {
+      //   video.mozSrcObject = stream;
+      // } else {
         var vendorURL = window.URL || window.webkitURL;
         video.src = vendorURL.createObjectURL(stream);
-      }
+      // }
       video.play();
+
+      // Tentative arret de camera
+      // console.log(video.src);
+      // cam.addEventListener('click', function(ev){
+      //  // vendorURL.revokeObjectURL(video);
+      //  video.removeAttribute('src')
+      //  stop.style.opacity = 0;
+      //  },false)
     },
     function(err) {
       console.log("An error occured! " + err);
@@ -60,6 +71,7 @@
 
   function takepicture(sauvegarder) {
   	
+    var wesh = document.querySelector("#wesh")
   	// console.log(d);
   	var ladate = new Date();
   	var jour = ladate.getDate();
@@ -71,6 +83,8 @@
   	canvas.width = width ;
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height); //	context.drawImage(img,x,y,width,height);
+    if(wesh)
+      canvas.getContext('2d').drawImage(wesh, 0, 0, width, height); // context.drawImage(img,x,y,width,height); 
     var data = canvas.toDataURL('image/png');
   	sauvegarder.setAttribute('href', data);
   	sauvegarder.setAttribute('download', "CamHero "+jour+"-"+mois+"-"+an+" "+heure+"h"+min+"m"+sec);
@@ -86,6 +100,30 @@
     context.clearRect(0,0,width,height);
     sauvegarder.removeAttribute('href');
   }
+
+
+
+
+  function addimage(){
+    var newcanvas = document.createElement("canvas");
+    newcanvas.style.position = "absolute";
+    newcanvas.setAttribute("id", "wesh");
+
+    if (height != 0)
+      newcanvas.height = height;
+    else
+      newcanvas.height = 540;
+
+    newcanvas.width = width;
+
+    create.appendChild(newcanvas);
+    // canvas  = document.querySelector('#canvas'),
+     context = newcanvas.getContext("2d");
+     newcanvas.getContext('2d').drawImage(mask, 0, 0, mask.width, mask.height); // context.drawImage(img,x,y,width,height);
+     var data = newcanvas.toDataURL('image/png');
+  }
+
+
 
 // prise de photo
  startbutton.addEventListener('click', function(ev){
@@ -125,17 +163,11 @@
   }, false);
 
   //arreter le flux video REGLER CE PB 
-  cam.addEventListener('click', function(ev){
-  	navigator.getMedia({audio:false, video:true},
-  	function(stream){
-  		var track = stream.getTracks()[0];
-  		track.stop();
-  	},
-  	 function(err) {
-      console.log("An error occured! " + err);
-    });
-
-
-  },false)
+  
+  // poser un masque
+  mask.addEventListener('click', function(ev){
+    // video.getContext('2d').drawImage("mask/iron-man.png", 0, 0, 600, 600)
+    addimage(video);
+  },false);
 
 })();
