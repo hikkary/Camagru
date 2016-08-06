@@ -66,12 +66,12 @@
 
   // function download(sauvegarder, canvas)
   // {
- 	// 	window.location.assign(sauvegarder); 	
+ 	// 	window.location.assign(sauvegarder);
   //  }
 
   function takepicture(sauvegarder) {
-  	
-    var wesh = document.querySelector("#wesh")
+
+    // var wesh = document.querySelector("#wesh")
   	// console.log(d);
   	var ladate = new Date();
   	var jour = ladate.getDate();
@@ -83,12 +83,12 @@
   	canvas.width = width ;
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height); //	context.drawImage(img,x,y,width,height);
-    if(wesh)
-      canvas.getContext('2d').drawImage(wesh, 0, 0, width, height); // context.drawImage(img,x,y,width,height); 
+    // if(wesh)
+    //   canvas.getContext('2d').drawImage(wesh, 0, 0, width, height); // context.drawImage(img,x,y,width,height);
     var data = canvas.toDataURL('image/png');
   	sauvegarder.setAttribute('href', data);
   	sauvegarder.setAttribute('download', "CamHero "+jour+"-"+mois+"-"+an+" "+heure+"h"+min+"m"+sec);
-  
+
     // photo.setAttribute('src', data);
   }
 
@@ -104,24 +104,24 @@
 
 
 
-  function addimage(){
-    var newcanvas = document.createElement("canvas");
-    newcanvas.style.position = "absolute";
-    newcanvas.setAttribute("id", "wesh");
+  // function addimage(){
+  //   var newcanvas = document.createElement("canvas");
+  //   newcanvas.style.position = "absolute";
+  //   newcanvas.setAttribute("id", "wesh");
 
-    if (height != 0)
-      newcanvas.height = height;
-    else
-      newcanvas.height = 540;
+  //   if (height != 0)
+  //     newcanvas.height = height;
+  //   else
+  //     newcanvas.height = 540;
 
-    newcanvas.width = width;
+  //   newcanvas.width = width;
 
-    create.appendChild(newcanvas);
-    // canvas  = document.querySelector('#canvas'),
-     context = newcanvas.getContext("2d");
-     newcanvas.getContext('2d').drawImage(mask, 0, 0, mask.width, mask.height); // context.drawImage(img,x,y,width,height);
-     var data = newcanvas.toDataURL('image/png');
-  }
+  //   create.appendChild(newcanvas);
+  //   // canvas  = document.querySelector('#canvas'),
+  //    context = newcanvas.getContext("2d");
+  //    newcanvas.getContext('2d').drawImage(mask, 0, 0, mask.width, mask.height); // context.drawImage(img,x,y,width,height);
+  //    var data = newcanvas.toDataURL('image/png');
+  // }
 
 
 
@@ -162,8 +162,8 @@
   	ev.preventDefault();
   }, false);
 
-  //arreter le flux video REGLER CE PB 
-  
+  //arreter le flux video REGLER CE PB
+
   // poser un masque
   mask.addEventListener('click', function(ev){
     // video.getContext('2d').drawImage("mask/iron-man.png", 0, 0, 600, 600)

@@ -13,16 +13,16 @@
 <i id="croix" class="fa fa-times" aria-hidden="true" title="Deconnexion"></i>
 <i id="album" class="fa fa-picture-o" aria-hidden="true" title="Album"></i>
 <!-- <p>Deconnexion</p> -->
-</img>	
+</img>
 </div>
 <div id ="bv">
 <div id ="v">
 <video id="video"></video>
 <div id ="newcanvas">
-	
+<canvas id="wesh" height="540" width="720" style="position: absolute;"></canvas>
 </div>
 
-<img id="ncam" src="img/ncam.png"> 
+<img id="ncam" src="img/ncam.png">
 
 <canvas id="canvas"></canvas>
 <img src="img/nphoto.png" id="photo" alt="photo">
