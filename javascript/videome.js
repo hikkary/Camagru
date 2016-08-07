@@ -11,7 +11,7 @@
   	  sauvegarder  = document.querySelector('#sauvegarder'),
   	  cam  = document.querySelector('#cam'),
   	  stop = document.querySelector('#stop'),
-      mask = document.querySelector('#m1'),
+      mask = document.querySelector('#mask'),
       create = document.querySelector('#newcanvas'),
       k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
  	  n = 0,
@@ -71,7 +71,6 @@
 
   function takepicture(sauvegarder) {
 
-    // var wesh = document.querySelector("#wesh")
   	// console.log(d);
   	var ladate = new Date();
   	var jour = ladate.getDate();
@@ -83,9 +82,14 @@
   	canvas.width = width ;
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height); //	context.drawImage(img,x,y,width,height);
-    // if(wesh)
-    //   canvas.getContext('2d').drawImage(wesh, 0, 0, width, height); // context.drawImage(img,x,y,width,height);
+    if(mask)
+    {
+      var datamask = mask.toDataURL('image/png')
+      startbutton.setAttribute('datacanvas', datamask);
+       // canvas.getContext('2d').drawImage(wesh, 0, 0, width, height); // context.drawImage(img,x,y,width,height);
+    }
     var data = canvas.toDataURL('image/png');
+    startbutton.setAttribute('dataphoto', data);
   	sauvegarder.setAttribute('href', data);
   	sauvegarder.setAttribute('download', "CamHero "+jour+"-"+mois+"-"+an+" "+heure+"h"+min+"m"+sec);
 
