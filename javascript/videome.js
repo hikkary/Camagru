@@ -72,6 +72,8 @@
   function takepicture(sauvegarder) {
 
   	// console.log(d);
+    var formphoto = document.querySelector("#dp");
+    var formcanvas = document.querySelector("#dc");
   	var ladate = new Date();
   	var jour = ladate.getDate();
   	var mois = ladate.getMonth() + 1;
@@ -85,14 +87,17 @@
     if(mask)
     {
       var datamask = mask.toDataURL('image/png')
-      startbutton.setAttribute('datacanvas', datamask);
+      formcanvas.setAttribute('value', datamask);
+      // startbutton.setAttribute('datacanvas', datamask);
+
        // canvas.getContext('2d').drawImage(wesh, 0, 0, width, height); // context.drawImage(img,x,y,width,height);
     }
     var data = canvas.toDataURL('image/png');
-    startbutton.setAttribute('dataphoto', data);
+    // startbutton.setAttribute('dataphoto', data);
+    formphoto.setAttribute('value', data);
   	sauvegarder.setAttribute('href', data);
   	sauvegarder.setAttribute('download', "CamHero "+jour+"-"+mois+"-"+an+" "+heure+"h"+min+"m"+sec);
-
+    document.querySelector('#formulaire').submit();
     // photo.setAttribute('src', data);
   }
 

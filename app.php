@@ -24,7 +24,15 @@
 	</div>
 
 		<img id="ncam" src="img/ncam.png">
-		<canvas id="canvas"></canvas>
+		<!-- <canvas id="canvas"> -->
+		<?php
+			if($_POST["dataphoto"] || $_POST["datacanvas"])
+			{
+
+			}
+		?>
+
+		<!-- </canvas> -->
 		<img src="img/nphoto.png" id="photo" alt="photo">
 
 		<button id="cam">
@@ -37,9 +45,12 @@
 		</button>
 
 		<form id="formulaire" action="app.php" method="post">
-		<button id="startbutton">
+		<button id="startbutton" type="submit" value="ok">
 			<i id="camera" class="fa fa-camera" aria-hidden="true"></i>
 		</button>
+		<input id="dp" type="text" name="dataphoto"> </input>
+		<input id="dc" type="text" name="datacanvas"> </input>
+
 		</form>
 		<button id="upload">
 			<i class="fa fa-arrow-up" aria-hidden="true"></i>
@@ -59,11 +70,11 @@
 
 <div id="montage">
 	<img id="m1" src="mask/prev-iron-man.png">
-	<?php 
+
+</div>
+	<?php
 		var_dump($_POST);
 	?>
-</div>
-
 </body>
 	<script type="text/javascript" src="javascript/videome.js"></script>
 	<script type="text/javascript" src="javascript/paint.js"></script>
