@@ -15,6 +15,7 @@
 <!-- <p>Deconnexion</p> -->
 </img>
 </div>
+<p id="ntm"></p>
 <div id ="bv">
 	<div id ="v">
 		<video id="video"></video>
