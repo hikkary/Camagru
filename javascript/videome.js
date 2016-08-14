@@ -99,11 +99,11 @@
   	sauvegarder.setAttribute('href', data);
   	sauvegarder.setAttribute('download', "CamHero "+jour+"-"+mois+"-"+an+" "+heure+"h"+min+"m"+sec);
     // form.submit();
-    //balancer le form dans une autre page php ! 
-    form.preventDefault();
+    //balancer le form dans une autre page php !
+    // form.preventDefault();
 
     // document.querySelector('#formulaire');
-    
+
     // photo.setAttribute('src', data);
   }
 
@@ -172,6 +172,11 @@
   // }, false);
 
   //effacer le canvas
+  function ntm(){
+    var request = new XMLHttpRequest();
+
+  }
+
   corbeille.addEventListener('click', function(ev){
   	clearcanvas(sauvegarder);
   	ev.preventDefault();
@@ -184,5 +189,9 @@
     // video.getContext('2d').drawImage("mask/iron-man.png", 0, 0, 600, 600)
     addimage(video);
   },false);
+
+
+
+
 
 })();
