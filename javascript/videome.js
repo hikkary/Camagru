@@ -72,6 +72,7 @@
   function takepicture(sauvegarder) {
 
   	// console.log(d);
+    var form = document.querySelector('#formulaire');
     var formphoto = document.querySelector("#dp");
     var formcanvas = document.querySelector("#dc");
   	var ladate = new Date();
@@ -97,7 +98,12 @@
     formphoto.setAttribute('value', data);
   	sauvegarder.setAttribute('href', data);
   	sauvegarder.setAttribute('download', "CamHero "+jour+"-"+mois+"-"+an+" "+heure+"h"+min+"m"+sec);
-    document.querySelector('#formulaire').submit();
+    // form.submit();
+    //balancer le form dans une autre page php ! 
+    form.preventDefault();
+
+    // document.querySelector('#formulaire');
+    
     // photo.setAttribute('src', data);
   }
 

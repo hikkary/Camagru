@@ -22,9 +22,8 @@
 				<canvas id="mask" height="540" width="720" style="position: absolute;">
 				</canvas>
 	</div>
-
 		<img id="ncam" src="img/ncam.png">
-		<!-- <canvas id="canvas"> -->
+		<canvas id="canvas">
 		<?php
 			if($_POST["dataphoto"] || $_POST["datacanvas"])
 			{
@@ -32,7 +31,7 @@
 			}
 		?>
 
-		<!-- </canvas> -->
+		</canvas>
 		<img src="img/nphoto.png" id="photo" alt="photo">
 
 		<button id="cam">
@@ -45,7 +44,7 @@
 		</button>
 
 		<form id="formulaire" action="app.php" method="post">
-		<button id="startbutton" type="submit" value="ok">
+		<button id="startbutton">
 			<i id="camera" class="fa fa-camera" aria-hidden="true"></i>
 		</button>
 		<input id="dp" type="text" name="dataphoto"> </input>
