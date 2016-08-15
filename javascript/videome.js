@@ -12,6 +12,7 @@
   	  cam  = document.querySelector('#cam'),
   	  stop = document.querySelector('#stop'),
       mask = document.querySelector('#mask'),
+      iron = document.querySelector('#m1'),
       create = document.querySelector('#newcanvas'),
       k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
  	  n = 0,
@@ -175,13 +176,21 @@
   function ntm(){
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
-      if (request.readyState == 4 && request.status == 200){
-        document.getElementById("ntm").innerHTML = request.reponseText;
+      if (request.readyState == 4 && request.status == 200)
+      {
+        const errors = JSON.parse(request.responseText);
+        console.log(errors);
+        document.getElementById("ntm").innerHTML = errors['test'];
       }
+
     };
-    request.open("POST", "supp.php", true);
+    const data = {
+      test : "coucou",
+      fawfawf : "lol"
+    };
+    request.open("POST", "./javascript/supp.php", true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    request.send("fname=Henry&lname=Ford");
+    request.send(JSON.stringify(data));
   }
 
   corbeille.addEventListener('click', function(ev){
@@ -198,7 +207,11 @@
     ntm();
   },true);
 
-
+ iron.addEventListener('click', function(ev){
+    // video.getContext('2d').drawImage("mask/iron-man.png", 0, 0, 600, 600)
+    //addimage(video);
+    ntm();
+  },true);
 
 
 
