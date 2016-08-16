@@ -15,6 +15,7 @@
 <!-- <p>Deconnexion</p> -->
 </img>
 </div>
+<!-- <img src=""> -->
 <p id="ntm"></p>
 <div id ="bv">
 	<div id ="v">
@@ -44,12 +45,13 @@
 			<i class="fa fa-clock-o" aria-hidden="true"></i>
 		</button>
 
-		<form id="formulaire" action="app.php" method="post">
+		<form id="formulaire" action="merge.php" method="post">
 		<button id="startbutton">
 			<i id="camera" class="fa fa-camera" aria-hidden="true"></i>
 		</button>
 		<input id="dp" type="text" name="dataphoto"> </input>
 		<input id="dc" type="text" name="datacanvas"> </input>
+		<input id="ds" type="submit" name="datasubmit"> </input>
 
 		</form>
 		<button id="upload">

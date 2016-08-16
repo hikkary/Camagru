@@ -70,8 +70,47 @@
  	// 	window.location.assign(sauvegarder);
   //  }
 
-  function takepicture(sauvegarder) {
+    //   function ntm(){
+  //   var request = new XMLHttpRequest(); // on initialise un nouvel objet XMLHttpRequest() qui permet de converser avec le serveur
+  //   request.onreadystatechange = function() { //stocke une fonction qui sera appeler si l'etat la propriete readyState change
+  //     if (request.readyState == 4 && request.status == 200) // les etats vont de 1 a 4, voir http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp pour plus d'info, le 200 signifie que le statut de la requete/page est "ok"
+  //     {
+  //       const errors = JSON.parse(request.responseText); //errors stock les donnee renvoyer par la page php
+  //       console.log(errors); 
+  //       document.getElementById("ntm").innerHTML = errors['fawfawf']; // je place dans la balise dont l'idee est ntm , la case fawfawf du tableau envoyer au php
+  //     }
+  //   };
+  //   const data = {
+  //     test : "coucou",
+  //     fawfawf : "lol"
+  //   };
+  //   request.open("POST", "./javascript/supp.php", true);//  http://www.w3schools.com/ajax/ajax_xmlhttprequest_send.asp
+  //   request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  //   request.send(JSON.stringify(data)); // on envoi rien en cas de GET et une string en cas de POST
+  // }
 
+
+  function mergepictures(dataphoto,datamask){
+    var merge = new XMLHttpRequest();
+    merge.onreadystatechange = function(){
+      if (merge.readyState == 4 && merge.status == 200)
+      {
+        const picture_data = JSON.parse(merge.responseText);
+        console.log(picture_data); 
+        document.getElementById("ntm").innerHTML = picture_data["picture"];
+      }
+      };
+      const data = {
+        picture : dataphoto,
+        canvas : datamask
+      }
+    merge.open("POST", "merge.php", true);//  http://www.w3schools.com/ajax/ajax_xmlhttprequest_send.asp
+    merge.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    merge.send(JSON.stringify(data)); // on envoi rien en cas de GET et une string en cas de POST
+    };
+  
+
+  function takepicture(sauvegarder) {
   	// console.log(d);
     var form = document.querySelector('#formulaire');
     var formphoto = document.querySelector("#dp");
@@ -91,22 +130,17 @@
       var datamask = mask.toDataURL('image/png')
       formcanvas.setAttribute('value', datamask);
       // startbutton.setAttribute('datacanvas', datamask);
-
-       // canvas.getContext('2d').drawImage(wesh, 0, 0, width, height); // context.drawImage(img,x,y,width,height);
+      // canvas.getContext('2d').drawImage(wesh, 0, 0, width, height); // context.drawImage(img,x,y,width,height);
     }
     var data = canvas.toDataURL('image/png');
     // startbutton.setAttribute('dataphoto', data);
     formphoto.setAttribute('value', data);
   	sauvegarder.setAttribute('href', data);
   	sauvegarder.setAttribute('download', "CamHero "+jour+"-"+mois+"-"+an+" "+heure+"h"+min+"m"+sec);
-    // form.submit();
-    //balancer le form dans une autre page php !
-    // form.preventDefault();
-
-    // document.querySelector('#formulaire');
-
-    // photo.setAttribute('src', data);
+      mergepictures(data,datamask);
+    
   }
+
 
   function clearcanvas(sauvegarder){
     canvas  = document.querySelector('#canvas'),
@@ -120,20 +154,22 @@
 
 
 
+
+
   // function addimage(){
-  //   var newcanvas = document.createElement("canvas");
-  //   newcanvas.style.position = "absolute";
-  //   newcanvas.setAttribute("id", "wesh");
+    // var newcanvas = document.createElement("canvas");
+    // newcanvas.style.position = "absolute";
+    // newcanvas.setAttribute("id", "wesh");
 
-  //   if (height != 0)
-  //     newcanvas.height = height;
-  //   else
-  //     newcanvas.height = 540;
+    // if (height != 0)
+    //   newcanvas.height = height;
+    // else
+    //   newcanvas.height = 540;
 
-  //   newcanvas.width = width;
+    // newcanvas.width = width;
 
-  //   create.appendChild(newcanvas);
-  //   // canvas  = document.querySelector('#canvas'),
+    // create.appendChild(newcanvas);
+  //    newcanvas  = document.querySelector('#mask'),
   //    context = newcanvas.getContext("2d");
   //    newcanvas.getContext('2d').drawImage(mask, 0, 0, mask.width, mask.height); // context.drawImage(img,x,y,width,height);
   //    var data = newcanvas.toDataURL('image/png');
@@ -144,6 +180,7 @@
 // prise de photo
  startbutton.addEventListener('click', function(ev){
       takepicture(sauvegarder);// on appelle la fonction takepicture quand on cliq srr le bouton
+
     ev.preventDefault();
   }, false);
 
@@ -173,25 +210,7 @@
   // }, false);
 
   //effacer le canvas
-  function ntm(){
-    var request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-      if (request.readyState == 4 && request.status == 200)
-      {
-        const errors = JSON.parse(request.responseText);
-        console.log(errors);
-        document.getElementById("ntm").innerHTML = errors['test'];
-      }
 
-    };
-    const data = {
-      test : "coucou",
-      fawfawf : "lol"
-    };
-    request.open("POST", "./javascript/supp.php", true);
-    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    request.send(JSON.stringify(data));
-  }
 
   corbeille.addEventListener('click', function(ev){
   	clearcanvas(sauvegarder);
@@ -201,16 +220,24 @@
   //arreter le flux video REGLER CE PB
 
   // poser un masque
-  mask.addEventListener('click', function(ev){
-    // video.getContext('2d').drawImage("mask/iron-man.png", 0, 0, 600, 600)
-    //addimage(video);
-    ntm();
-  },true);
+  // mask.addEventListener('click', function(ev){
+  //   // video.getContext('2d').drawImage("mask/iron-man.png", 0, 0, 600, 600)
+  //   //addimage(video);
+  //   ntm();
+  // },true);
+
+
+
+  function masktocanvas(themask){
+    var contextmask = mask.getContext("2d");
+    contextmask.drawImage(themask,0,0)
+  }
 
  iron.addEventListener('click', function(ev){
-    // video.getContext('2d').drawImage("mask/iron-man.png", 0, 0, 600, 600)
-    //addimage(video);
-    ntm();
+    // mask.getContext("2d").drawImage("mask/iron-man.png", 0, 0, 600, 600);
+    // addimage(video);
+    // ntm();
+    masktocanvas(iron);
   },true);
 
 
