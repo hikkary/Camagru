@@ -90,14 +90,18 @@
   // }
 
 
-  function mergepictures(dataphoto,datamask){
+
+
+  function mergepictures(dataphoto,datamask,sauvegarder){
     var merge = new XMLHttpRequest();
     merge.onreadystatechange = function(){
       if (merge.readyState == 4 && merge.status == 200)
       {
         const picture_data = JSON.parse(merge.responseText);
         console.log(picture_data); 
-        document.getElementById("ntm").innerHTML = picture_data["picture"];
+        document.getElementById("photo").setAttribute('src' , picture_data);
+        sauvegarder.setAttribute('href', picture_data);
+        return(picture_data);
       }
       };
       const data = {
@@ -122,7 +126,7 @@
   	var heure = ladate.getHours();
   	var min = ladate.getMinutes();
   	var sec = ladate.getSeconds();
-  	canvas.width = width ;
+    canvas.width = width ;
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height); //	context.drawImage(img,x,y,width,height);
     if(mask)
@@ -134,10 +138,14 @@
     }
     var data = canvas.toDataURL('image/png');
     // startbutton.setAttribute('dataphoto', data);
+    // var image_finale = mergepictures(data,datamask);
+    // console.log(image_finale);   
+    // photo.setAttribute('src', image_finale);
+    mergepictures(data,datamask,sauvegarder);
     formphoto.setAttribute('value', data);
-  	sauvegarder.setAttribute('href', data);
-  	sauvegarder.setAttribute('download', "CamHero "+jour+"-"+mois+"-"+an+" "+heure+"h"+min+"m"+sec);
-      mergepictures(data,datamask);
+    sauvegarder.setAttribute('download', "CamHero "+jour+"-"+mois+"-"+an+" "+heure+"h"+min+"m"+sec);
+
+  	
     
   }
 
@@ -230,7 +238,7 @@
 
   function masktocanvas(themask){
     var contextmask = mask.getContext("2d");
-    contextmask.drawImage(themask,0,0)
+    contextmask.drawImage(themask,360,220)
   }
 
  iron.addEventListener('click', function(ev){

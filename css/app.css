@@ -195,7 +195,8 @@ max-width: 1600px;
 	box-shadow : 0px 0px 5px;
 }
 
-canvas{
+#canvas{
+	display : none;
 	position: absolute;
 	/*background-color: red;*/
 	/*display: none;	*/
@@ -215,6 +216,10 @@ canvas{
 
 }
 
+#formulaire input{
+	display: none;
+
+}
 
 /*
 #top-app p{
