@@ -4,7 +4,7 @@
 
 // 	var x = event.clientX - canvas.offsetLeft;
 // 	var y = event.clientY - canvas.offsetTop;
-// 	alert('Vous avez cliqué au point de coordonnés: ' + x + ', ' + y );
+ 	// alert('Vous avez cliqué au point de coordonnés: ' + x + ', ' + y );
 
 
 // 	 context.beginPath();

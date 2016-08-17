@@ -98,7 +98,6 @@
       if (merge.readyState == 4 && merge.status == 200)
       {
         const picture_data = JSON.parse(merge.responseText);
-        console.log(picture_data); 
         document.getElementById("photo").setAttribute('src' , picture_data);
         sauvegarder.setAttribute('href', picture_data);
         return(picture_data);
@@ -113,6 +112,8 @@
     merge.send(JSON.stringify(data)); // on envoi rien en cas de GET et une string en cas de POST
     };
   
+
+  //creer une fonction qui renvoi une str de la date.
 
   function takepicture(sauvegarder) {
   	// console.log(d);
@@ -129,40 +130,19 @@
     canvas.width = width ;
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height); //	context.drawImage(img,x,y,width,height);
-    if(mask)
-    {
-      var datamask = mask.toDataURL('image/png')
-      formcanvas.setAttribute('value', datamask);
-      // startbutton.setAttribute('datacanvas', datamask);
-      // canvas.getContext('2d').drawImage(wesh, 0, 0, width, height); // context.drawImage(img,x,y,width,height);
-    }
+    var datamask = mask.toDataURL('image/png')
     var data = canvas.toDataURL('image/png');
-    // startbutton.setAttribute('dataphoto', data);
-    // var image_finale = mergepictures(data,datamask);
-    // console.log(image_finale);   
-    // photo.setAttribute('src', image_finale);
+    formcanvas.setAttribute('value', datamask);
     mergepictures(data,datamask,sauvegarder);
     formphoto.setAttribute('value', data);
     sauvegarder.setAttribute('download', "CamHero "+jour+"-"+mois+"-"+an+" "+heure+"h"+min+"m"+sec);
-
-  	
-    
   }
 
 
-  function clearcanvas(sauvegarder){
-    canvas  = document.querySelector('#canvas'),
-    context = canvas.getContext("2d");
-    canvas.width = width ;
-    canvas.height = height;
-    context.clearRect(0,0,width,height);
+  function clearcanvas(sauvegarder, photo){
+    photo.setAttribute('src', "img/nphoto.png");
     sauvegarder.removeAttribute('href');
   }
-
-
-
-
-
 
   // function addimage(){
     // var newcanvas = document.createElement("canvas");
@@ -187,19 +167,18 @@
 
 // prise de photo
  startbutton.addEventListener('click', function(ev){
-      takepicture(sauvegarder);// on appelle la fonction takepicture quand on cliq srr le bouton
-
+    takepicture(sauvegarder);// on appelle la fonction takepicture quand on cliq srr le bouton
     ev.preventDefault();
   }, false);
 
 //ecoute du clavier
  document.addEventListener("keydown",function(ev){
- 	// alert(event.keyCode);
+  	// alert(event.keyCode);
  	if (event.keyCode==13){
 			takepicture(sauvegarder);
 	}
 	if (event.keyCode==46){
-			clearcanvas(sauvegarder);
+			clearcanvas(sauvegarder,photo);
 	}
  },true);
 
@@ -221,7 +200,7 @@
 
 
   corbeille.addEventListener('click', function(ev){
-  	clearcanvas(sauvegarder);
+  	clearcanvas(sauvegarder,photo);
   	ev.preventDefault();
   }, false);
 
@@ -238,8 +217,29 @@
 
   function masktocanvas(themask){
     var contextmask = mask.getContext("2d");
-    contextmask.drawImage(themask,360,220)
+    contextmask.drawImage(themask,360,220);
   }
+
+  function movemask(mask, themask,video){
+   var maskcontext = mask.getContext('2d'); 
+   var x = event.clientX - mask.offsetLeft;
+   var y = event.clientY - mask.offsetTop;
+
+   console.log(mask.offsetLeft);
+   console.log(mask.offsetTop);
+   console.log(x);
+   console.log(y);
+
+    // alert('Vous avez cliqué au point de coordonnés: ' + x + ', ' + y );
+   mask.width = width ;
+   mask.height = height;
+   maskcontext.clearRect(0,0,width,height);
+   maskcontext.drawImage(themask,x,y);
+  }
+
+mask.addEventListener('mousedown', function(ev){
+   movemask(mask,iron,video);
+}, true);
 
  iron.addEventListener('click', function(ev){
     // mask.getContext("2d").drawImage("mask/iron-man.png", 0, 0, 600, 600);

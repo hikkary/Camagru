@@ -52,6 +52,8 @@ unlink($canvas);
 
 $image_finale = addimagemetadatatobase64($image_finale); 
 
+unlink($picture);
+
 echo (json_encode($image_finale));
 // echo(json_encode($picture));
 ?>
