@@ -42,7 +42,7 @@
 		</button>
 		<input id="dp" type="text" name="dataphoto"> </input>
 		<input id="dc" type="text" name="datacanvas"> </input>
-		<input id="ds" type="submit" name="datasubmit"> </input>
+		<!-- <input id="ds" type="submit" name="datasubmit"> </input> -->
 
 		</form>
 		<button id="upload">
@@ -71,7 +71,7 @@
 	?>
 </body>
 	<script type="text/javascript" src="javascript/videome.js"></script>
-	<script type="text/javascript" src="javascript/paint.js"></script>
+	<script type="text/javascript" src="javascript/resize_img.js"></script>
 </html>
 
 
