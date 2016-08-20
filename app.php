@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="fonts/css/font-awesome.min.css">
 	<title>Prends Toi en photo !</title>
 </head>
-<body>
+<body id="body">
 
 <div id = top-app>
 <img src="img/logo.png" >
@@ -17,11 +17,12 @@
 </div>
 <!-- <img src=""> -->
 <p id="ntm"></p>
+<canvas id="mask" height="540" width="720" style="position: absolute;">	</canvas>
 <div id ="bv">
 	<div id ="v">
 		<video id="video"></video>
-				<canvas id="mask" height="540" width="720" style="position: absolute;">
-				</canvas>
+				
+			
 		<img id="ncam" src="img/ncam.png">
 		<canvas id="canvas"></canvas>
 		<img src="img/nphoto.png" id="photo" alt="photo">
@@ -61,11 +62,9 @@
 </div>
 
 <div id="montage">
-	<img id="m1" src="mask/prev-iron-man.png">
+	<img id="m1" src="mask/iron-man.png" >
+	<img id="m2" src="mask/captain-america.png" >
 	<form action="javascript/supp.php" method="post">
-Your name: <input type="text" name="fname" size="20" />
-Your name: <input type="text" name="lname" size="20" />
-<input type="submit" value="Submit" />
 </div>
 	<?php
 		var_dump($_POST);

@@ -222,19 +222,24 @@
 
   function movemask(mask, themask,video){
    var maskcontext = mask.getContext('2d'); 
-   var x = event.clientX - mask.offsetLeft;
-   var y = event.clientY - mask.offsetTop;
+   var x = event.clientX - mask.offsetLeft - themask.width/2 - mask.scrollTop ;
+   var y = event.clientY - mask.offsetTop - themask.height/2 + document.getElementById("body").scrollTop;
 
+   console.log(document.getElementById("body").scrollTop);
    console.log(mask.offsetLeft);
    console.log(mask.offsetTop);
    console.log(x);
    console.log(y);
 
-    // alert('Vous avez cliqué au point de coordonnés: ' + x + ', ' + y );
+  
    mask.width = width ;
    mask.height = height;
    maskcontext.clearRect(0,0,width,height);
    maskcontext.drawImage(themask,x,y);
+   // mask.addEventListener('click', function(ev){
+   //   // alert('Vous avez cliqué au point de coordonnés: ' + x + ', ' + y );
+   // },true);
+
   }
 
 mask.addEventListener('mousedown', function(ev){
@@ -242,6 +247,8 @@ mask.addEventListener('mousedown', function(ev){
 }, true);
 
  iron.addEventListener('click', function(ev){
+  var montage = document.getElementById("montage");
+  console.log(document.images.item(3));
     // mask.getContext("2d").drawImage("mask/iron-man.png", 0, 0, 600, 600);
     // addimage(video);
     // ntm();
