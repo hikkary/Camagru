@@ -2,12 +2,12 @@
 body
 {
 	background-color: #ccf2ff;
-	width: 100%;
-	height: 100%;
+/* 	width: 100%; */
+/* 	height: 100%; */
 }
 html{
-	width: 100%;
-	height: 0px;
+/* 	width: 100%; */
+/* 	height: 0px; */
 }
 @font-face{
 	font-family: "crayon";
@@ -15,40 +15,61 @@ html{
 }
 
 /*==========Css Contenu==========*/
-#polaroid
-{
-	position: relative;
-	width: 800px;
-	height: 400px;
-	margin-left: auto;
-	margin-right:auto;
-	/*margin-top: 15%;*/
-	display: flex;
-	background-color: #b3ecff;
-	border-radius: 15px;
-	box-shadow: 0.1px 0.1px 3px;
+
+
+#top-app {
+background-color:#6dc2f8 ;
+position: relative;
+margin-left: auto;
+margin-right: auto;
+width: 80%;
+height: 140px;
+max-width: 1600px;
+min-width: 800px;
+box-shadow : 0px 0px 5px;
 }
 
-#inscription
+#croix {
+	position: absolute;
+	font-size: 50px;
+	color: #00beff;
+	top : 5%;
+	left : 81%;
+}
+#album {
+	position: absolute;
+	font-size: 50px;
+	color: #00beff;
+	top : 5%;
+	left : 76%;
+}
+
+/* #inscription
 {
-	width: 400px;
+	width: 80%;
 	height: 170px;
 	margin-left: auto;
 	margin-right:auto;
 	margin-top: 20px;
 	text-align: center;
 
-}
+} */
 
 #formulaire label,input,h1{
+	position:relative;
+	margin-right: auto;
+	margin-left:auto;
 	color: #00beff;
 	font-family: "crayon";
 	text-align: center;
 	display: block;
+	max-width: 1600px;
+	min-width: 800px;
 	margin-top: 20px;
 	margin-bottom: 20px;
-	/*width: 380px;*/
-	
+	font-size : 7vh;
+	width: 80%;
+	height: 10vh;
 
 }
 
@@ -63,7 +84,7 @@ html{
 
 #sub{
 
-		width: 385px;
+/* 		width: 385px; */
 		background-color: white;
 		border: 0.1px solid black;
 		/*enlever contour bleu des formulaires, regler bouton submit*/
@@ -71,9 +92,13 @@ html{
 
 #hero{
 	position: relative;
-	width: 100%;
+	width: 80%;
 	height: 100px;
-	align-content: center;
+	max-width: 1600px;
+	min-width: 800px;
+	margin-left: auto;
+	margin-right:auto;
+/* 	align-content: center; */
 }
 
 #footer img{

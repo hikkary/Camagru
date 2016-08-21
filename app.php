@@ -6,16 +6,21 @@
 <link rel="stylesheet" href="fonts/css/font-awesome.min.css">
 	<title>Prends Toi en photo !</title>
 </head>
-<body id="body">
+<!-- <body id="body">
 
 <div id = top-app>
 <img src="img/logo.png" >
 <i id="croix" class="fa fa-times" aria-hidden="true" title="Deconnexion"></i>
 <i id="album" class="fa fa-picture-o" aria-hidden="true" title="Album"></i>
-<!-- <p>Deconnexion</p> -->
+<p>Deconnexion</p> 
 </img>
-</div>
-<!-- <img src=""> -->
+</div> 
+<img src=""> -->
+<?php
+	$rootname = getcwd();
+	require_once($rootname.'/nav/menu.php');
+  	menu();
+?>
 <p id="ntm"></p>
 <canvas id="mask" height="540" width="720" style="position: absolute;">	</canvas>
 <div id ="bv">
