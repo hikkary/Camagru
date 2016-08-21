@@ -62,16 +62,15 @@
 </div>
 
 <div id="montage">
+
 	<img id="m1" src="mask/iron-man.png" >
 	<img id="m2" src="mask/captain-america.png" >
 	<form action="javascript/supp.php" method="post">
+	<script type="text/javascript" src="javascript/resize_img.js"></script>
 </div>
-	<?php
-		var_dump($_POST);
-	?>
 </body>
 	<script type="text/javascript" src="javascript/videome.js"></script>
-	<script type="text/javascript" src="javascript/resize_img.js"></script>
+
 </html>
 
 

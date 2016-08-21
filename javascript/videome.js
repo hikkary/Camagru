@@ -225,11 +225,11 @@
    var x = event.clientX - mask.offsetLeft - (themask.width * 4)/2 - mask.scrollTop ;
    var y = event.clientY - mask.offsetTop - (themask.height * 4)/2 + document.getElementById("body").scrollTop;
 
-   console.log(document.getElementById("body").scrollTop);
-   console.log(mask.offsetLeft);
-   console.log(mask.offsetTop);
-   console.log(x);
-   console.log(y);
+   // console.log(document.getElementById("body").scrollTop);
+   // console.log(mask.offsetLeft);
+   // console.log(mask.offsetTop);
+   // console.log(x);
+   // console.log(y);
 
   
    mask.width = width ;
@@ -246,13 +246,13 @@ mask.addEventListener('mousedown', function(ev){
    movemask(mask,iron,video);
 }, true);
 
- iron.addEventListener('click', function(ev){
+ // iron.addEventListener('click', function(ev){
 
-    // mask.getContext("2d").drawImage("mask/iron-man.png", 0, 0, 600, 600);
-    // addimage(video);
-    // ntm();
-    masktocanvas(iron);
-  },true);
+ //    // mask.getContext("2d").drawImage("mask/iron-man.png", 0, 0, 600, 600);
+ //    // addimage(video);
+ //    // ntm();
+ //    masktocanvas(iron);
+ //  },true);
 
 
 
