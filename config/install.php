@@ -1,11 +1,16 @@
 <?php
+	
+	require_once('function_sql.php');
 
-	try{
-		require_once('database.php');
-		$connect = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
-	} catch (PDOException $e) {
-		echo "Connection Failed, like your life :" . $e->getMessage();
-	}
+	// try{
+	// 	require_once('database.php');
+	// 	$connect = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+	// } catch (PDOException $e) {
+	// 	echo "Connection Failed, like your life :" . $e->getMessage();
+	// }
+
+	$connect = connectToDatabase();
+
 
 	if(!$connect)
 		exit();
@@ -16,6 +21,7 @@
     . " first_name VARCHAR(128) NOT NULL,\n"
     . " last_name VARCHAR(128) NOT NULL,\n"
     . " login VARCHAR(255) NOT NULL,\n"
+    . " password VARCHAR(255) NOT NULL,\n"
     . " mail VARCHAR(255) NOT NULL,\n"
     . " mail_check INT NOT NULL DEFAULT 0,\n"
     . " PRIMARY KEY(id_users));");
