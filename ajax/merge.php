@@ -11,7 +11,7 @@ $data = ((array)json_decode(file_get_contents('php://input')));// je decode le j
 function imagefromb64($image_data){
 $random_path1 = rand(0,10000);
 $random_path2 = rand(0,10000);
-$path = "tmp/".$random_path1.$random_path2.".png";
+$path = "../tmp/".$random_path1.$random_path2.".png";
 $tableau = explode(',', $image_data);
 // echo $path."\n";
 // echo $tableau[1]."\n";

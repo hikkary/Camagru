@@ -107,7 +107,7 @@
         picture : dataphoto,
         canvas : datamask
       }
-    merge.open("POST", "merge.php", true);//  http://www.w3schools.com/ajax/ajax_xmlhttprequest_send.asp
+    merge.open("POST", "ajax/merge.php", true);//  http://www.w3schools.com/ajax/ajax_xmlhttprequest_send.asp
     merge.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     merge.send(JSON.stringify(data)); // on envoi rien en cas de GET et une string en cas de POST
     };

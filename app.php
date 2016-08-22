@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" type="text/css" href="css/app.css">
 <link rel="stylesheet" href="fonts/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, user-scalable=yes" />
+
 	<title>Prends Toi en photo !</title>
 </head>
-<!-- <body id="body">
+<body id="body">
 
-<div id = top-app>
-<img src="img/logo.png" >
-<i id="croix" class="fa fa-times" aria-hidden="true" title="Deconnexion"></i>
-<i id="album" class="fa fa-picture-o" aria-hidden="true" title="Album"></i>
-<p>Deconnexion</p> 
-</img>
-</div> 
-<img src=""> -->
 <?php
 	$rootname = getcwd();
 	require_once($rootname.'/nav/menu.php');
