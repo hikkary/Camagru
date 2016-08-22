@@ -10,11 +10,23 @@
 
 	$mail = ((array)json_decode(file_get_contents('php://input')));
 
-	// echo (json_encode($mail));
+	$tableau_mail = $connect->prepare( 
+		"SELECT mail FROM `cam_users`"
+		);
 
-	if ($mail['email'] == "zebi")
-		echo (json_encode("true"));
-	else
-		echo (json_encode("false"));
+	$tableau_mail->execute();
+
+	$result = $tableau_mail->fetchAll(PDO::FETCH_COLUMN,0);
+
+	foreach ($result as $value) 
+	{
+		if($mail['email'] === $value)
+		{
+			echo(json_encode("true"));
+			 exit();
+		}
+	}
+ 	echo (json_encode("false"));
+
 	
 ?>
