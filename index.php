@@ -18,11 +18,13 @@
 </div>
 <div id="inscription">
 	<form  action="#" method="post">
-		<input id="email" type="email" placeholder="Email">
 
-		<input id="username" type="text" placeholder="Username">
+
+		
 		<input id="first_name" type="text" placeholder="First Name">
 		<input id="last_name" type="text" placeholder="Last Name">
+		<input id="email" type="email" placeholder="Email">
+		<input id="username" type="text" placeholder="Username">
 		<input id="password" type="password" placeholder="Mot de passe">
 		<input id="sub" type="submit" name="s'inscrire">
 	</form>
