@@ -5,7 +5,7 @@
 	var last_name = document.getElementById('last_name');
 	var password = document.getElementById('password');
 	var submit = document.getElementById('sub');
-
+	var popup = document.getElementById('ptext');
 
 	function recovery(elem)
 	{
@@ -15,20 +15,38 @@
 
 	}
 
-	function lenghterror(elem)
-	{
-		var tmp = elem.value;
+	// function apparition(popup)
+	// {
+	// 	var opacit = 0;
 
+	// 	while (opacit <= 100)
+	// 	{
+	// 			popup.style.opacity = opacit;
+	// 			opacit++;
+			
+	// 	}
+	// }
+
+	function errorpopup(elem, popup, error)
+	{
 		elem.style.color="red";
 		elem.style.border="none";
 		elem.style.boxShadow="1px 1px 5px red";
-		elem.value="X It's too short/long ";
+		popup.innerHTML= error;
+		popup.style.color="red";
+		popup.style.display ="inherit";
+		popup.style.transition = "opacity 2s linear";
+		popup.style.opacity= 100;
+		// setTimeout(function() {
+		// popup.style.opacity= 0;		
+		// }, 5000);
 		setTimeout(function() {
-		elem.value = tmp;	
-		}, 2000);
+		// popup.style.display="none";
+		popup.innerHTML=" ";
+		}, 7000);
 	}
 
-	function lenghtok(elem)
+	function allgreen(elem)
 	{
 		// var tmp = elem.value;
 
@@ -37,37 +55,9 @@
 		elem.style.boxShadow="1px 1px 5px green";
 	}
 
-	function alreadyused(elem)
-	{
-		var tmp = elem.value;
 
-		elem.style.color="red";
-		elem.style.border="none";
-		elem.style.boxShadow="1px 1px 5px red";
-		elem.value="X Already used";
-		setTimeout(function() {
-		elem.value = tmp;	
-		}, 2000);
-	}
 
-	function Available(elem)
-	{
-		var tmp = elem.value;
-
-		elem.style.color="green";
-		elem.style.border="none";
-		elem.style.boxShadow="1px 1px 5px green";
-		elem.value="V Available";
-		setTimeout(function() {
-		elem.value = tmp;	
-		}, 1000);
-	}
-
-	function alertamalibu()
-	{
-		alert('mail pas bon');
-		
-	}
+	// }
 
 
 	function checkemailpattern(mail,email){
@@ -80,7 +70,7 @@
 				console.log(bool);
 				if (bool == "true")
 				{
-					alertamalibu();
+					alertamalibu(email);
 					verif = "true";
 					return(verif);
 				}
@@ -101,7 +91,7 @@
     	console.log('zebi');
 	};
 
-	function checkemail(mail,email){
+	function checkemail(mail,email, popup){
 		var mail_check = new XMLHttpRequest();
 		mail_check.onreadystatechange = function(){
 			if (mail_check.readyState == 4 && mail_check.status == 200)
@@ -109,7 +99,7 @@
 				const bool = JSON.parse(mail_check.responseText);
 				console.log(bool);
 				if (bool == "true")
-					alreadyused(email);
+					alreadyused(email,popup);
 				else
 					Available(email);
 			}
@@ -123,17 +113,19 @@
     	console.log('zebi');
 	};
 
-	function checkusername(uservalue,username){
+	function checkusername(uservalue,username, popup){
 		var user_check = new XMLHttpRequest();
 		user_check.onreadystatechange = function(){
 			if (user_check.readyState == 4 && user_check.status == 200)
 			{
 				const bool = JSON.parse(user_check.responseText);
-				console.log(bool);
 				if (bool == "true")
-					alreadyused(username);
+				{
+					var error = "Username Already Used";
+					errorpopup(username, popup, error);
+				}
 				else
-					Available(username);
+					allgreen(username);
 			}
 		};
 		const data = {
@@ -142,20 +134,22 @@
 		user_check.open("POST", "ajax/usercheck.php", true);
     	user_check.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     	user_check.send(JSON.stringify(data));
-    	console.log('zebi');
 	};
 
-	function checklength(value,variable){
+	function checklength(value,variable,popup){
 		var length_check = new XMLHttpRequest();
 		length_check.onreadystatechange = function(){
 			if (length_check.readyState == 4 && length_check.status == 200)
 			{
 				const bool = JSON.parse(length_check.responseText);
-				console.log(bool);
+				// console.log(bool);
 				if (bool == "true")
-					lenghterror(variable);
+				{
+					var error = "X it's too short/Long"
+					errorpopup(variable,popup, error);
+				}
 				else
-					lenghtok(variable);
+					allgreen(variable);
 			}
 		};
 		const data = {
@@ -164,7 +158,7 @@
 		length_check.open("POST", "ajax/lenghtcheck.php", true);
     	length_check.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     	length_check.send(JSON.stringify(data));
-    	console.log('zebi');
+    	// console.log('zebi');
 	};
 
 	email.addEventListener('blur', function(ev){
@@ -188,23 +182,79 @@
 
 	username.addEventListener('blur', function(ev){
 		if (username.value)
-			checkusername(username.value,username);
+			checkusername(username.value,username, popup);
 		else
 			recovery(username);
 	}, true);
 
 	first_name.addEventListener('blur', function(ev){
 		if (first_name.value)
-			checklength(first_name.value,first_name);
+			checklength(first_name.value,first_name,popup);
 		else
 			recovery(first_name);
 	}, true);
 
 	last_name.addEventListener('blur', function(ev){
 		if (last_name.value)
-			checklength(last_name.value,last_name);
+			checklength(last_name.value,last_name, popup);
 		else
 			recovery(last_name);
 	}, true);
 
 })();
+
+
+	// function lenghtok(elem)
+	// {
+	// 	// var tmp = elem.value;
+
+	// 	elem.style.color="green";
+	// 	elem.style.border="none";
+	// 	elem.style.boxShadow="1px 1px 5px green";
+	// }
+
+	// function alreadyused(elem, popup)
+	// {
+	// 	var tmp = elem.value;
+
+	// 	elem.style.color="red";
+	// 	elem.style.border="none";
+	// 	elem.style.boxShadow="1px 1px 5px red";
+	// 	popup.innerHTML="X Already Used ";
+	// 	popup.style.color="red";
+	// 	popup.style.display ="inherit";
+	// 	popup.style.transition = "opacity 2s linear";
+	// 	popup.style.opacity= 100;
+	// 	// setTimeout(function() {
+	// 	// popup.style.opacity= 0;		
+	// 	// }, 5000);
+	// 	setTimeout(function() {
+	// 	// popup.style.display="none";
+	// 	popup.innerHTML=" ";
+	// 	}, 7000);
+	// }
+
+	// function Available(elem)
+	// {
+	// 	var tmp = elem.value;
+
+	// 	elem.style.color="green";
+	// 	elem.style.border="none";
+	// 	elem.style.boxShadow="1px 1px 5px green";
+	// 	elem.value="V Available";
+	// 	setTimeout(function() {
+	// 	elem.value = tmp;	
+	// 	}, 500);
+	// }
+
+	// function Unvalidemail(elem)
+	// {
+	// 	var tmp = elem.value;
+
+	// 	elem.style.color="red";
+	// 	elem.style.border="none";
+	// 	elem.style.boxShadow="1px 1px 5px red";
+	// 	elem.value="Please enter a valid mail";
+	// 	setTimeout(function() {
+	// 	elem.value = tmp;	
+	// 	}, 500);

@@ -16,6 +16,9 @@
 <div id="hero">
 	<img src="img/inscription.png" width="100%">
 </div>
+<div id="popup">
+<p id="ptext" style="opacity: 0;"></p>
+</div>
 <div id="inscription">
 	<form  action="#" method="post">
 
