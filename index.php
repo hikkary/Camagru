@@ -20,7 +20,7 @@
 <p id="ptext" style="opacity: 0;"></p>
 </div>
 <div id="inscription">
-	<form  action="#" method="post">
+	<form method="post">
 
 
 		
@@ -28,9 +28,12 @@
 		<input id="last_name" type="text" placeholder="Last Name">
 		<input id="email" type="email" placeholder="Email">
 		<input id="username" type="text" placeholder="Username">
-		<input id="password" type="password" placeholder="Mot de passe">
-		<input id="sub" type="submit" name="s'inscrire">
+		<input id="password" type="password" placeholder="Type Password">
+		<input id="password_check" type="password" placeholder="Type Password Again">
+		
+		 <!-- id="sub" type="submit" name="s'inscrire"> -->
 	</form>
+	<button id="sub">Submit</button>
 </div>
 <!-- <div id="footer">
 	<a href="app.php">app</a>

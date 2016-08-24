@@ -4,6 +4,7 @@
 	var first_name = document.getElementById('first_name');
 	var last_name = document.getElementById('last_name');
 	var password = document.getElementById('password');
+	var password_check = document.getElementById('password_check');
 	var submit = document.getElementById('sub');
 	var popup = document.getElementById('ptext');
 
@@ -15,33 +16,23 @@
 
 	}
 
-	// function apparition(popup)
-	// {
-	// 	var opacit = 0;
-
-	// 	while (opacit <= 100)
-	// 	{
-	// 			popup.style.opacity = opacit;
-	// 			opacit++;
-			
-	// 	}
-	// }
-
 	function errorpopup(elem, popup, error)
 	{
 		elem.style.color="red";
 		elem.style.border="none";
 		elem.style.boxShadow="1px 1px 5px red";
 		popup.innerHTML= error;
+		popup.style.heigth = "60px";
 		popup.style.color="red";
 		popup.style.display ="inherit";
 		popup.style.transition = "opacity 2s linear";
-		popup.style.opacity= 100;
-		// setTimeout(function() {
-		// popup.style.opacity= 0;		
-		// }, 5000);
+		popup.style.opacity= "100";
 		setTimeout(function() {
-		// popup.style.display="none";
+		popup.style.opacity= 0;		
+		}, 5000);
+		setTimeout(function() {
+		popup.style.display="none";
+		popup.style.heigth = "0px";
 		popup.innerHTML=" ";
 		}, 7000);
 	}
@@ -53,10 +44,12 @@
 		elem.style.boxShadow="1px 1px 5px green";
 	}
 
-
-
-	// }
-
+	function allred(elem)
+	{
+		elem.style.color="red";
+		elem.style.border="none";
+		elem.style.boxShadow="1px 1px 5px red";
+	}
 
 
 	function checkemail(mail,email, popup){
@@ -192,6 +185,60 @@
 			recovery(last_name);
 	}, true);
 
+	// password.addEventListener('input', function(ev){
+	// 	var passregexp = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+	// 	if (password.value.localeCompare(password.value) == 0)
+	// 		allgreen(password);
+	// 	else
+	// 		allred(password);
+
+	// 	if (password.value.length == 0) 
+	// 		recovery(password);
+	// }, true);
+
+	password_check.addEventListener('input', function(ev){
+		if (password_check.value.localeCompare(password.value) == 0)
+			allgreen(password_check);
+		else
+			allred(password_check);
+
+		if (password_check.value.length == 0) 
+			recovery(password_check);
+	}, true);
+
+	submit.addEventListener('click', function(ev){
+		var error = "Please fill all the form"
+		if(first_name.value.length == 0)
+		{
+			errorpopup(first_name,popup,error)
+			return;
+		}
+		if(last_name.value.length == 0)
+		{
+			errorpopup(last_name,popup,error)
+			return;
+		}
+		if(email.value.length == 0)
+		{		
+			errorpopup(email,popup,error)
+			return;		
+		}
+		if(username.value.length == 0)
+		{
+			errorpopup(username,popup,error)
+			return;
+		}
+		if(password.value.length == 0)
+		{
+			errorpopup(password,popup,error)
+			return;
+		}
+		if(password_check.value.length == 0)
+		{
+			errorpopup(password_check,popup,error)
+			return;
+		}
+	}, true);
 })();
 
 
