@@ -60,36 +60,6 @@
 	// }
 
 
-	function checkemailpattern(mail,email){
-		var verif;
-		var mail_check = new XMLHttpRequest();
-		mail_check.onreadystatechange = function(){
-			if (mail_check.readyState == 4 && mail_check.status == 200)
-			{
-				const bool = JSON.parse(mail_check.responseText);
-				console.log(bool);
-				if (bool == "true")
-				{
-					alertamalibu(email);
-					verif = "true";
-					return(verif);
-				}
-				else
-				{
-					lenghtok(email);
-					verif = "false";
-					return(verif);
-				}
-			}
-		};
-		const data = {
-			email : mail
-		}
-		mail_check.open("POST", "ajax/mailpatterncheck.php", true);
-    	mail_check.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    	mail_check.send(JSON.stringify(data));
-    	console.log('zebi');
-	};
 
 	function checkemail(mail,email, popup){
 		var mail_check = new XMLHttpRequest();
@@ -98,10 +68,12 @@
 			{
 				const bool = JSON.parse(mail_check.responseText);
 				console.log(bool);
-				if (bool == "true")
-					alreadyused(email,popup);
+				if (bool == "true"){
+					var error = "X Mail Already	Used";
+					errorpopup(email,popup, error);
+				}
 				else
-					Available(email);
+					allgreen(email);
 			}
 		};
 		const data = {
@@ -111,6 +83,32 @@
     	mail_check.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     	mail_check.send(JSON.stringify(data));
     	console.log('zebi');
+	};
+
+
+	function checkemailpattern(mail,email, popup){
+		var mail_check = new XMLHttpRequest();
+		mail_check.onreadystatechange = function(){
+			if (mail_check.readyState == 4 && mail_check.status == 200)
+			{
+				const bool = JSON.parse(mail_check.responseText);
+				console.log(bool);
+				if (bool == "true")
+				{
+					var error = " X Unvalid Mail";
+					errorpopup(email, popup, error);
+				}
+				else
+					checkemail(mail,email,popup);
+			}
+		};
+		const data = {
+			email : mail
+		}
+		mail_check.open("POST", "ajax/mailpatterncheck.php", true);
+    	mail_check.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    	mail_check.send(JSON.stringify(data));
+    	// console.log('zebi');
 	};
 
 	function checkusername(uservalue,username, popup){
@@ -163,21 +161,11 @@
 
 	email.addEventListener('blur', function(ev){
 		if (email.value)
-		{
-			var check = checkemailpattern(email.value,email); 
-			console.log('nani o mienai ?')
-
-			console.log(check);
-			if (check == true)
-			{
-				console.log('nani o mienai ?')
-				 return;
-			}
-		// 	else
-		// 		checkemail(email.value,email);
-		}
-		else
+			checkemailpattern(email.value,email,popup); 
+		else	
 			recovery(email);
+		// console.log(check);
+
 	}, true);
 
 	username.addEventListener('blur', function(ev){
