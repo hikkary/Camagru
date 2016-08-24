@@ -48,8 +48,6 @@
 
 	function allgreen(elem)
 	{
-		// var tmp = elem.value;
-
 		elem.style.color="green";
 		elem.style.border="none";
 		elem.style.boxShadow="1px 1px 5px green";
@@ -169,7 +167,12 @@
 	}, true);
 
 	username.addEventListener('blur', function(ev){
-		if (username.value)
+		if ((username.value.length < 5 || username.value.length >= 60) && username.value.length != 0)
+		{
+			var error = "X Username Too short/long";
+			errorpopup(username, popup, error)
+		}
+		else if (username.value.length >= 5 && username.value.length <= 60)
 			checkusername(username.value,username, popup);
 		else
 			recovery(username);
