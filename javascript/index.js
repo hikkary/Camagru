@@ -8,6 +8,34 @@
 	var submit = document.getElementById('sub');
 	var popup = document.getElementById('ptext');
 
+	function submit_form(email,username,first_name,last_name,password)
+	{
+		var form = new XMLHttpRequest();
+		form.onreadystatechange = function(){
+			if (form.readyState == 4 && form.status == 200)
+			{
+				const bool = JSON.parse(form.responseText);
+				console.log(bool);
+				if (bool == "true"){
+					var error = "An error occured";
+					errorpopup(email,popup, error);
+				}
+				// else
+				// 	window.location.href="http://localhost:8081/Camagru/app.php";
+			}
+		};
+		const data = {
+			t_email : email,
+			t_username : username,
+			t_first_name : first_name,
+			t_last_name : last_name,
+			t_password : password 
+		}
+		form.open("POST", "ajax/add_user.php", true);
+    	form.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    	form.send(JSON.stringify(data));
+	}
+
 	function recovery(elem)
 	{
 		elem.style.color = " #00beff";
@@ -162,7 +190,7 @@
 	username.addEventListener('blur', function(ev){
 		if ((username.value.length < 5 || username.value.length >= 60) && username.value.length != 0)
 		{
-			var error = "X Username Too short/long";
+			var error = "X Username Must be at least 5 character";
 			errorpopup(username, popup, error)
 		}
 		else if (username.value.length >= 5 && username.value.length <= 60)
@@ -185,16 +213,19 @@
 			recovery(last_name);
 	}, true);
 
-	// password.addEventListener('input', function(ev){
-	// 	var passregexp = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
-	// 	if (password.value.localeCompare(password.value) == 0)
-	// 		allgreen(password);
-	// 	else
-	// 		allred(password);
+	password.addEventListener('blur', function(ev){
+		var passregexp = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.).*$", "g");
+		if (passregexp.test(password.value) == true && password.value.length >= 8)
+			allgreen(password);
+		else
+		{
+			var error = "Must contain at least 8 character, 1 uppercase and 1 number";
+			errorpopup(password,popup, error);
+		}
 
-	// 	if (password.value.length == 0) 
-	// 		recovery(password);
-	// }, true);
+		if (password.value.length == 0) 
+			recovery(password);
+	}, true);
 
 	password_check.addEventListener('input', function(ev){
 		if (password_check.value.localeCompare(password.value) == 0)
@@ -207,39 +238,41 @@
 	}, true);
 
 	submit.addEventListener('click', function(ev){
-		var error = "Please fill all the form"
-		if(first_name.value.length == 0)
+		var error = "Please fill correctly all the form"
+		if(first_name.value.length == 0 || first_name.style.color == "red")
 		{
 			errorpopup(first_name,popup,error)
 			return;
 		}
-		if(last_name.value.length == 0)
+		if(last_name.value.length == 0 || last_name.style.color == "red")
 		{
 			errorpopup(last_name,popup,error)
 			return;
 		}
-		if(email.value.length == 0)
+		if(email.value.length == 0 || email.style.color == "red")
 		{		
 			errorpopup(email,popup,error)
 			return;		
 		}
-		if(username.value.length == 0)
+		if(username.value.length == 0 || username.style.color == "red")
 		{
 			errorpopup(username,popup,error)
 			return;
 		}
-		if(password.value.length == 0)
+		if(password.value.length == 0 || password.style.color == "red")
 		{
 			errorpopup(password,popup,error)
 			return;
 		}
-		if(password_check.value.length == 0)
+		if(password_check.value.length == 0 || password_check.style.color == "red")
 		{
 			errorpopup(password_check,popup,error)
 			return;
 		}
+		submit_form(email.value,username.value,first_name.value,last_name.value,password.value);
 	}, true);
 })();
+
 
 
 	// function lenghtok(elem)
