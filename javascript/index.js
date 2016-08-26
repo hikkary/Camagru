@@ -8,6 +8,26 @@
 	var submit = document.getElementById('sub');
 	var popup = document.getElementById('ptext');
 
+	email.verif = 0;
+	username.verif = 0;
+	first_name.verif = 0;
+	last_name.verif = 0;
+	password.verif = 0;
+	password_check.verif= 0;
+
+
+	function empty_form(email,username,first_name,last_name,password,password_check)
+	{
+		email.value = "";
+		username.value = "";
+		first_name.value = "";
+		last_name.value = "";
+		password.value = "";
+		password_check.value = "";
+	}
+
+	empty_form(email, username,first_name,last_name,password,password_check);
+
 	function submit_form(email,username,first_name,last_name,password)
 	{
 		var form = new XMLHttpRequest();
@@ -20,8 +40,8 @@
 					var error = "An error occured";
 					errorpopup(email,popup, error);
 				}
-				// else
-				// 	window.location.href="http://localhost:8081/Camagru/app.php";
+				 else
+				 	window.location.href="http://localhost:8081/Camagru/app.php";
 			}
 		};
 		const data = {
@@ -41,11 +61,12 @@
 		elem.style.color = " #00beff";
 		elem.style.border= "";
 		elem.style.boxShadow="";
-
+		elem.verif = 0;
 	}
 
 	function errorpopup(elem, popup, error)
 	{
+		elem.verif = 0;
 		elem.style.color="red";
 		elem.style.border="none";
 		elem.style.boxShadow="1px 1px 5px red";
@@ -63,6 +84,7 @@
 		popup.style.heigth = "0px";
 		popup.innerHTML=" ";
 		}, 7000);
+
 	}
 
 	function allgreen(elem)
@@ -70,6 +92,7 @@
 		elem.style.color="green";
 		elem.style.border="none";
 		elem.style.boxShadow="1px 1px 5px green";
+		elem.verif = 1;
 	}
 
 	function allred(elem)
@@ -77,6 +100,7 @@
 		elem.style.color="red";
 		elem.style.border="none";
 		elem.style.boxShadow="1px 1px 5px red";
+		elem.verif = 0;
 	}
 
 
@@ -90,6 +114,7 @@
 				if (bool == "true"){
 					var error = "X Mail Already	Used";
 					errorpopup(email,popup, error);
+					return;
 				}
 				else
 					allgreen(email);
@@ -237,39 +262,67 @@
 			recovery(password_check);
 	}, true);
 
+
+	// function verifcheck(first_name,last_name,email,username,password,password_check){
+	// 	if (first_name.verif == 0 || last_name.verif == 0 || email.verif ==0 ||	username.verif == 0 || password.verif == 0 || password_check.verif == 0)
+	// 		return false;
+	// 	else
+	// 		return true;
+
+	// }
+
+
 	submit.addEventListener('click', function(ev){
 		var error = "Please fill correctly all the form"
-		if(first_name.value.length == 0 || first_name.style.color == "red")
+		checkemailpattern(email.value,email,popup);
+		if ((username.value.length < 5 || username.value.length >= 60) && username.value.length != 0)
+			errorpopup(username, popup, error)
+		else if (username.value.length >= 5 && username.value.length <= 60)
+			checkusername(username.value,username, popup);
+		 // checkusername(username.value,username, popup);
+
+		// console.log(first_name.verif);
+		// console.log(last_name.verif);
+		// console.log(email.verif);
+		// console.log(username.verif);
+		// console.log(password.verif);
+		// console.log(password_check.verif);
+		
+
+		if(first_name.value.length == 0 || first_name.style.color == "red" || first_name.verif == 0)
 		{
 			errorpopup(first_name,popup,error)
 			return;
 		}
-		if(last_name.value.length == 0 || last_name.style.color == "red")
+		if(last_name.value.length == 0 || last_name.style.color == "red" || last_name.verif == 0)
 		{
 			errorpopup(last_name,popup,error)
 			return;
 		}
-		if(email.value.length == 0 || email.style.color == "red")
+		if(email.value.length == 0 || email.style.color == "red" || email.verif == 0)
 		{		
 			errorpopup(email,popup,error)
 			return;		
 		}
-		if(username.value.length == 0 || username.style.color == "red")
+		if(username.value.length == 0 || username.style.color == "red" || username.verif == 0)
 		{
 			errorpopup(username,popup,error)
 			return;
 		}
-		if(password.value.length == 0 || password.style.color == "red")
+		if(password.value.length == 0 || password.style.color == "red" || password.verif == 0)
 		{
 			errorpopup(password,popup,error)
 			return;
 		}
-		if(password_check.value.length == 0 || password_check.style.color == "red")
+		if(password_check.value.length == 0 || password_check.style.color == "red" || password_check.verif == 0)
 		{
 			errorpopup(password_check,popup,error)
 			return;
 		}
-		submit_form(email.value,username.value,first_name.value,last_name.value,password.value);
+		// if (verifcheck(first_name,last_name,email,username,password,password_check) == true)
+				submit_form(email.value,username.value,first_name.value,last_name.value,password.value);
+		// else
+			// return;
 	}, true);
 })();
 
