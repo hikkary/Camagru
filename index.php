@@ -19,6 +19,9 @@
 <div id="popup">
 <p id="ptext" style="opacity: 0;"></p>
 </div>
+<div id="redirect">
+<p id="sendmail">Please confirm your email to finish the inscription</p>
+</div>
 <div id="inscription">
 	<form method="post">
 

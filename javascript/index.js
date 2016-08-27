@@ -15,6 +15,10 @@
 	password.verif = 0;
 	password_check.verif= 0;
 
+	console.log(location.pathname + "app.php")
+
+	window.location.href= location.pathname + "mailcheck.php?mail=z.kerkeb@gmail.com";
+
 
 	function empty_form(email,username,first_name,last_name,password,password_check)
 	{
@@ -26,12 +30,28 @@
 		password_check.value = "";
 	}
 
+	function hide_form()
+	{
+		document.getElementById('hero').style.display = "none";
+		document.getElementById('ptext').style.display = "none";
+		document.getElementById('email').style.display = "none";
+		document.getElementById('username').style.display = "none";
+		document.getElementById('first_name').style.display = "none";
+		document.getElementById('last_name').style.display = "none";
+		document.getElementById('password').style.display = "none";
+		document.getElementById('password_check').style.display = "none";
+		document.getElementById('sub').style.display = "none";
+		document.getElementById('redirect').style.display = "inherit";
+	}
+
+
 	empty_form(email, username,first_name,last_name,password,password_check);
 
 	function submit_form(email,username,first_name,last_name,password)
 	{
+		var random = Math.floor((Math.random() * 899999) + 100000);
 		var form = new XMLHttpRequest();
-		form.onreadystatechange = function(){
+		form.onreadystatechange = function(data){
 			if (form.readyState == 4 && form.status == 200)
 			{
 				const bool = JSON.parse(form.responseText);
@@ -40,8 +60,13 @@
 					var error = "An error occured";
 					errorpopup(email,popup, error);
 				}
-				 else
-				 	window.location.href="http://localhost:8081/Camagru/app.php";
+				 else{
+				 	hide_form();
+				 	setTimeout(function() {
+				 	window.location.href= location.pathname + "mailcheck.php?rkey="+ random + "&uname=" + username +"&mail=" + email ;
+				 	}, 4000);
+				 }
+				 	
 			}
 		};
 		const data = {
@@ -49,7 +74,8 @@
 			t_username : username,
 			t_first_name : first_name,
 			t_last_name : last_name,
-			t_password : password 
+			t_password : password,
+			t_random : random
 		}
 		form.open("POST", "ajax/add_user.php", true);
     	form.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -274,7 +300,7 @@
 
 	submit.addEventListener('click', function(ev){
 		var error = "Please fill correctly all the form"
-		checkemailpattern(email.value,email,popup);
+		// checkemailpattern(email.value,email,popup);
 		if ((username.value.length < 5 || username.value.length >= 60) && username.value.length != 0)
 			errorpopup(username, popup, error)
 		else if (username.value.length >= 5 && username.value.length <= 60)

@@ -24,6 +24,7 @@
     . " password VARCHAR(255) NOT NULL,\n"
     . " mail VARCHAR(255) NOT NULL,\n"
     . " mail_check INT NOT NULL DEFAULT 0,\n"
+    . " mail_key INT NOT NULL,\n"
     . " PRIMARY KEY(id_users));");
 
 

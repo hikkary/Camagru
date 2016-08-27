@@ -44,6 +44,27 @@ box-shadow : 0px 0px 5px;
 	left : 76%;
 }
 
+
+/* div message pour le mail */
+
+#redirect{
+background-color:#6dc2f8 ;
+position: relative;
+margin-left: auto;
+margin-right: auto;
+width: 80%;
+height: 140px;
+max-width: 1600px;
+min-width: 800px;
+font-family: "crayon";
+font-size: 3vw;
+text-align : center;
+line-height: 140px;
+box-shadow : 0px 0px 5px;
+display:none;
+}
+
+
 #popup p{
 	position:relative;
 	margin-top: 0px;
