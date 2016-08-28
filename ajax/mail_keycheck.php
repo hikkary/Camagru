@@ -1,5 +1,24 @@
 <?php
+	function verif_account($username,$bdd)
+	{
+		$verif = $bdd->prepare(
+		"SELECT mail_key FROM `cam_users` WHERE login = :username ");
 
+		$verif->execute(array(
+			'username' => $username
+		));
+
+		$result_verif = $verif->fetch(PDO::FETCH_ASSOC);
+
+		// echo($result_verif['mail_key'])."\n";
+		if($result_verif['mail_key'] === "1")
+		{
+ 			echo ("Account already verified");
+ 			exit();
+		}
+	 	else
+ 			echo ("true");
+	}
 // header('Content-Type: application/json');
 	
 	require_once('../config/function_sql.php');
@@ -13,6 +32,8 @@
 		exit();
 
 	// echo($_GET['uname']);
+
+	verif_account($_GET['uname'],$connect);
 
 	$id = $connect->prepare(
 		"SELECT mail_check FROM `cam_users` WHERE login = :username"
@@ -28,6 +49,7 @@
 
 	// var_dump($result_id);
 	// echo $result_id['mail_check'];
+
 
 	function validate_account($username,$bdd)
 	{
