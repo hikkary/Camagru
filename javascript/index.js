@@ -15,9 +15,9 @@
 	password.verif = 0;
 	password_check.verif= 0;
 
-	console.log(location.pathname + "app.php")
+	// console.log(location.pathname + "app.php")
 
-	window.location.href= location.pathname + "mailcheck.php?mail=z.kerkeb@gmail.com";
+	// window.location.href= location.pathname + "mailcheck.php?mail=z.kerkeb@gmail.com";
 
 
 	function empty_form(email,username,first_name,last_name,password,password_check)
