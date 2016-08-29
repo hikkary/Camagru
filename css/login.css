@@ -53,7 +53,7 @@ position: relative;
 margin-left: auto;
 margin-right: auto;
 width: 80%;
-height: 140px;
+height: 500px;
 max-width: 1600px;
 min-width: 800px;
 font-family: "crayon";
@@ -61,102 +61,22 @@ font-size: 3vw;
 text-align : center;
 line-height: 140px;
 box-shadow : 0px 0px 5px;
-display:none;
-}
-
-
-#popup p{
-	position:relative;
-	margin-top: 0px;
-	margin-bottom: 0px;
-	max-width: 1600px;
-	min-width: 800px;
-	margin-right: auto;
-	margin-left: auto;
-	background: white;
-	width: 80%;
-	border-radius: 550px;
-	font-family: "crayon";
-	text-align: center;
-	border : 1px solid #6dc2f8;
-	font-size : 5vh;
-	line-height: 60px;
-	/*display: none;*/
-	/*opacity: 0;*/
-	/*transition : opacity 2s linear;*/
-}
-
-/* #inscription
-{
-	width: 80%;
-	height: 170px;
-	margin-left: auto;
-	margin-right:auto;
-	margin-top: 20px;
-	text-align: center;
-
-} */
-
-#formulaire label,input,h1,button{
-	position:relative;
-	margin-right: auto;
-	margin-left:auto;
-	color: #00beff;
-	font-family: "crayon";
-	text-align: center;
-	display: block;
-	max-width: 1600px;
-	min-width: 800px;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	font-size : 7vh;
-	width: 80%;
-	height: 8vh;
+display: block;
 
 }
 
-#logo
-{
-	width: 799px;
-	padding-top: 10%;
-	position: relative;
-	margin-left: auto;
-	margin-right: auto;
-}
+#redirect form{
+/*background-color:#6dc2f8 ;*/
+position: relative;
+margin-left: auto;
+margin-right: auto;
+width: 20%;
+max-width: 1600px;
+min-width: 800px;
+font-family: "crayon";
+font-size: 2vw;
+text-align : center;
+line-height: 20px;
+display: block;
 
-#sub{
-
-/* 		width: 385px; */
-		background-color: white;
-		border: 0.1px solid black;
-		/*enlever contour bleu des formulaires, regler bouton submit*/
-}
-
-#hero{
-	position: relative;
-	width: 80%;
-	height: 100px;
-	max-width: 1600px;
-	min-width: 800px;
-	margin-left: auto;
-	margin-right:auto;
-/* 	align-content: center; */
-}
-
-#footer img{
-	position: absolute;
-	float: right;
-	margin-right: 15px;
-	margin-top: -10px;
-	opacity: 0.1;
-/*	width: 300px;
-	height: 50px;*/
-}
-
-/*Icone Formulaire*/
-
-#err_mail {
-	/*position: absolute;*/
-	right: 50px;
-	z-index: 2;
 }

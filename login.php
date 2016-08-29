@@ -19,7 +19,12 @@
 </div> -->
 
 <div id="redirect">
-<p id="sendmail">Your mail has been succesfully verified</p>
+<p> Login </p>
+<form method="post">
+		<input id="username" type="text" placeholder="Username or Email">
+		<input id="password" type="password" placeholder="Type Password">
+		 <!-- id="sub" type="submit" name="s'inscrire"> -->
+	</form>
 </div>
 <div id="inscription">
 
