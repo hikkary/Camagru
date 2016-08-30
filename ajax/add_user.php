@@ -32,7 +32,7 @@
 			'first_name' => $data['t_first_name'],
 			'last_name' => $data['t_last_name'],
 			'username' => $data['t_username'],
-			'password' => $data['t_password'],
+			'password' => hash("whirlpool",$data['t_password']),
 			'email' => $data['t_email'],
 			'email_key' => $data['t_random']
 		));
