@@ -4,11 +4,6 @@
 	ini_set("smtp_port","25");
 	ini_set("sendmail_from","z.kerkeb@sfr.fr");	
 
-	// $headers = 	'From: z.kerkeb@sfr.fr' . "\r\n" .
- //     'Reply-To: zk.yonjuni@gmail.com' . "\r\n" .
- //     'MIME-Version: 1.0' . "\r\n".
- //     'X-Mailer: PHP/' . phpversion();
-
     $headers   = array();
 	$headers[] = "MIME-Version: 1.0";
 	$headers[] = "Content-type: text/plain; charset=iso-8859-1";
@@ -17,7 +12,7 @@
 	$headers[] = "X-Mailer: PHP/".phpversion();
 
 
-	var_dump($_SERVER);
+	// var_dump($_SERVER);
 
 
 	function validation_mail_create($pseudo, $key)
@@ -41,11 +36,8 @@
     return($message);
 	}
 
-	 mail($_GET['mail'],"Finish Your Inscription",validation_mail_create("zak", "6986"), implode("\r\n",$headers));
-	// ini_set("SMTP","localhost");
-	// echo($rootname)."\n";
-	// redirect("app.php");
-	// var_dump($rootpath);
-
-
-?>
+	 if(mail($_GET['mail'],"Finish Your Inscription",validation_mail_create("zak", "6986"), implode("\r\n",$headers)) !== false)
+	 	echo(json_encode("false"))
+	 else
+	 	echo(json_encode("true"))
+	?>

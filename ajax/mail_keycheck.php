@@ -28,7 +28,7 @@
 	if(!$connect)
 		exit();
 
-	if(!$_GET['uname'] || !$_GET['rkey'])
+	if( !$_GET || !$_GET['uname'] || !$_GET['rkey'])
 		exit();
 
 	// echo($_GET['uname']);

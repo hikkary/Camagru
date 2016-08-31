@@ -47,6 +47,34 @@
 
 	empty_form(email, username,first_name,last_name,password,password_check);
 
+	function send_form(mail,username, random){
+		var mail_check = new XMLHttpRequest();
+		mail_check.onreadystatechange = function(){
+			if (mail_check.readyState == 4 && mail_check.status == 200)
+			{
+				const bool = JSON.parse(mail_check.responseText);
+				console.log(bool);
+				if (bool == "true"){
+					var error = "X Mail Already	Used";
+					errorpopup(email,popup, error);
+					return;
+				}
+				else
+					alert('mail envoyer');			}
+		};
+		const data = {
+			email : mail,
+			uname : username,
+			rkey : random
+		}
+		mail_check.open("POST", "ajax/mailsend.php", true);
+    	mail_check.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    	mail_check.send(JSON.stringify(data));
+    	// console.log('zebi');
+	};
+
+
+
 	function submit_form(email,username,first_name,last_name,password)
 	{
 		var random = Math.floor((Math.random() * 899999) + 100000);
@@ -62,9 +90,10 @@
 				}
 				 else{
 				 	hide_form();
-				 	setTimeout(function() {
-				 	window.location.href= location.pathname + "mailcheck.php?rkey="+ random + "&uname=" + username +"&mail=" + email ;
-				 	}, 4000);
+
+				 	// setTimeout(function() {
+				 	// window.location.href= location.pathname + "mailcheck.php?rkey="+ random + "&uname=" + username +"&mail=" + email ;
+				 	// }, 4000);
 				 }
 				 	
 			}

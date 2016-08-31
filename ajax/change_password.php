@@ -1,30 +1,38 @@
 <?php
 // header('Content-Type: application/json');
-	
-	require_once('../config/function_sql.php');
-	
-	$connect = connectToDatabase();
+	function username_check($connect,$username)
+	{
+		$id = $connect->prepare(
+			"SELECT mail_check FROM `cam_users` WHERE login = :username OR mail = :username"
+		);
 
-	if(!$connect)
-		exit();
+		$id->execute(array(
+				'username' => $username
+			));
 
-	if(!$_GET['uname'] || !$_GET['rkey'] || !$_GET['n_pword'])
-		exit();
+		$result_id = $id->fetch(PDO::FETCH_ASSOC);
 
-	// verif_account($_GET['uname'],$connect);
-	echo($_GET['uname']);
+		return($result_id);
+	}
 
-	$id = $connect->prepare(
-		"SELECT mail_check FROM `cam_users` WHERE login = :username OR mail = :username"
-	);
+	function check_change($username,$bdd)
+	{
+		 $random = rand(100000,999999);
+		 // $random = 0;
 
-	$id->execute(array(
-			'username' => $_GET['uname']
+		$key_change = $bdd->prepare(
+		"UPDATE `cam_users` SET `mail_check` = :random WHERE login = :username OR mail = :username");
+
+		$key_change->execute(array(
+			'random' => $random,
+			'username' => $username
 		));
 
-	$result_id = $id->fetch(PDO::FETCH_ASSOC);
-
-	// print_r($result_id);
+		if($key_change)
+ 			echo ("cle changer"); //Voir avec l'ajaxification
+	 	else
+ 			echo ("non je n'ai pas changer");
+	}
 
 	function password_change($username,$bdd,$new_password)
 	{
@@ -37,11 +45,25 @@
 			'password' => $new_password
 		));
 
-		if($validate)
+		if($validate){
+			check_change($username, $bdd);
  			echo ("false"); //Voir avec l'ajaxification
+		}
 	 	else
  			echo ("true");
 	}
+
+	require_once('../config/function_sql.php');
+	
+	$connect = connectToDatabase();
+
+	if(!$connect)
+		exit();
+
+	if(!$_GET || !$_GET['uname'] || !$_GET['rkey'] || !$_GET['n_pword'])
+		exit();
+
+	$result_id = username_check($connect,$_GET['uname']);
 
 	if ($result_id['mail_check'] === $_GET['rkey'])
 		password_change($_GET['uname'],$connect,hash("whirlpool", $_GET['n_pword']));
