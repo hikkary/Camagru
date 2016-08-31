@@ -55,8 +55,7 @@
 				const bool = JSON.parse(mail_check.responseText);
 				console.log(bool);
 				if (bool == "true"){
-					var error = "X Mail Already	Used";
-					errorpopup(email,popup, error);
+					alert('non non non non non');
 					return;
 				}
 				else
@@ -90,7 +89,7 @@
 				}
 				 else{
 				 	hide_form();
-
+				 	send_form(email,username, random);
 				 	// setTimeout(function() {
 				 	// window.location.href= location.pathname + "mailcheck.php?rkey="+ random + "&uname=" + username +"&mail=" + email ;
 				 	// }, 4000);

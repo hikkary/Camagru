@@ -1,4 +1,5 @@
 <?php
+	header('Content-Type: application/json');
 	header('Content-Type: text/html; charset="iso-8859-1"');
 	ini_set("SMTP","smtp.numericable.fr");
 	ini_set("smtp_port","25");
@@ -13,6 +14,7 @@
 
 
 	// var_dump($_SERVER);
+	$value = ((array)json_decode(file_get_contents('php://input')));
 
 
 	function validation_mail_create($pseudo, $key)
@@ -29,15 +31,15 @@
       <body>
        <p>Hi.'.$pseudo.'</p>
        <p>To verify your mail, click on the link Below</p>
-       <a href='.$path1.'/'.$path2[1].'/app.php?key='.$key.'&uname='.$pseudo.'>Become a Hero</a>
+       <a href='.$path1.'/'.$path2[1].'/ajax/mail_keycheck.php?rkey='.$key.'&uname='.$pseudo.'>Become a Hero</a>
        </body>
     </html>
     ';
     return($message);
 	}
 
-	 if(mail($_GET['mail'],"Finish Your Inscription",validation_mail_create("zak", "6986"), implode("\r\n",$headers)) !== false)
-	 	echo(json_encode("false"))
+	 if(mail($value['email'],"Finish Your Inscription",validation_mail_create($value['uname'], $value['rkey']), implode("\r\n",$headers)) !== false)
+	 	echo(json_encode("false"));
 	 else
-	 	echo(json_encode("true"))
+	 	echo(json_encode("true"));
 	?>

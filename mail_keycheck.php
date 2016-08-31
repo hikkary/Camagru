@@ -1,4 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/mail_keycheck.css">
+	<meta name="viewport" content="width=device-width, user-scalable=yes" />
+	<link rel="stylesheet" href="fonts/css/font-awesome.min.css">
+	<title>Camagru</title>
+</head>
+<body>
 <?php
+	$rootname = getcwd();
+	require_once($rootname.'/nav/menu.php');
+  	menu();
+?>
+
+<!-- <div id="hero">
+	<img src="img/inscription.png" width="100%">
+</div> -->
+
+<div id="redirect">
+<p> <?php
+	require_once('/config/function_sql.php');
+	require_once('/function/redirect.php');
+
 	function verif_account($username,$bdd)
 	{
 		$verif = $bdd->prepare(
@@ -14,14 +38,15 @@
 		if($result_verif['mail_key'] === "1")
 		{
  			echo ("Account already verified");
+ 			redirect("login.php");
+ 			// faire redirecte vers une page d'erreur
  			exit();
 		}
-	 	else
- 			echo ("true");
+		
 	}
 // header('Content-Type: application/json');
 	
-	require_once('../config/function_sql.php');
+
 	
 	$connect = connectToDatabase();
 
@@ -61,14 +86,26 @@
 			'username' => $username
 		));
 
-		if($validate)
- 			echo ("false");
+		if($validate){
+ 			echo ("Account Successfully Verified");
+ 			redirect("login.php");
+		}
 	 	else
- 			echo ("true");
+ 			echo ("An error Occured");
 	}
 
 	if ($result_id['mail_check'] === $_GET['rkey'])
 		validate_account($_GET['uname'],$connect);
 	else
-		echo("false");
-?>
+		echo("An error Occured");
+?></p>
+
+</div>
+
+</body>
+<!-- <script type="text/javascript" src="javascript/index.js"></script> -->
+</html>
+ 
+
+
+
