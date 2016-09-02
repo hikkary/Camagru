@@ -14,10 +14,6 @@
   	menu();
 ?>
 
-<!-- <div id="hero">
-	<img src="img/inscription.png" width="100%">
-</div> -->
-
 <div id="redirect">
 <p> <?php
 	require_once('/config/function_sql.php');

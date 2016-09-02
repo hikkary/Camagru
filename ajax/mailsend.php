@@ -1,9 +1,14 @@
 <?php
 	header('Content-Type: application/json');
 	header('Content-Type: text/html; charset="iso-8859-1"');
-	ini_set("SMTP","smtp.numericable.fr");
+	// ini_set("SMTP","smtp.numericable.fr");
+	// ini_set("smtp_port","25");
+	// ini_set("sendmail_from","z.kerkeb@sfr.fr");	
+
+	ini_set("SMTP","smtp.free.fr");
 	ini_set("smtp_port","25");
-	ini_set("sendmail_from","z.kerkeb@sfr.fr");	
+	ini_set("sendmail_from","z.kerkeb@gmail.com");	
+
 
     $headers   = array();
 	$headers[] = "MIME-Version: 1.0";
@@ -31,7 +36,7 @@
       <body>
        <p>Hi.'.$pseudo.'</p>
        <p>To verify your mail, click on the link Below</p>
-       <a href='.$path1.'/'.$path2[1].'/ajax/mail_keycheck.php?rkey='.$key.'&uname='.$pseudo.'>Become a Hero</a>
+       <a href='.$path1.'/'.$path2[1].'/mail_keycheck.php?rkey='.$key.'&uname='.$pseudo.'>Become a Hero</a>
        </body>
     </html>
     ';

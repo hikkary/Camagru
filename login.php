@@ -30,6 +30,6 @@
 
 </div>
 </body>
-<script type="text/javascript" src="javascript/index.js"></script>
+<script type="text/javascript" src="javascript/login.js"></script>
 </html>
  
