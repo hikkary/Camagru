@@ -3,6 +3,7 @@
 <head>
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/login.css">
+	<link rel="stylesheet" href="css/menu.css">
 	<meta name="viewport" content="width=device-width, user-scalable=yes" />
 	<link rel="stylesheet" href="fonts/css/font-awesome.min.css">
 	<title>Camagru</title>
@@ -19,17 +20,17 @@
 </div> -->
 
 <div id="redirect">
-<p> Login </p>
-<form method="post">
+<p id="message"> Login </p>
+<form id="decathlon" method="post">
 		<input id="username" type="text" placeholder="Username or Email">
 		<input id="password" type="password" placeholder="Type Password">
+		<div id="submit">
+		<a href="#"><p>Submit</p>
+		</div></a>
 		 <!-- id="sub" type="submit" name="s'inscrire"> -->
 	</form>
 </div>
-<div id="inscription">
 
-</div>
 </body>
 <script type="text/javascript" src="javascript/login.js"></script>
 </html>
- 

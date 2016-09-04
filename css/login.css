@@ -17,66 +17,55 @@ html{
 /*==========Css Contenu==========*/
 
 
-#top-app {
-background-color:#6dc2f8 ;
-position: relative;
-margin-left: auto;
-margin-right: auto;
-width: 80%;
-height: 140px;
-max-width: 1600px;
-min-width: 800px;
-box-shadow : 0px 0px 5px;
-}
-
-#croix {
-	position: absolute;
-	font-size: 50px;
-	color: #00beff;
-	top : 5%;
-	left : 81%;
-}
-#album {
-	position: absolute;
-	font-size: 50px;
-	color: #00beff;
-	top : 5%;
-	left : 76%;
-}
-
 
 /* div message pour le mail */
 
-#redirect{
-background-color:#6dc2f8 ;
+#redirect{background-color:#6dc2f8;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	height: 500px;
+	max-width: 1600px;
+	min-width: 800px;
+	font-family: "crayon";
+	font-size: 3vw;
+	text-align : center;
+	line-height: 140px;
+	box-shadow : 0px 0px 5px;
+	display: block;}
+
+#decathlon input{/*background-color:#6dc2f8 ;*/
 position: relative;
 margin-left: auto;
 margin-right: auto;
-width: 80%;
-height: 500px;
-max-width: 1600px;
-min-width: 800px;
-font-family: "crayon";
-font-size: 3vw;
-text-align : center;
-line-height: 140px;
-box-shadow : 0px 0px 5px;
-display: block;
+width: 50vh;
+height: 5vh;
 
+/*min-width: 800px*/
+font-family: "crayon";
+font-size: 5vw;
+text-align : center;
+/*line-height: 20px;*/
+display: block;
 }
 
-#redirect form{
-/*background-color:#6dc2f8 ;*/
-position: relative;
-margin-left: auto;
-margin-right: auto;
-width: 20%;
-max-width: 1600px;
-min-width: 800px;
-font-family: "crayon";
-font-size: 2vw;
-text-align : center;
-line-height: 20px;
-display: block;
 
+#submit {
+	background-color: #ccf2ff;
+	width: inherit;
+	height: 2vw;
+	/* line-height: 20px; */
+	width: 50%;
+	text-align: center;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 10px;
+	height: 3vh;
+	line-height: 3vh;
+}
+
+#submit a{
+	text-decoration: none;
+	color :black;
 }

@@ -2,6 +2,7 @@
 <html>
 <head>
 	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/menu.css">
 	<link rel="stylesheet" href="css/mail_keycheck.css">
 	<meta name="viewport" content="width=device-width, user-scalable=yes" />
 	<link rel="stylesheet" href="fonts/css/font-awesome.min.css">

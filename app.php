@@ -3,6 +3,7 @@
 <head>
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" type="text/css" href="css/app.css">
+<link rel="stylesheet" type="text/css" href="css/menu.css">
 <link rel="stylesheet" href="fonts/css/font-awesome.min.css">
 <meta name="viewport" content="width=device-width, user-scalable=yes" />
 

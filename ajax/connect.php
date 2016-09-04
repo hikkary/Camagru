@@ -8,13 +8,13 @@
 	if(!$connect)
 		exit();
 
-	if(!$_GET['uname'] || !$_GET['pword'])
-		exit();
+	// if(!$_GET['uname'] || !$_GET['pword'])
+	// 	exit();
 
-	// $users = ((array)json_decode(file_get_contents('php://input')));
+	 $users = ((array)json_decode(file_get_contents('php://input')));
 
-	$username = $_GET['uname'];
-	$password = hash("whirlpool", $_GET['pword']);
+	$username = $users['t_username'];
+	$password = hash("whirlpool", $users['t_password']);
 
 	$user = $connect->prepare( 
 		"SELECT login,password FROM `cam_users` WHERE login = :pseudo"
@@ -28,11 +28,11 @@
 
 	if(!$result)
 	{
-		echo "dendi";
+		echo (json_encode("true"));
 		// faire redirection page d'erreur
 	}
 
 	if($password === $result['password'])
-		echo "ok"; // foutre le login dans la variable session
+		echo (json_encode("false")); // foutre le login dans la variable session
 	
 ?>

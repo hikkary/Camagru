@@ -15,11 +15,6 @@
 	password.verif = 0;
 	password_check.verif= 0;
 
-	// console.log(location.pathname + "app.php")
-
-	// window.location.href= location.pathname + "mailcheck.php?mail=z.kerkeb@gmail.com";
-
-
 	function empty_form(email,username,first_name,last_name,password,password_check)
 	{
 		email.value = "";
@@ -47,67 +42,56 @@
 
 	empty_form(email, username,first_name,last_name,password,password_check);
 
-	function send_form(mail,username, random){
-		var mail_check = new XMLHttpRequest();
-		mail_check.onreadystatechange = function(){
-			if (mail_check.readyState == 4 && mail_check.status == 200)
-			{
-				const bool = JSON.parse(mail_check.responseText);
-				console.log(bool);
-				if (bool == "true"){
-					alert('non non non non non');
-					return;
-				}
-				else
-					alert('mail envoyer');			}
-		};
-		const data = {
-			email : mail,
-			uname : username,
-			rkey : random
-		}
-		mail_check.open("POST", "ajax/mailsend.php", true);
-    	mail_check.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    	mail_check.send(JSON.stringify(data));
-    	// console.log('zebi');
-	};
+function send_form(mail, username, random) {
+    var mail_check = new XMLHttpRequest();
+    mail_check.onreadystatechange = function() {
+        if (mail_check.readyState == 4 && mail_check.status == 200) {
+            const bool = JSON.parse(mail_check.responseText);
+            console.log(bool);
+            if (bool == "true") {
+                // alert('non non non non non');
+                return;
+            }
+        	}
+				};
+        const data = {
+            email: mail,
+            uname: username,
+            rkey: random
+        };
+        mail_check.open("POST", "ajax/mailsend.php", true);
+        mail_check.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        mail_check.send(JSON.stringify(data));
+      }
 
 
-
-	function submit_form(email,username,first_name,last_name,password)
-	{
-		var random = Math.floor((Math.random() * 899999) + 100000);
-		var form = new XMLHttpRequest();
-		form.onreadystatechange = function(data){
-			if (form.readyState == 4 && form.status == 200)
-			{
-				const bool = JSON.parse(form.responseText);
-				console.log(bool);
-				if (bool == "true"){
-					var error = "An error occured";
-					errorpopup(email,popup, error);
-				}
-				 else{
-				 	hide_form();
-				 	send_form(email,username, random);
-				 	// setTimeout(function() {
-				 	// window.location.href= location.pathname + "mailcheck.php?rkey="+ random + "&uname=" + username +"&mail=" + email ;
-				 	// }, 4000);
-				 }
-				 	
-			}
-		};
-		const data = {
-			t_email : email,
-			t_username : username,
-			t_first_name : first_name,
-			t_last_name : last_name,
-			t_password : password,
-			t_random : random
-		}
-		form.open("POST", "ajax/add_user.php", true);
-    	form.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    	form.send(JSON.stringify(data));
+	function submit_form(email, username, first_name, last_name, password) {
+	    var random = Math.floor((Math.random() * 899999) + 100000);
+	    var form = new XMLHttpRequest();
+	    form.onreadystatechange = function(data) {
+	        if (form.readyState == 4 && form.status == 200) {
+	            const bool = JSON.parse(form.responseText);
+	            console.log(bool);
+	            if (bool == "true") {
+	                var error = "An error occured";
+	                errorpopup(email, popup, error);
+	            } else {
+	                hide_form();
+	                send_form(email, username, random);
+	            }
+	        }
+	    };
+	    const data = {
+	        t_email: email,
+	        t_username: username,
+	        t_first_name: first_name,
+	        t_last_name: last_name,
+	        t_password: password,
+	        t_random: random
+	    };
+	    form.open("POST", "ajax/add_user.php", true);
+	    form.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	    form.send(JSON.stringify(data));
 	}
 
 	function recovery(elem)
@@ -131,7 +115,7 @@
 		popup.style.transition = "opacity 2s linear";
 		popup.style.opacity= "100";
 		setTimeout(function() {
-		popup.style.opacity= 0;		
+		popup.style.opacity= 0;
 		}, 5000);
 		setTimeout(function() {
 		popup.style.display="none";
@@ -176,12 +160,12 @@
 		};
 		const data = {
 			email : mail
-		}
+		};
 		mail_check.open("POST", "ajax/mailcheck.php", true);
     	mail_check.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     	mail_check.send(JSON.stringify(data));
     	console.log('zebi');
-	};
+	}
 
 
 	function checkemailpattern(mail,email, popup){
@@ -202,12 +186,12 @@
 		};
 		const data = {
 			email : mail
-		}
+		};
 		mail_check.open("POST", "ajax/mailpatterncheck.php", true);
     	mail_check.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     	mail_check.send(JSON.stringify(data));
     	// console.log('zebi');
-	};
+	}
 
 	function checkusername(uservalue,username, popup){
 		var user_check = new XMLHttpRequest();
@@ -226,11 +210,11 @@
 		};
 		const data = {
 			username : uservalue
-		}
+		};
 		user_check.open("POST", "ajax/usercheck.php", true);
     	user_check.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     	user_check.send(JSON.stringify(data));
-	};
+	}
 
 	function checklength(value,variable,popup){
 		var length_check = new XMLHttpRequest();
@@ -241,7 +225,7 @@
 				// console.log(bool);
 				if (bool == "true")
 				{
-					var error = "X it's too short/Long"
+					var error = "X it's too short/Long";
 					errorpopup(variable,popup, error);
 				}
 				else
@@ -250,27 +234,27 @@
 		};
 		const data = {
 			string : value
-		}
+		};
 		length_check.open("POST", "ajax/lenghtcheck.php", true);
     	length_check.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     	length_check.send(JSON.stringify(data));
     	// console.log('zebi');
-	};
+	}
 
 	email.addEventListener('blur', function(ev){
 		if (email.value)
-			checkemailpattern(email.value,email,popup); 
-		else	
+			checkemailpattern(email.value,email,popup);
+		else
 			recovery(email);
 		// console.log(check);
 
 	}, true);
 
 	username.addEventListener('blur', function(ev){
-		if ((username.value.length < 5 || username.value.length >= 60) && username.value.length != 0)
+		if ((username.value.length < 5 || username.value.length >= 60) && username.value.length !== 0)
 		{
 			var error = "X Username Must be at least 5 character";
-			errorpopup(username, popup, error)
+			errorpopup(username, popup, error);
 		}
 		else if (username.value.length >= 5 && username.value.length <= 60)
 			checkusername(username.value,username, popup);
@@ -294,7 +278,7 @@
 
 	password.addEventListener('blur', function(ev){
 		var passregexp = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.).*$", "g");
-		if (passregexp.test(password.value) == true && password.value.length >= 8)
+		if (passregexp.test(password.value) === true && password.value.length >= 8)
 			allgreen(password);
 		else
 		{
@@ -302,17 +286,17 @@
 			errorpopup(password,popup, error);
 		}
 
-		if (password.value.length == 0) 
+		if (password.value.length === 0)
 			recovery(password);
 	}, true);
 
 	password_check.addEventListener('input', function(ev){
-		if (password_check.value.localeCompare(password.value) == 0)
+		if (password_check.value.localeCompare(password.value) === 0)
 			allgreen(password_check);
 		else
 			allred(password_check);
 
-		if (password_check.value.length == 0) 
+		if (password_check.value.length === 0)
 			recovery(password_check);
 	}, true);
 
@@ -327,10 +311,10 @@
 
 
 	submit.addEventListener('click', function(ev){
-		var error = "Please fill correctly all the form"
+		var error = "Please fill correctly all the form";
 		// checkemailpattern(email.value,email,popup);
-		if ((username.value.length < 5 || username.value.length >= 60) && username.value.length != 0)
-			errorpopup(username, popup, error)
+		if ((username.value.length < 5 || username.value.length >= 60) && username.value.length !== 0)
+			errorpopup(username, popup, error);
 		else if (username.value.length >= 5 && username.value.length <= 60)
 			checkusername(username.value,username, popup);
 		 // checkusername(username.value,username, popup);
@@ -341,36 +325,36 @@
 		// console.log(username.verif);
 		// console.log(password.verif);
 		// console.log(password_check.verif);
-		
 
-		if(first_name.value.length == 0 || first_name.style.color == "red" || first_name.verif == 0)
+
+		if(first_name.value.length === 0 || first_name.style.color == "red" || first_name.verif === 0)
 		{
-			errorpopup(first_name,popup,error)
+			errorpopup(first_name,popup,error);
 			return;
 		}
-		if(last_name.value.length == 0 || last_name.style.color == "red" || last_name.verif == 0)
+		if(last_name.value.length === 0 || last_name.style.color == "red" || last_name.verif === 0)
 		{
-			errorpopup(last_name,popup,error)
+			errorpopup(last_name,popup,error);
 			return;
 		}
-		if(email.value.length == 0 || email.style.color == "red" || email.verif == 0)
-		{		
-			errorpopup(email,popup,error)
-			return;		
-		}
-		if(username.value.length == 0 || username.style.color == "red" || username.verif == 0)
+		if(email.value.length === 0 || email.style.color == "red" || email.verif === 0)
 		{
-			errorpopup(username,popup,error)
+			errorpopup(email,popup,error);
 			return;
 		}
-		if(password.value.length == 0 || password.style.color == "red" || password.verif == 0)
+		if(username.value.length === 0 || username.style.color == "red" || username.verif === 0)
 		{
-			errorpopup(password,popup,error)
+			errorpopup(username,popup,error);
 			return;
 		}
-		if(password_check.value.length == 0 || password_check.style.color == "red" || password_check.verif == 0)
+		if(password.value.length === 0 || password.style.color == "red" || password.verif === 0)
 		{
-			errorpopup(password_check,popup,error)
+			errorpopup(password,popup,error);
+			return;
+		}
+		if(password_check.value.length === 0 || password_check.style.color == "red" || password_check.verif === 0)
+		{
+			errorpopup(password_check,popup,error);
 			return;
 		}
 		// if (verifcheck(first_name,last_name,email,username,password,password_check) == true)
@@ -378,61 +362,4 @@
 		// else
 			// return;
 	}, true);
-})();
-
-
-
-	// function lenghtok(elem)
-	// {
-	// 	// var tmp = elem.value;
-
-	// 	elem.style.color="green";
-	// 	elem.style.border="none";
-	// 	elem.style.boxShadow="1px 1px 5px green";
-	// }
-
-	// function alreadyused(elem, popup)
-	// {
-	// 	var tmp = elem.value;
-
-	// 	elem.style.color="red";
-	// 	elem.style.border="none";
-	// 	elem.style.boxShadow="1px 1px 5px red";
-	// 	popup.innerHTML="X Already Used ";
-	// 	popup.style.color="red";
-	// 	popup.style.display ="inherit";
-	// 	popup.style.transition = "opacity 2s linear";
-	// 	popup.style.opacity= 100;
-	// 	// setTimeout(function() {
-	// 	// popup.style.opacity= 0;		
-	// 	// }, 5000);
-	// 	setTimeout(function() {
-	// 	// popup.style.display="none";
-	// 	popup.innerHTML=" ";
-	// 	}, 7000);
-	// }
-
-	// function Available(elem)
-	// {
-	// 	var tmp = elem.value;
-
-	// 	elem.style.color="green";
-	// 	elem.style.border="none";
-	// 	elem.style.boxShadow="1px 1px 5px green";
-	// 	elem.value="V Available";
-	// 	setTimeout(function() {
-	// 	elem.value = tmp;	
-	// 	}, 500);
-	// }
-
-	// function Unvalidemail(elem)
-	// {
-	// 	var tmp = elem.value;
-
-	// 	elem.style.color="red";
-	// 	elem.style.border="none";
-	// 	elem.style.boxShadow="1px 1px 5px red";
-	// 	elem.value="Please enter a valid mail";
-	// 	setTimeout(function() {
-	// 	elem.value = tmp;	
-	// 	}, 500);
+}());
