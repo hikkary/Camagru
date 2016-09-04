@@ -1,3 +1,7 @@
+<?php
+	session_start();
+	echo $_SESSION['username'];
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,8 +25,8 @@
 <div id ="bv">
 	<div id ="v">
 		<video id="video"></video>
-				
-			
+
+
 		<img id="ncam" src="img/ncam.png">
 		<canvas id="canvas"></canvas>
 		<img src="img/nphoto.png" id="photo" alt="photo">
@@ -72,5 +76,3 @@
 	<script type="text/javascript" src="javascript/videome.js"></script>
 
 </html>
-
-

@@ -1,9 +1,13 @@
+<?php
+	session_start();
+	echo $_SESSION['username'];
+?>
 <!DOCTYPE html>
 <html>
 <head>
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/index.css">
-	<link rel="stylesheet" href="css/menu.css">	
+	<link rel="stylesheet" href="css/menu.css">
 	<meta name="viewport" content="width=device-width, user-scalable=yes" />
 	<link rel="stylesheet" href="fonts/css/font-awesome.min.css">
 	<title>Camagru</title>
@@ -27,14 +31,14 @@
 	<form method="post">
 
 
-		
+
 		<input id="first_name" type="text" placeholder="First Name">
 		<input id="last_name" type="text" placeholder="Last Name">
 		<input id="email" type="email" placeholder="Email">
 		<input id="username" type="text" placeholder="Username">
 		<input id="password" type="password" placeholder="Type Password">
 		<input id="password_check" type="password" placeholder="Type Password Again">
-		
+
 		 <!-- id="sub" type="submit" name="s'inscrire"> -->
 	</form>
 	<button id="sub">Submit</button>
@@ -46,4 +50,3 @@
 </body>
 <script type="text/javascript" src="javascript/index.js"></script>
 </html>
- 

@@ -1,3 +1,7 @@
+<?php
+	session_start();
+	echo $_SESSION['username'];
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,12 +43,12 @@
  			// faire redirecte vers une page d'erreur
  			exit();
 		}
-		
+
 	}
 // header('Content-Type: application/json');
-	
 
-	
+
+
 	$connect = connectToDatabase();
 
 	if(!$connect)
@@ -62,7 +66,7 @@
 	);
 
 	// $id->execute();
-	
+
 	$id->execute(array(
 			'username' => $_GET['uname']
 		));
@@ -102,7 +106,3 @@
 </body>
 <!-- <script type="text/javascript" src="javascript/index.js"></script> -->
 </html>
- 
-
-
-

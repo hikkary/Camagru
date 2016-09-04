@@ -1,8 +1,8 @@
 <?php
 	// header('Content-Type: application/json');
-	
+	session_start();
 	require_once('../config/function_sql.php');
-	
+
 	$connect = connectToDatabase();
 
 	if(!$connect)
@@ -16,7 +16,7 @@
 	$username = $users['t_username'];
 	$password = hash("whirlpool", $users['t_password']);
 
-	$user = $connect->prepare( 
+	$user = $connect->prepare(
 		"SELECT login,password FROM `cam_users` WHERE login = :pseudo"
 		);
 
@@ -34,5 +34,5 @@
 
 	if($password === $result['password'])
 		echo (json_encode("false")); // foutre le login dans la variable session
-	
+		$_SESSION['username'] = $username;
 ?>
