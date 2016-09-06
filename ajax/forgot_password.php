@@ -11,10 +11,9 @@
 	 $users = ((array)json_decode(file_get_contents('php://input')));
 
 	$username = $users['t_username'];
-	$password = hash("whirlpool", $users['t_password']);
 
 	$user = $connect->prepare(
-		"SELECT login,password FROM `cam_users` WHERE login = :pseudo"
+		"SELECT login,mail,mail_check FROM `cam_users` WHERE login = :pseudo OR mail = :pseudo"
 		);
 
 	$user->execute(array(
@@ -29,9 +28,10 @@
 		// faire redirection page d'erreur
 	}
 
-	if($password === $result['password'])
+	if($username === $result['login'] || $username === $result['mail'])
 	{
-		echo (json_encode("false")); // foutre le login dans la variable session
-		$_SESSION['username'] = $username;
+		$result['check'] = "false";
+		echo (json_encode($result)); // foutre le login dans la variable session
 	}
+		// $_SESSION['username'] = $username;
 ?>

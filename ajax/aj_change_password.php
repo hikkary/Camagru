@@ -54,7 +54,7 @@
 	}
 
 	require_once('../config/function_sql.php');
-	
+
 	$connect = connectToDatabase();
 
 	if(!$connect)

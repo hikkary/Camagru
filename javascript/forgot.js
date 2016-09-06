@@ -1,6 +1,5 @@
  var username = document.getElementById('username');
- // var password = document.getElementById('password');
- // var submit = document.getElementById('submit');
+ var submit = document.getElementById('submit');
  var message = document.getElementById('message');
 
  function changetext(message,element,color,original_message)
@@ -15,16 +14,42 @@
  	}
  }
 
-function connect(username,password){
-  var error = "Wrong Username or Password";
-  var connect = new XMLHttpRequest();
-	connect.onreadystatechange = function(){
-		if (connect.readyState == 4 && connect.status == 200)
+ function mail_forgot_send(data){
+   var error = "An error Occured";
+   var mail_forgot = new XMLHttpRequest();
+ 	mail_forgot.onreadystatechange = function(){
+ 		if (mail_forgot.readyState == 4 && mail_forgot.status == 200)
+ 		{
+ 			const bool = JSON.parse(mail_forgot.responseText);
+ 			console.log(bool);
+ 			if(bool == "false")
+      {
+        alert('mail sent ! ')
+      }
+      else
+       {
+ 				changetext(error,document.getElementById('message'),"red", null);
+       }
+ 		}
+ 	};
+ 	mail_forgot.open("POST","ajax/forgot_mail.php",true);
+  mail_forgot.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+ 	mail_forgot.send(JSON.stringify(data));
+ }
+
+
+
+
+function mail_forgot(username){
+  var error = "Username or Email Does not Exist";
+  var forgot = new XMLHttpRequest();
+	forgot.onreadystatechange = function(){
+		if (forgot.readyState == 4 && forgot.status == 200)
 		{
-			const bool = JSON.parse(connect.responseText);
+			const bool = JSON.parse(forgot.responseText);
 			console.log(bool);
-			if(bool == "false")
-				window.location.href = "app.php";
+			if(bool['check'] == "false")
+				mail_forgot_send(bool);
 			else
       {
 				changetext(error,document.getElementById('message'),"red", null);
@@ -32,12 +57,11 @@ function connect(username,password){
 		}
 	};
 	const data = {
-		t_username : username,
-		t_password : password
+		t_username : username
 	};
-	connect.open("POST","ajax/connect.php",true);
-    connect.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	connect.send(JSON.stringify(data));
+	forgot.open("POST","ajax/forgot_password.php",true);
+  forgot.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	forgot.send(JSON.stringify(data));
 }
 
 
@@ -50,5 +74,5 @@ submit.addEventListener('click',function(ev){
 		return;
 	}
 	else
-		connect(username.value,password.value);
+		mail_forgot(username.value);
 },true);

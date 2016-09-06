@@ -1,10 +1,14 @@
 <?php
+	session_start();
 	header('Content-Type: application/json');
 	header('Content-Type: text/html; charset="iso-8859-1"');
+	// ini_set("SMTP","smtp.free.fr");
+	// ini_set("smtp_port","25");
+	// ini_set("sendmail_from","z.kerkeb@gmail.com");
 
-	ini_set("SMTP","smtp.free.fr");
-	ini_set("smtp_port","25");
-	ini_set("sendmail_from","z.kerkeb@gmail.com");
+	 ini_set("SMTP","smtp.numericable.fr");
+	 ini_set("smtp_port","25");
+	 ini_set("sendmail_from","z.kerkeb@sfr.fr");
 
   $headers   = array();
 	$headers[] = "MIME-Version: 1.0";
@@ -15,7 +19,16 @@
 
 	$value = ((array)json_decode(file_get_contents('php://input')));
 
-	function validation_mail_create($pseudo, $key)
+	require_once('../config/function_sql.php');
+
+	$connect = connectToDatabase();
+
+	if(!$connect)
+		exit();
+
+//recuperer la cle
+
+	function forgot_mail_create($pseudo, $key)
 	{
 		$path1 = $_SERVER['HTTP_HOST'];
 		$path2 = array_slice(explode('/', $_SERVER['SCRIPT_NAME']), 0, -1);
@@ -28,15 +41,15 @@
       </head>
       <body>
        <p>Hi.'.$pseudo.'</p>
-       <p>To verify your mail, click on the link Below</p>
-       <a href='.$path1.'/'.$path2[1].'/mail_keycheck.php?rkey='.$key.'&uname='.$pseudo.'>Become a Hero</a>
+       <p>To change your password, click on the link Below</p>
+       <a href='.$path1.'/'.$path2[1].'/change_password.php?rkey='.$key.'&uname='.$pseudo.'>change my password</a>
        </body>
     </html>
     ';
     return($message);
 	}
 
-	 if(mail($value['email'],"Finish Your Inscription",validation_mail_create($value['uname'], $value['rkey']), implode("\r\n",$headers)) !== false)
+	 if(mail($value['mail'],"Forgotten Password",forgot_mail_create($value['login'], $value['mail_check']), implode("\r\n",$headers)) !== false)
 	 	echo(json_encode("false"));
 	 else
 	 	echo(json_encode("true"));
