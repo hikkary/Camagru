@@ -6,7 +6,7 @@
 <html>
 <head>
 	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/forgot.css">
+	<link rel="stylesheet" href="css/change_password.css">
 	<link rel="stylesheet" href="css/menu.css">
 	<meta name="viewport" content="width=device-width, user-scalable=yes" />
 	<link rel="stylesheet" href="fonts/css/font-awesome.min.css">
@@ -38,5 +38,7 @@
 </div>
 
 </body>
-<script type="text/javascript" src="javascript/forgot.js"></script>
+<!-- <script type="text/javascript" src="javascript/function.js"></script> -->
+<script type="text/javascript" src="javascript/change_password.js"></script>
+
 </html>
