@@ -1,19 +1,5 @@
 <?php
-// header('Content-Type: application/json');
-	function username_check($connect,$username)
-	{
-		$id = $connect->prepare(
-			"SELECT mail_check FROM `cam_users` WHERE login = :username OR mail = :username"
-		);
-
-		$id->execute(array(
-				'username' => $username
-			));
-
-		$result_id = $id->fetch(PDO::FETCH_ASSOC);
-
-		return($result_id);
-	}
+ header('Content-Type: application/json');
 
 	function check_change($username,$bdd)
 	{
@@ -29,9 +15,9 @@
 		));
 
 		if($key_change)
- 			echo ("cle changer"); //Voir avec l'ajaxification
+ 			return true; //Voir avec l'ajaxification
 	 	else
- 			echo ("non je n'ai pas changer");
+ 			return false;
 	}
 
 	function password_change($username,$bdd,$new_password)
@@ -46,11 +32,14 @@
 		));
 
 		if($validate){
-			check_change($username, $bdd);
- 			echo ("false"); //Voir avec l'ajaxification
+			if(check_change($username, $bdd) === true)
+ 				echo(json_encode("false")); //Voir avec l'ajaxification
+			else {
+					echo(json_encode("true"));
+				}
 		}
 	 	else
- 			echo ("true");
+ 			echo(json_encode("true"));
 	}
 
 	require_once('../config/function_sql.php');
@@ -60,13 +49,13 @@
 	if(!$connect)
 		exit();
 
-	if(!$_GET || !$_GET['uname'] || !$_GET['rkey'] || !$_GET['n_pword'])
-		exit();
+	$password = ((array)json_decode(file_get_contents('php://input')));
+	// var_dump($password);
+	// return;
 
-	$result_id = username_check($connect,$_GET['uname']);
-
-	if ($result_id['mail_check'] === $_GET['rkey'])
-		password_change($_GET['uname'],$connect,hash("whirlpool", $_GET['n_pword']));
-	else
-		echo("false");
+	if ($password)
+		password_change($password['t_username'],$connect,hash("whirlpool", $password['t_password']));
+	else {
+			echo(json_encode("true"));
+	}
 ?>

@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	echo $_SESSION['username'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,8 +23,37 @@
 </div> -->
 
 <div id="redirect">
-<p id="message"> Please enter your new password </p>
+<p id="message"><?php
+require_once('config/function_sql.php');
+
+// var_dump($_GET);
+
+$connect = connectToDatabase();
+
+if(!$connect)
+{
+	echo "An error occured";
+	exit();
+}
+
+if($_GET['uname'] === "" || $_GET['rkey'] === ""){
+	echo "Invalid Username or Key";
+	exit();
+}
+	$result_id = username_check($connect,$_GET['uname']);
+
+	if ($result_id['mail_check'] === $_GET['rkey'])
+		echo "Please enter your new password";
+	else{
+		echo "An error occured";
+		exit();
+	}
+?>
+
+  </p>
 <form id="decathlon" method="post">
+		<input id="username" type="text" placeholder="Username or Email" value=<?php echo $_GET['uname'] ?> >
+		<input id="rkey" type="text" placeholder="Username or Email" value=<?php echo $_GET['rkey'] ?> >
 		<input id="password" type="password" placeholder="type password">
 		<input id="password_check" type="password" placeholder="type password again">
 		<!-- <input id="password" type="password" placeholder="Type Password"> -->

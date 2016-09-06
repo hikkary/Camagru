@@ -27,7 +27,7 @@
 <p id="message"> Login </p>
 <form id="decathlon" method="post">
 		<input id="username" type="text" placeholder="Username or Email">
-		<!-- <input id="password" type="password" placeholder="Type Password"> -->
+		<input id="password" type="password" placeholder="Type Password">
 		<div id="submit">
 		<a href="#"><p>Submit</p>
 		</div></a>

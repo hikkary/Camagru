@@ -1,5 +1,6 @@
  var password = document.getElementById('password');
  var password_check = document.getElementById('password_check');
+ var username = document.getElementById('username');
  var message = document.getElementById('message');
 
  function include(fileName){
@@ -8,72 +9,39 @@
 
 include("function.js");
 
- function changetext(message,element,color,original_message)
- {
- 	element.innerHTML = message;
- 	element.style.color = color;
- 	if(original_message)
- 	{
- 		setTimeout(function(){
- 			changetext(original_message,element,"black", null);
- 		},3000);
- 	}
- }
+function change_password(password,username,rkey){
+  var password_change = new XMLHttpRequest();
+  password_change.onreadystatechange = function(){
+    if (password_change.readyState == 4 && password_change.status == 200)
+    {
+      const bool = JSON.parse(password_change.responseText);
+      console.log(bool);
+      if (bool == "true")
+      {
+          changetext("An error Occured",document.getElementById('message'),"red",document.getElementById('message').innerHTML);
+      }
+      else
+      {
+        changetext("Password successfully updated",document.getElementById('message'),"black",document.getElementById('message').innerHTML);
+        setTimeout(function(){
+            window.location.href= "login.php";
+        },1000);
+      }
+    }
+  };
+  const data = {
+    t_password : password.value,
+    t_username : username.value
+  };
+  password_change.open("POST", "ajax/aj_change_password.php", true);
+  password_change.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  password_change.send(JSON.stringify(data));
 
-//  function mail_forgot_send(data){
-//    var error = "An error Occured";
-//    var mail_forgot = new XMLHttpRequest();
-//  	mail_forgot.onreadystatechange = function(){
-//  		if (mail_forgot.readyState == 4 && mail_forgot.status == 200)
-//  		{
-//  			const bool = JSON.parse(mail_forgot.responseText);
-//  			console.log(bool);
-//  			if(bool == "false")
-//       {
-//         alert('mail sent ! ')
-//       }
-//       else
-//        {
-//  				changetext(error,document.getElementById('message'),"red", null);
-//        }
-//  		}
-//  	};
-//  	mail_forgot.open("POST","ajax/forgot_mail.php",true);
-//   mail_forgot.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-//  	mail_forgot.send(JSON.stringify(data));
-//  }
-//
-//
-//
-//
-// function mail_forgot(username){
-//   var error = "Username or Email Does not Exist";
-//   var forgot = new XMLHttpRequest();
-// 	forgot.onreadystatechange = function(){
-// 		if (forgot.readyState == 4 && forgot.status == 200)
-// 		{
-// 			const bool = JSON.parse(forgot.responseText);
-// 			console.log(bool);
-// 			if(bool['check'] == "false")
-// 				mail_forgot_send(bool);
-// 			else
-//       {
-// 				changetext(error,document.getElementById('message'),"red", null);
-//       }
-// 		}
-// 	};
-// 	const data = {
-// 		t_username : username
-// 	};
-// 	forgot.open("POST","ajax/forgot_password.php",true);
-//   forgot.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-// 	forgot.send(JSON.stringify(data));
-// }
-//
+}
+
 
 password.addEventListener('blur', function(ev){
-  var passregexp = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.).*$", "g");
-  if (passregexp.test(password.value) === true && password.value.length >= 8)
+  if (regex_password(password) === true)
     allgreen(password);
   else
   {
@@ -82,27 +50,38 @@ password.addEventListener('blur', function(ev){
     allred(password);
     // errorpopup(password,popup, error);
   }
-  if (password_check.value.length === 0)
-    recovery(password);
+  if (password.value.length === 0)
+    recovery(password,"black");
 }, true);
 
 password_check.addEventListener('input', function(ev){
-  if (password_check.value.localeCompare(password.value) === 0)
+  if (password_compare(password, password_check) === true && regex_password(password) === true)
     allgreen(password_check);
   else
     allred(password_check);
 
   if (password_check.value.length === 0)
-    recovery(password_check);
+    recovery(password_check, "black");
 }, true);
 
 submit.addEventListener('click',function(ev){
-	var formfill = "Password : 8 character, 1 uppercase & 1 number";
 	if(password.value.length === 0 || password_check.value.length === 0 )
 	{
+    var formfill = "Please fill all the form";
 		changetext(formfill,message,"red",message.innerHTML);
 		return;
 	}
-	// else
-	// 	mail_forgot(username.value);
+  else if (regex_password(password) === false ) {
+    var error_password = "Password : 8 character, 1 uppercase & 1 number";
+    changetext(error_password,message,"red",message.innerHTML);
+    return;
+  }
+  else if (password_compare(password, password_check) === false) {
+      var password_match = "Passwords does not match";
+      changetext(password_match,message,"red",message.innerHTML);
+      return;
+  }
+	 else
+    change_password(password,username,rkey);
+  	// mail_forgot(username.value);
 },true);

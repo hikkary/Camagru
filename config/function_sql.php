@@ -11,4 +11,20 @@
 		}
 	}
 
+	function username_check($connect,$username)
+	{
+		$id = $connect->prepare(
+			"SELECT mail_check FROM `cam_users` WHERE login = :username OR mail = :username"
+		);
+
+		$id->execute(array(
+				'username' => $username
+			));
+
+		$result_id = $id->fetch(PDO::FETCH_ASSOC);
+
+		return($result_id);
+	}
+
+
 ?>
