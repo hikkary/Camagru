@@ -1,6 +1,7 @@
 <?php
 	session_start();
-	echo $_SESSION['username'];
+	var_dump($_SESSION);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,5 +49,8 @@
 	<img src="img/yjuni.png">
 </div> -->
 </body>
+
 <script type="text/javascript" src="javascript/index.js"></script>
+<script type="text/javascript" src="javascript/islog.js"></script>
+
 </html>
