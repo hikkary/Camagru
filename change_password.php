@@ -68,5 +68,10 @@ if($_GET['uname'] === "" || $_GET['rkey'] === ""){
 </body>
 <!-- <script type="text/javascript" src="javascript/function.js"></script> -->
 <script type="text/javascript" src="javascript/change_password.js"></script>
+<?php
+	$rootname = getcwd();
+	require_once($rootname.'/script/script.php');
+  	script();
+?>
 
 </html>

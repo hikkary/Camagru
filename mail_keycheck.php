@@ -103,5 +103,11 @@
 </div>
 
 </body>
+<?php
+	$rootname = getcwd();
+	require_once($rootname.'/script/script.php');
+  	script();
+?>
+
 <!-- <script type="text/javascript" src="javascript/index.js"></script> -->
 </html>
