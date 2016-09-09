@@ -5,6 +5,7 @@ if($_SESSION)
     if($_SESSION['username'] !== "")
     {
       $_SESSION['username'] = "";
+      session_destroy();
       echo(json_encode("true"));
     }
     else
