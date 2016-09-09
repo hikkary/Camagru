@@ -23,7 +23,21 @@
 </div> -->
 
 <div id="redirect">
-<p id="message"> Login </p>
+<p id="message"> <?php
+	if($_SESSION)
+	{
+		if($_SESSION['username'] !== "")
+		{
+			echo "You are already connected";
+			return;
+		}
+		else {
+			echo "Login";
+		}
+	}
+	else {
+	}
+ ?> </p>
 <form id="decathlon" method="post">
 		<input id="username" type="text" placeholder="Username or Email">
 		<input id="password" type="password" placeholder="Type Password">

@@ -56,7 +56,7 @@ function islog(login, link){
         console.log(bool);
         if(bool == "true")
         {
-          alert("pas connecter");
+          // alert("pas connecter");
           login_logout(login, link, 1);
         }
         else {
