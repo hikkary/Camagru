@@ -36,6 +36,7 @@
 		}
 	}
 	else {
+		echo "Login";
 	}
  ?> </p>
 <form id="decathlon" method="post">
