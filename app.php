@@ -20,6 +20,7 @@
   	menu();
 ?>
 <p id="ntm"></p>
+<img src="img/nphoto2.png" id="photo" alt="photo">
 <canvas id="mask" height="540" width="720" style="position: absolute;">	</canvas>
 <div id ="bv">
 	<div id ="v">
@@ -28,7 +29,7 @@
 
 		<img id="ncam" src="img/ncam.png">
 		<canvas id="canvas"></canvas>
-		<img src="img/nphoto.png" id="photo" alt="photo">
+
 
 		<button id="cam">
 			<i id="stop" class="fa fa-ban" aria-hidden="true"></i>
