@@ -1,5 +1,7 @@
 (function() {
 
+
+
   var streaming = false,
       video        = document.querySelector('#video'), //
       cover        = document.querySelector('#cover'),
@@ -17,10 +19,9 @@
       k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
  	  n = 0,
   	  // clavier 	   = event.which,
-
       width = 720,
       height = 0; // on definira sa plus tard
-
+      console.log(photo);
   navigator.getMedia = ( navigator.getUserMedia ||
                          navigator.webkitGetUserMedia ||
                          navigator.mozGetUserMedia ||
@@ -76,7 +77,7 @@
   //     if (request.readyState == 4 && request.status == 200) // les etats vont de 1 a 4, voir http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp pour plus d'info, le 200 signifie que le statut de la requete/page est "ok"
   //     {
   //       const errors = JSON.parse(request.responseText); //errors stock les donnee renvoyer par la page php
-  //       console.log(errors); 
+  //       console.log(errors);
   //       document.getElementById("ntm").innerHTML = errors['fawfawf']; // je place dans la balise dont l'idee est ntm , la case fawfawf du tableau envoyer au php
   //     }
   //   };
@@ -89,7 +90,12 @@
   //   request.send(JSON.stringify(data)); // on envoi rien en cas de GET et une string en cas de POST
   // }
 
+  function summon_buttons(display){
+    document.getElementById('corbeille').style.display = display;
+    document.getElementById('sauvegarder').style.display = display;
+    document.getElementById('valid_picture').style.display = display;
 
+  }
 
 
   function mergepictures(dataphoto,datamask,sauvegarder){
@@ -99,7 +105,9 @@
       {
         const picture_data = JSON.parse(merge.responseText);
         document.getElementById("photo").setAttribute('src' , picture_data);
+        document.getElementById("photo").style.opacity = "1";
         sauvegarder.setAttribute('href', picture_data);
+        summon_buttons("");
         return(picture_data);
       }
       };
@@ -111,7 +119,7 @@
     merge.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     merge.send(JSON.stringify(data)); // on envoi rien en cas de GET et une string en cas de POST
     };
-  
+
 
   //creer une fonction qui renvoi une str de la date.
 
@@ -139,8 +147,11 @@
   }
 
 
-  function clearcanvas(sauvegarder, photo){
+  function clearcanvas(sauvegarder, photo,mask){
+    var context = mask.getContext('2d');
     photo.setAttribute('src', "img/nphoto.png");
+    photo.style.opacity = "0";
+    context.clearRect(0, 0, canvas.width, canvas.height);
     sauvegarder.removeAttribute('href');
   }
 
@@ -200,7 +211,8 @@
 
 
   corbeille.addEventListener('click', function(ev){
-  	clearcanvas(sauvegarder,photo);
+  	clearcanvas(sauvegarder,photo,mask);
+    summon_buttons("none")
   	ev.preventDefault();
   }, false);
 
@@ -221,7 +233,7 @@
   }
 
   function movemask(mask, themask,video){
-   var maskcontext = mask.getContext('2d'); 
+   var maskcontext = mask.getContext('2d');
    var x = event.clientX - mask.offsetLeft - (themask.width * 4)/2 - mask.scrollTop ;
    var y = event.clientY - mask.offsetTop - (themask.height * 4)/2 + document.getElementById("body").scrollTop;
 
@@ -231,7 +243,7 @@
    // console.log(x);
    // console.log(y);
 
-  
+
    mask.width = width ;
    mask.height = height;
    maskcontext.clearRect(0,0,width,height);

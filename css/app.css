@@ -6,51 +6,55 @@ body{
 
 /*Canvas ou on dessine les masques*/
 #mask{
-	position : absolute;
+	position : fixed !important;
 	z-index :2;
-	margin-left:auto;
-	margin-right: auto;
+	background-color: aliceblue;
+	left: 250px;
+	top: initial;
+	/* right: 16px; */
+	top: 170px;
+	height:540px;
+	width: 720px;
+}
+
+/*#mask{
+
+  margin-right: auto;
 	left: 80px;
 	top : 240px;
 	right:800px;
-/* margin-left:21.6%;
-margin-right:auto%;
-margin-top :3.2%; */
-	height:540px;
-	width: 720px;
-
-}
+/* margin-left:21.6%;*/
 
 
 /*Zone video et photo */
 #bv{
-	padding-top: 50px;
-	margin-top: 50px;
+	padding-top: 10px;
+	margin-top: 20px;
 	width: 80%;
-	min-width: 1600px;
-max-width: 1600px;
-
+	max-width: 1600px;
+	min-width: 1200px;
+	/*align-content: center;*/
 	height: 620px;
 	background-color: #6dc2f8;
 	margin-left: auto;
 	margin-right: auto;
 	box-shadow : 0px 0px 5px;
-
 }
 
 #v{
 	padding-left: auto;
+	margin-left: auto;
 	display: inline;
 	position: relative;
 	width: 720px;
 	padding-top: 50px;
 	margin-left: 80px;
-	margin-right: 30px;
+	margin-right: auto;
 }
 
 
-#v video{
-	position: absolute;
+#bv video{
+	/*position: absolute;*/
 	box-shadow : 0px 0px 5px;
 	width: 720px;
 	height: 540px;
@@ -58,14 +62,14 @@ max-width: 1600px;
 
 #photo{
   	position: absolute;
-  	left: 1px;
-  	top: -475px;
-  	right: 800px;
-  	/* margin-left:21.6%;  margin-right:auto%;  margin-top :3.2%; */
-  	height:540px;
   	z-index: 1;
+  	margin-left: auto;
+  	margin-right: auto;
+  	left: 80px;
+  	top: 240px;
+  	right: 800px;
+  	height: 540px;
   	width: 720px;
-  	box-shadow: 0px 0px 5px;
 }
 
 #canvas{
@@ -189,33 +193,33 @@ max-width: 1600px;
 
 #corbeille {
 	position: absolute;
-	left: 1040px;
+	left: 487px;
 	font-size: 30px;
-    bottom: -60px;
- 	border-radius: 500px;
- 	width: 50px;
- 	height: 50px;
- 	color: #00beff;
- 	background-color: #6dc2f8;
- 	border: none;
+	bottom: -60px;
+	border-radius: 500px;
+	width: 50px;
+	height: 50px;
+	color: #00beff;
+	background-color: #6dc2f8;
+	border: none;
 	box-shadow : 0px 0px 10px;
- }
+	}
 
 /*Bouton telecharger photo */
 
 #sauvegarder button{
 	position: absolute;
-	left: 1100px;
+	left: 545px;
 	font-size: 30px;
-    bottom: -60px;
- 	border-radius: 500px;
- 	width: 50px;
- 	height: 50px;
- 	color: #00beff;
- 	background-color: #6dc2f8;
- 	border: none;
+	bottom: -60px;
+	border-radius: 500px;
+	width: 50px;
+	height: 50px;
+	color: #00beff;
+	background-color: #6dc2f8;
+	border: none;
 	box-shadow : 0px 0px 10px;
- }
+	}
 
 
 

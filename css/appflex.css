@@ -1,0 +1,123 @@
+body{
+ background-image: url("../img/bg.png");
+ }
+/*Css general*/
+#bv,#montage,#remote{
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  min-width: 1200px;
+  max-width: 1600px;
+  background-color: #6dc2f8;
+
+}
+
+/*Zone video*/
+#bv{
+  display: flex;
+  /*justify-content: flex-start;*/
+  flex-wrap: nowrap;
+  height: 550px;
+
+  /*max-width: 1600px;*/
+  background-color: #6dc2f8;
+}
+
+#void1,#webcam,#preview{
+  margin-top: 10px;
+}
+
+#void1{
+  width: 100px;
+  height: 540px;
+  background-color: blue;
+}
+
+#photo{
+  /*display: none;*/
+  position: absolute;
+
+}
+
+#webcam{
+
+  width: 720px;
+  height: 540px;
+  background-image: url("../img/ncam.png");
+  z-index: 2;
+}
+/*zone bouton*/
+#preview{
+  /*align-items: : flex-end;*/
+  flex: 1;
+  width: 470px;
+  height: 540px;
+  background-color: green;
+}
+
+#remote{
+  display: flex;
+  justify-content: space-between;;
+  padding-top: 5px;
+  height: 55px;
+  margin-top: 0px;
+}
+
+.button{
+  width: 50px;
+  height: 50px;
+  align-content: center;
+  line-height: 50px;
+  color: #00beff;
+  background-color: #6dc2f8;
+  border: none;
+  box-shadow : none;
+  font-size: 30px;
+  border-radius: 500px;
+  text-align: center;
+
+}
+
+.button:nth-child(4),.button:nth-child(5),.button:nth-child(6)
+,.button:nth-child(9){
+  box-shadow : 0px 0px 10px;
+
+}
+.button:nth-child(7){
+  color: green;
+}
+
+.button:nth-child(8){
+  color: red;
+}
+
+
+/*formulaire cachÃ©*/
+#formulaire{
+	display: none;
+}
+/*Canvas*/
+#mask{
+  /*display: flex;*/
+  z-index: 3;
+  position: absolute;
+  /*background-color: aliceblue;*/
+  height: 540px;
+  width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/*Partie masque*/
+#montage{
+  display: flex;
+  width: 80%;
+  height: 100px;
+  background-color: #6dc2f8;
+}
+
+#canvas{
+  display: none;
+}
