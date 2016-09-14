@@ -1,7 +1,7 @@
 <?php
 
 header('Content-Type: application/json'); // necessaire lors de l'envoi de JSON
-$data = ((array)json_decode(file_get_contents('php://input')));// je decode le json envoyé 
+$data = ((array)json_decode(file_get_contents('php://input')));// je decode le json envoyé
  // echo(json_encode($data['picture']))."  "; // me permet d'afficher les donnee envoyer via le js, en format json
 // echo($data["canvas"]);
  // $picture = $data["picture"];
@@ -10,8 +10,9 @@ $data = ((array)json_decode(file_get_contents('php://input')));// je decode le j
 
 function imagefromb64($image_data){
 $random_path1 = rand(0,10000);
+$random_key = rand(0,9);
 $random_path2 = rand(0,10000);
-$path = "../tmp/".$random_path1.$random_path2.".png";
+$path = "../pictures/".$random_path1.$random_key.$random_path2.".png";
 $tableau = explode(',', $image_data);
 // echo $path."\n";
 // echo $tableau[1]."\n";
@@ -50,10 +51,11 @@ $image_finale = base64_encode($image_finale);
 
 unlink($canvas);
 
-$image_finale = addimagemetadatatobase64($image_finale); 
+$image_finale = addimagemetadatatobase64($image_finale);
 
-unlink($picture);
+$tableau = array("picture" => $image_finale, "url" => $picture);
+// unlink($picture);
 
-echo (json_encode($image_finale));
+echo (json_encode($tableau));
 // echo(json_encode($picture));
 ?>

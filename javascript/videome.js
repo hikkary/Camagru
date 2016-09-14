@@ -11,6 +11,7 @@
       corbeille	   = document.querySelector('#corbeille'),
       retardateur  = document.querySelector('#retardateur'),
   	  sauvegarder  = document.querySelector('#sauvegarder'),
+      validate_picture  = document.querySelector('#valid_picture'),
   	  cam  = document.querySelector('#cam'),
   	  stop = document.querySelector('#stop'),
       mask = document.querySelector('#mask'),
@@ -41,13 +42,7 @@
       // }
       video.play();
 
-      // Tentative arret de camera
-      // console.log(video.src);
-      // cam.addEventListener('click', function(ev){
-      //  // vendorURL.revokeObjectURL(video);
-      //  video.removeAttribute('src')
-      //  stop.style.opacity = 0;
-      //  },false)
+
     },
     function(err) {
       console.log("An error occured! " + err);
@@ -66,34 +61,14 @@
     }
   }, false);
 
-  // function download(sauvegarder, canvas)
-  // {
- 	// 	window.location.assign(sauvegarder);
-  //  }
-
-    //   function ntm(){
-  //   var request = new XMLHttpRequest(); // on initialise un nouvel objet XMLHttpRequest() qui permet de converser avec le serveur
-  //   request.onreadystatechange = function() { //stocke une fonction qui sera appeler si l'etat la propriete readyState change
-  //     if (request.readyState == 4 && request.status == 200) // les etats vont de 1 a 4, voir http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp pour plus d'info, le 200 signifie que le statut de la requete/page est "ok"
-  //     {
-  //       const errors = JSON.parse(request.responseText); //errors stock les donnee renvoyer par la page php
-  //       console.log(errors);
-  //       document.getElementById("ntm").innerHTML = errors['fawfawf']; // je place dans la balise dont l'idee est ntm , la case fawfawf du tableau envoyer au php
-  //     }
-  //   };
-  //   const data = {
-  //     test : "coucou",
-  //     fawfawf : "lol"
-  //   };
-  //   request.open("POST", "./javascript/supp.php", true);//  http://www.w3schools.com/ajax/ajax_xmlhttprequest_send.asp
-  //   request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  //   request.send(JSON.stringify(data)); // on envoi rien en cas de GET et une string en cas de POST
-  // }
 
   function summon_buttons(display){
     document.getElementById('corbeille').style.display = display;
     document.getElementById('sauvegarder').style.display = display;
     document.getElementById('valid_picture').style.display = display;
+  }
+
+  function listen_to_delete_image(url){
 
   }
 
@@ -104,10 +79,12 @@
       if (merge.readyState == 4 && merge.status == 200)
       {
         const picture_data = JSON.parse(merge.responseText);
-        document.getElementById("photo").setAttribute('src' , picture_data);
+        console.log(picture_data);
+        document.getElementById("photo").setAttribute('src' , picture_data[`picture`]);
         document.getElementById("photo").style.opacity = "1";
         sauvegarder.setAttribute('href', picture_data);
         summon_buttons("");
+        listen_to_delete_image(picture_data[`url`]);
         return(picture_data);
       }
       };
@@ -155,25 +132,6 @@
     sauvegarder.removeAttribute('href');
   }
 
-  // function addimage(){
-    // var newcanvas = document.createElement("canvas");
-    // newcanvas.style.position = "absolute";
-    // newcanvas.setAttribute("id", "wesh");
-
-    // if (height != 0)
-    //   newcanvas.height = height;
-    // else
-    //   newcanvas.height = 540;
-
-    // newcanvas.width = width;
-
-    // create.appendChild(newcanvas);
-  //    newcanvas  = document.querySelector('#mask'),
-  //    context = newcanvas.getContext("2d");
-  //    newcanvas.getContext('2d').drawImage(mask, 0, 0, mask.width, mask.height); // context.drawImage(img,x,y,width,height);
-  //    var data = newcanvas.toDataURL('image/png');
-  // }
-
 
 
 // prise de photo
@@ -216,15 +174,6 @@
   	ev.preventDefault();
   }, false);
 
-  //arreter le flux video REGLER CE PB
-
-  // poser un masque
-  // mask.addEventListener('click', function(ev){
-  //   // video.getContext('2d').drawImage("mask/iron-man.png", 0, 0, 600, 600)
-  //   //addimage(video);
-  //   ntm();
-  // },true);
-
 
 
   function masktocanvas(themask){
@@ -258,6 +207,21 @@ mask.addEventListener('mousedown', function(ev){
    movemask(mask,iron,video);
 }, true);
 
+validate_picture.addEventListener('mousedown', function(ev){
+  alert('ok');
+}, true);
+
+//arreter le flux video REGLER CE PB
+
+// poser un masque
+// mask.addEventListener('click', function(ev){
+//   // video.getContext('2d').drawImage("mask/iron-man.png", 0, 0, 600, 600)
+//   //addimage(video);
+//   ntm();
+// },true);
+
+
+
  // iron.addEventListener('click', function(ev){
 
  //    // mask.getContext("2d").drawImage("mask/iron-man.png", 0, 0, 600, 600);
@@ -266,6 +230,56 @@ mask.addEventListener('mousedown', function(ev){
  //    masktocanvas(iron);
  //  },true);
 
+ // function addimage(){
+   // var newcanvas = document.createElement("canvas");
+   // newcanvas.style.position = "absolute";
+   // newcanvas.setAttribute("id", "wesh");
+
+   // if (height != 0)
+   //   newcanvas.height = height;
+   // else
+   //   newcanvas.height = 540;
+
+   // newcanvas.width = width;
+
+   // create.appendChild(newcanvas);
+ //    newcanvas  = document.querySelector('#mask'),
+ //    context = newcanvas.getContext("2d");
+ //    newcanvas.getContext('2d').drawImage(mask, 0, 0, mask.width, mask.height); // context.drawImage(img,x,y,width,height);
+ //    var data = newcanvas.toDataURL('image/png');
+ // }
+
+ // function download(sauvegarder, canvas)
+ // {
+ // 	window.location.assign(sauvegarder);
+ //  }
+
+   //   function ntm(){
+ //   var request = new XMLHttpRequest(); // on initialise un nouvel objet XMLHttpRequest() qui permet de converser avec le serveur
+ //   request.onreadystatechange = function() { //stocke une fonction qui sera appeler si l'etat la propriete readyState change
+ //     if (request.readyState == 4 && request.status == 200) // les etats vont de 1 a 4, voir http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp pour plus d'info, le 200 signifie que le statut de la requete/page est "ok"
+ //     {
+ //       const errors = JSON.parse(request.responseText); //errors stock les donnee renvoyer par la page php
+ //       console.log(errors);
+ //       document.getElementById("ntm").innerHTML = errors['fawfawf']; // je place dans la balise dont l'idee est ntm , la case fawfawf du tableau envoyer au php
+ //     }
+ //   };
+ //   const data = {
+ //     test : "coucou",
+ //     fawfawf : "lol"
+ //   };
+ //   request.open("POST", "./javascript/supp.php", true);//  http://www.w3schools.com/ajax/ajax_xmlhttprequest_send.asp
+ //   request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+ //   request.send(JSON.stringify(data)); // on envoi rien en cas de GET et une string en cas de POST
+ // }
+
+ // Tentative arret de camera
+ // console.log(video.src);
+ // cam.addEventListener('click', function(ev){
+ //  // vendorURL.revokeObjectURL(video);
+ //  video.removeAttribute('src')
+ //  stop.style.opacity = 0;
+ //  },false)
 
 
 })();
