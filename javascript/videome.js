@@ -22,7 +22,7 @@
   	  // clavier 	   = event.which,
       width = 720,
       height = 0; // on definira sa plus tard
-      console.log(photo);
+      
   navigator.getMedia = ( navigator.getUserMedia ||
                          navigator.webkitGetUserMedia ||
                          navigator.mozGetUserMedia ||
@@ -56,7 +56,6 @@
       video.setAttribute('height', height);
       canvas.setAttribute('width', width);
       canvas.setAttribute('height', height);
-      console.log(video.getAttribute('src'));
       streaming = true;
     }
   }, false);
@@ -68,10 +67,70 @@
     document.getElementById('valid_picture').style.display = display;
   }
 
-  function listen_to_delete_image(url){
+function delete_picture(url)
+{
+  var delete_pic = new XMLHttpRequest();
+  delete_pic.onreadystatechange = function(){
+    if (delete_pic.readyState == 4 && delete_pic.status == 200)
+    {
+      const bool = JSON.parse(delete_pic.responseText);
+      console.log(bool);
+      if (bool == "true"){
+        return;
+      }
+      else {
+        return;
+      }
+    }
+  };
+  const data = {
+    t_url : url
+  };
+    delete_pic.open("POST", "ajax/delete_picture.php", true);
+    delete_pic.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    delete_pic.send(JSON.stringify(data));
+}
 
-  }
+function valid_picture(url) {
+    var validate_pic = new XMLHttpRequest();
+    validate_pic.onreadystatechange = function() {
+        if (validate_pic.readyState == 4 && validate_pic.status == 200) {
+            const bool = JSON.parse(validate_pic.responseText);
+            console.log(bool);
+            if (bool == "true") {
+                return;
+            } else {
+                return;
+            }
+        }
+    };
+    const data = {
+        t_url: url
+    };
+    validate_pic.open("POST", "ajax/validate_picture.php", true);
+    validate_pic.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    validate_pic.send(JSON.stringify(data));
+}
 
+
+
+
+function listen_to_delete_image(url) {
+    document.getElementById('corbeille').addEventListener('click', function(ev) {
+        clearcanvas(sauvegarder, photo, mask);
+        delete_picture(url);
+        summon_buttons("none")
+        ev.preventDefault();
+    }, false);
+}
+
+function listen_to_valdidate_image(url) {
+      document.getElementById('valid_picture').addEventListener('mousedown', function(ev) {
+          valid_picture(url);
+            clearcanvas(sauvegarder, photo, mask);
+          summon_buttons("none")
+      }, true);
+}
 
   function mergepictures(dataphoto,datamask,sauvegarder){
     var merge = new XMLHttpRequest();
@@ -85,6 +144,7 @@
         sauvegarder.setAttribute('href', picture_data);
         summon_buttons("");
         listen_to_delete_image(picture_data[`url`]);
+        listen_to_valdidate_image(picture_data[`url`]);
         return(picture_data);
       }
       };
@@ -168,11 +228,6 @@
   //effacer le canvas
 
 
-  corbeille.addEventListener('click', function(ev){
-  	clearcanvas(sauvegarder,photo,mask);
-    summon_buttons("none")
-  	ev.preventDefault();
-  }, false);
 
 
 
@@ -207,9 +262,7 @@ mask.addEventListener('mousedown', function(ev){
    movemask(mask,iron,video);
 }, true);
 
-validate_picture.addEventListener('mousedown', function(ev){
-  alert('ok');
-}, true);
+
 
 //arreter le flux video REGLER CE PB
 

@@ -25,13 +25,19 @@
 
 	if(!$result)
 	{
-		echo (json_encode("true"));
 		// faire redirection page d'erreur
+		echo (json_encode("true"));
+		return;
 	}
 
 	if($password === $result['password'])
 	{
 		echo (json_encode("false")); // foutre le login dans la variable session
 		$_SESSION['username'] = $username;
+		return;
+	}
+	else {
+		echo (json_encode("true"));
+		return;
 	}
 ?>

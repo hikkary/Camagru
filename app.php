@@ -110,6 +110,7 @@
 	<script type="text/javascript" src="javascript/resize_img.js"></script>
 </div>
 </body>
+	<script type="text/javascript" src="javascript/preview.js"></script>
 	<script type="text/javascript" src="javascript/videome.js"></script>
 	<?php
 		$rootname = getcwd();

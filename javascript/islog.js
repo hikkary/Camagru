@@ -1,7 +1,6 @@
 var login = document.getElementById('croix');
 var link =  document.getElementById('link_croix');
 
-console.log(link);
 
 function logout(){
   var log_out = new XMLHttpRequest();
@@ -27,7 +26,6 @@ function logout(){
 }
 
 function login_logout(croix, link, state){
-  console.log(state);
   if(state == 1)
     {
       croix.setAttribute('class',"fa fa-sign-in");
@@ -35,7 +33,6 @@ function login_logout(croix, link, state){
       croix.setAttribute('title' ,"Login")
     }
     else if (state == 0) {
-       console.log('ace');
        croix.setAttribute('class',"fa fa-times");
        link.setAttribute('href',"#");
        croix.setAttribute('title' ,"Logout");
@@ -53,7 +50,6 @@ function islog(login, link){
     if(log.readyState == 4 && log.status == 200)
     {
         const bool = JSON.parse(log.responseText);
-        console.log(bool);
         if(bool == "true")
         {
           // alert("pas connecter");
