@@ -14,7 +14,7 @@
 	$password = hash("whirlpool", $users['t_password']);
 
 	$user = $connect->prepare(
-		"SELECT login,password FROM `cam_users` WHERE login = :pseudo"
+		"SELECT login,password,id_users FROM `cam_users` WHERE login = :pseudo"
 		);
 
 	$user->execute(array(
@@ -34,6 +34,7 @@
 	{
 		echo (json_encode("false")); // foutre le login dans la variable session
 		$_SESSION['username'] = $username;
+		$_SESSION['id'] = $result['id_users'];
 		return;
 	}
 	else {
