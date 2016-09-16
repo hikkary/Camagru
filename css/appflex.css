@@ -1,6 +1,10 @@
 body{
  background-image: url("../img/bg.png");
  }
+ @font-face{
+ 	font-family: "crayon";
+ 	src: url("crayon.ttf");
+ }
 /*Css general*/
 #bv,#montage,#remote{
   margin-top: 10px;
@@ -51,6 +55,7 @@ body{
 /*zone bouton*/
 #preview{
   display: flex;
+  /*flex-direction: row-reverse;*/
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
@@ -134,10 +139,12 @@ body{
   margin : 3px;
 }
 
-.picture_preview i{
+.picture_preview a{
+  font-family: "crayon";
   position: relative;
   /* bottom: 0px; */
-  left: 177px;
-  bottom: 2px;
+  left: 179px;
+  bottom: 4px;
   color : red;
+  text-decoration: none;
 }

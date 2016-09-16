@@ -2,7 +2,7 @@
 	session_start();
 ?>
 <!DOCTYPE html>
-<html>
+<html id="html" data-username="<?php echo($_SESSION['username'])?>" data-id="<?php echo($_SESSION['id'])?>">
 <head>
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" type="text/css" href="css/appflex.css">
@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="fonts/css/font-awesome.min.css">
 <meta name="viewport" content="width=device-width, user-scalable=yes" />
 
-	<title>Prends Toi en photo !</title>
+<title>Prends Toi en photo !</title>
 </head>
 <body id="body">
 

@@ -1,5 +1,10 @@
 (function() {
 
+  function include(fileName){
+    document.write("<script type='text/javascript' src='javascript/"+fileName+"'></script>" );
+  }
+
+ include("refresh.js");
 
 
   var streaming = false,
@@ -22,7 +27,7 @@
   	  // clavier 	   = event.which,
       width = 720,
       height = 0; // on definira sa plus tard
-      
+
   navigator.getMedia = ( navigator.getUserMedia ||
                          navigator.webkitGetUserMedia ||
                          navigator.mozGetUserMedia ||
@@ -127,8 +132,10 @@ function listen_to_delete_image(url) {
 function listen_to_valdidate_image(url) {
       document.getElementById('valid_picture').addEventListener('mousedown', function(ev) {
           valid_picture(url);
-            clearcanvas(sauvegarder, photo, mask);
+          clearcanvas(sauvegarder, photo, mask);
           summon_buttons("none")
+          erase_all_child(document.getElementById('preview'));
+          display_picture();
       }, true);
 }
 
