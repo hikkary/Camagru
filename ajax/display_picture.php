@@ -10,7 +10,7 @@
 	//  $users = ((array)json_decode(file_get_contents('php://input')));
 
 	$user = $connect->prepare(
-		"SELECT * FROM `photo`"
+		"SELECT * FROM `photo` ORDER BY `date_creation` DESC"
 		);
 
 	$user->execute();
@@ -26,5 +26,7 @@
 		return;
 	}
 	else
+	{
 		echo (json_encode($result));
+	}
 ?>

@@ -17,6 +17,12 @@
 
 	 $path['t_url'] = str_replace("..","",$path['t_url']);
 
+	 if (file_exists("../".$path['t_url']) === false)
+	 {
+		 echo (json_encode("true"));
+		 return;
+	 }
+
 	$user = $connect->prepare(
 		"SELECT id_users FROM `cam_users` WHERE login = :pseudo"
 		);
@@ -34,10 +40,10 @@
 	}
 	else {
 		$photo = $connect->prepare(
-		"INSERT INTO `photo` (`id_photo`, `id_user`, `photo_url`, `comments`, `liked`)
-		 VALUES (NULL, :userid, :photo, NULL, NULL)
+		"INSERT INTO `photo` (`id_photo`, `id_user`, `photo_url`,`date_creation`, `comments`, `liked`)
+		 VALUES (NULL, :userid, :photo, CURRENT_TIME ,NULL, NULL)
 		");
-
+		$time = time();
 		$photo->execute(array(
 			'userid' => $result['id_users'],
 			'photo' => $path['t_url']

@@ -2,7 +2,7 @@
 	session_start();
 ?>
 <!DOCTYPE html>
-<html id="html" data-username="<?php echo($_SESSION['username'])?>" data-id="<?php echo($_SESSION['id'])?>">
+<html id="html" data-username="<?php echo($_SESSION['username'])?>" data-idnumber="<?php echo($_SESSION['id'])?>">
 <head>
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" type="text/css" href="css/appflex.css">
