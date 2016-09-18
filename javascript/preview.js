@@ -6,6 +6,7 @@
       node.innerHTML = "";
   }
 
+  // window.open('index.php','fenetre','width=650,height=500');
   // function get_data_like()
   // {
   //   var display_pic = new XMLHttpRequest();
@@ -39,6 +40,22 @@
   {
     if(data[`comments`] === null)
       return(0);
+    else {
+      return(1);
+    }
+  }
+
+  function display_comments(data)
+  {
+    // console.log(data);
+    // var comments_zone = document.getElementsByClassName('comments_zone');
+    // console.log(index);
+
+     if(data['comments'] === null)
+        return("<p>No comment yet</p>");
+      else {
+        return("<p>sisi la famine</p>")
+      }
   }
 
   function create_preview(data){
@@ -50,14 +67,14 @@
     var new_picture = document.createElement("div");
     new_picture.setAttribute('id_user', data['id_user']);
     new_picture.setAttribute('id_photo', data['id_photo']);
-    new_picture.style.backgroundPosition = "60% 40%" ;
+    new_picture.style.backgroundPosition = "50% 10%" ;
     new_picture.style.backgroundColor= "white" ;
-    new_picture.style.backgroundSize = "180px 135px" ;
+    new_picture.style.backgroundSize = "648px 486px" ;
     new_picture.style.backgroundRepeat = "no-repeat" ;
     new_picture.style.backgroundImage = "url('/"+window.location.pathname.split("/")[1]+data[`photo_url`]+"')";
     new_picture.setAttribute('class', "picture_preview");
-    new_picture.style.width = "190px";
-    new_picture.style.height ="175px";
+    new_picture.style.width = "720px";
+    new_picture.style.height ="780px";
     new_picture.style.border ="1px solid black";
     new_picture.style.borderWidth ="thin";
     if(id === data[`id_user`])
@@ -68,9 +85,13 @@
      {
        new_picture.innerHTML += "<a href='#' class='liked' data-id="+data[`id_photo`]+" data-userid="+data[`id_user`]+"> <i class='fa fa-heart-o' aria-hidden='true'></i> &nbsp"+  return_number_like(data)+" </a>";
       //  new_picture.innerHTML += "<a href='#' class='number_liked' data-id="+data[`id_photo`]+"data-userid="+data[`id_user`]+" >"+return_number_like(data)+"</i> </a>";
-       new_picture.innerHTML += "<a href='#' class='comments' data-id="+data[`id_photo`]+"> <i class='fa fa-comments' aria-hidden='true'></i> </a>";
-       new_picture.innerHTML += "<a href='#' class='number_comments' data-id="+data[`id_photo`]+">"+return_number_comments(data)+"</i> </a>";
+       new_picture.innerHTML += "<a href='#' class='comments' data-id="+data[`id_photo`]+"> <i class='fa fa-comments' aria-hidden='true'></i> &nbsp"+return_number_comments(data)+" </a>";
+       new_picture.innerHTML += "<div class='comments_zone' data-id="+data[`id_photo`]+">"+display_comments(data)+"</div>"
+       new_picture.innerHTML += "<div class='comments_write' data-id="+data[`id_photo`]+"><form method='post'><input type='text' name='comment' maxlength='100' placeholder='write a comment' </form></div>"
+
+      //  new_picture.innerHTML += "<a href='#' class='number_comments' data-id="+data[`id_photo`]+">"+return_number_comments(data)+"</i> </a>";
      }
+    //  <form method='post'><input type='text' name='comment' maxlength='100' </form>
     document.getElementById('preview').appendChild(new_picture);
   }
 
@@ -116,7 +137,7 @@
                   erase_all_child(document.getElementById('preview'));
                   for( var index = 0; index < bool.length; ++index)
                   {
-                    create_preview(bool[index]);
+                    create_preview(bool[index],index);
                   }
                   return;
               }
