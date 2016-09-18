@@ -22,6 +22,7 @@ function logout(login, link){
         }
         else {
           login_logout(login, link);
+          window.location = "login.php"
         }
     }
   };

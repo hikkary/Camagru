@@ -65,8 +65,9 @@
 
   function create_preview(data){
     // console.log(data);
+    // erase_all_child(document.getElementById('preview'));
     var id = document.getElementById('html').dataset.idnumber;
-    console.log(data);
+//     console.log(data);
     var username = document.getElementById('html').dataset.username;
     var new_picture = document.createElement("div");
     new_picture.setAttribute('id_user', data['id_user']);
@@ -89,17 +90,17 @@
   }
 
   function display_picture() {
-    erase_all_child(document.getElementById('preview'));
       var display_pic = new XMLHttpRequest();
       display_pic.onreadystatechange = function() {
           if (display_pic.readyState == 4 && display_pic.status == 200) {
               const bool = JSON.parse(display_pic.responseText);
               console.log(bool);
               if (bool == "true") {
-                  preview.innerHTML = " An error occured";
+                  preview.innerHTML = "no photo yet";
                   return;
               } else {
                   console.log(bool.length);
+                  erase_all_child(document.getElementById('preview'));
                   for( var index = 0; index < bool.length; ++index)
                   {
                     create_preview(bool[index]);
@@ -293,17 +294,17 @@ function listen_to_valdidate_image(url) {
   }, false);
 
 //ecoute du clavier
- document.addEventListener("keydown",function(ev){
-  	// alert(event.keyCode);
- 	if (event.keyCode==13){
-			takepicture(sauvegarder);
-      summon_photo_buttons("none");
-      ev.preventDefault();
-	}
-	if (event.keyCode==46){
-			clearcanvas(sauvegarder,photo);
-	}
- },true);
+ // document.addEventListener("keydown",function(ev){
+ //  	// alert(event.keyCode);
+ // 	if (event.keyCode==13){
+ // 		takepicture(sauvegarder);
+ //      summon_photo_buttons("none");
+ //      ev.preventDefault();
+ // }
+ // if (event.keyCode==46){
+ // 		clearcanvas(sauvegarder,photo);
+ // }
+ // },true);
 
 // photo apres 3 seconde
   retardateur.addEventListener('click', function(ev){

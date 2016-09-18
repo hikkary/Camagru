@@ -13,6 +13,7 @@ function logout(){
         {
           // alert("pas connecter");
           login_logout(login, link, 1);
+          window.location.href = "login.php";
         }
         else {
           login_logout(login, link, 0);

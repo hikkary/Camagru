@@ -2,7 +2,7 @@
 	session_start();
 ?>
 <!DOCTYPE html>
-<html id="html" data-username="<?php echo($_SESSION['username'])?>" data-idnumber="<?php echo($_SESSION['id'])?>">
+<html id="html" data-username="<?php require_once("function/get_session.php"); echo(get_username_session());?>" data-idnumber="<?php require_once("function/get_session.php"); echo(get_id_session());?>">
 <head>
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" type="text/css" href="css/appflex.css">
@@ -43,12 +43,12 @@
 		<div class="button"></div>
 		<div class="button"></div>
 		<div class="button"></div>
-		<div class="button" id="startbutton"><i id="camera" class="fa fa-camera" aria-hidden="true"></i></div>
-		<div class="button" id="retardateur">	<i class="fa fa-clock-o" aria-hidden="true"></i></div>
-		<div class="button" id="upload">	<i class="fa fa-arrow-up" aria-hidden="true"></i></div>
-		<div class="button" id="valid_picture" style="display: none"><i class="fa fa-check" aria-hidden="true"></i></div>
-		<div class="button" id="corbeille" style="display: none"><i class="fa fa-trash" aria-hidden="true"></i></div>
-		<div class="button" id="sauvegarder" style="display: none"><i class="fa fa-floppy-o" aria-hidden="true"></i></div>
+		<a href="#" class="button" id="startbutton" ><div><i id="camera" class="fa fa-camera" aria-hidden="true"></i></div></a>
+		<a href="#" class="button" id="retardateur" ><div>	<i class="fa fa-clock-o" aria-hidden="true"></i></div></a>
+		<a href="#" class="button" id="upload" ><div>	<i class="fa fa-arrow-up" aria-hidden="true"></i></div></a>
+		<a href="#" class="button" id="valid_picture" style="display: none"><div ><i class="fa fa-check" aria-hidden="true"></i></div></a>
+		<a href="#" class="button" id="corbeille" style="display: none"><div ><i class="fa fa-trash" aria-hidden="true"></i></div></a>
+		<a href="#" class="button" id="sauvegarder" style="display: none"><div ><i class="fa fa-floppy-o" aria-hidden="true"></i></div></a>
 		<div class="button"></div>
 		<div class="button"></div>
 		<div class="button"></div>
@@ -110,7 +110,7 @@
 	<script type="text/javascript" src="javascript/resize_img.js"></script>
 </div>
 </body>
-	<script type="text/javascript" src="javascript/preview.js"></script>
+	<!-- <script type="text/javascript" src="javascript/preview.js"></script> -->
 	<script type="text/javascript" src="javascript/videome.js"></script>
 	<?php
 		$rootname = getcwd();

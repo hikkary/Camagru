@@ -26,5 +26,19 @@
 		return($result_id);
 	}
 
+	function get_like($connect, $likes)
+	{
+	  $like = $connect->prepare(
+	  "SELECT `liked` FROM `photo` WHERE id_photo = :photo_id "
+	  );
+
+	  $like->execute(array(
+	     'photo_id' => $likes['id_photo']
+	  ));
+
+	  $result = $like->fetch(PDO::FETCH_ASSOC);
+
+	  return ($result);
+	}
 
 ?>
