@@ -103,7 +103,8 @@ body{
   top: 509px;
   margin-left: auto;
   margin-right: auto;
-    font-family: "crayon";
+  font-family: "crayon";
+  overflow: scroll;
 }
 
 .comments_write{

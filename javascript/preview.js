@@ -6,26 +6,6 @@
       node.innerHTML = "";
   }
 
-  // window.open('index.php','fenetre','width=650,height=500');
-  // function get_data_like()
-  // {
-  //   var display_pic = new XMLHttpRequest();
-  //   display_pic.onreadystatechange = function() {
-  //       if (display_pic.readyState == 4 && display_pic.status == 200) {
-  //           const bool = JSON.parse(display_pic.responseText);
-  //           console.log(bool);
-  //           if (bool) {
-  //               return(bool);
-  //           } else {
-  //               return;
-  //           }
-  //       }
-  //   };
-  //   display_pic.open("POST", "ajax/display_picture.php", true);
-  //   display_pic.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  //   display_pic.send(null);
-  // }
-
   function return_number_like(data)
   {
     var like = JSON.parse(data['liked']);
@@ -38,27 +18,59 @@
 
   function return_number_comments(data)
   {
+    var comments = JSON.parse(data['comments']);
     if(data[`comments`] === null)
       return(0);
     else {
-      return(1);
+      return(comments.length);
     }
   }
 
   function display_comments(data)
   {
-    // console.log(data);
-    // var comments_zone = document.getElementsByClassName('comments_zone');
-    // console.log(index);
-
      if(data['comments'] === null)
         return("<p>No comment yet</p>");
       else {
-        return("<p>sisi la famine</p>")
+        var comments = JSON.parse(data['comments']);
+        var tableau = [];
+        for(var index = 0; index < comments.length; index++)
+        {
+          console.log(comments[index]['id_user']);
+          tableau[index] = comments[index]['id_user']+" : "+comments[index]['comment']+'<br>';
+        }
+        return(tableau);
       }
   }
 
-  function create_preview(data){
+  function comment_picture(element) {
+        var comment = new XMLHttpRequest();
+        comment.onreadystatechange = function() {
+            if (comment.readyState == 4 && comment.status == 200) {
+                const bool = JSON.parse(comment.responseText);
+                console.log(bool);
+                if (bool == "true") {
+                  // alert('ok');
+                  // erase_all_child(document.getElementById('preview'));
+                  display_picture();
+                    return;
+                } else {
+                    // alert('like');
+                    return;
+                }
+            }
+        };
+        const data = {
+          id_photo : element.parentNode.dataset.id,
+          id_user : document.getElementById('html').dataset.username,
+          comment : element.value
+        }
+        comment.open("POST", "ajax/comment_picture.php", true);
+        comment.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        comment.send(JSON.stringify(data));
+    }
+
+
+  function create_preview(data,index){
 
     var id = document.getElementById('html').dataset.idnumber;
     //  console.log(id);
@@ -87,12 +99,22 @@
       //  new_picture.innerHTML += "<a href='#' class='number_liked' data-id="+data[`id_photo`]+"data-userid="+data[`id_user`]+" >"+return_number_like(data)+"</i> </a>";
        new_picture.innerHTML += "<a href='#' class='comments' data-id="+data[`id_photo`]+"> <i class='fa fa-comments' aria-hidden='true'></i> &nbsp"+return_number_comments(data)+" </a>";
        new_picture.innerHTML += "<div class='comments_zone' data-id="+data[`id_photo`]+">"+display_comments(data)+"</div>"
-       new_picture.innerHTML += "<div class='comments_write' data-id="+data[`id_photo`]+"><form method='post'><input type='text' name='comment' maxlength='100' placeholder='write a comment' </form></div>"
+       new_picture.innerHTML += "<div class='comments_write' data-id="+data[`id_photo`]+"><form  data-id="+data[`id_photo`]+" method='post'><input class='form_comment' type='text' name='comment' maxlength='100' placeholder='write a comment' </form></div>"
 
       //  new_picture.innerHTML += "<a href='#' class='number_comments' data-id="+data[`id_photo`]+">"+return_number_comments(data)+"</i> </a>";
      }
+    //  console.log(document.getElementsByClassName('picture_preview')[index]);
+
     //  <form method='post'><input type='text' name='comment' maxlength='100' </form>
     document.getElementById('preview').appendChild(new_picture);
+    // console.log(document.getElementsByClassName('form_comment')[index]);
+    var form = document.getElementsByClassName('form_comment')[index];
+    form.addEventListener('keyup', function(){
+      if (event.keyCode == 13 && form.value.length > 0)
+      {
+        comment_picture(form);
+      }
+    }, false);
   }
 
 
@@ -135,7 +157,8 @@
               } else {
                   console.log(bool.length);
                   erase_all_child(document.getElementById('preview'));
-                  for( var index = 0; index < bool.length; ++index)
+                  create_preview(bool[0],0);
+                  for( var index = 1; index < bool.length; index++)
                   {
                     create_preview(bool[index],index);
                   }
