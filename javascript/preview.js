@@ -42,6 +42,26 @@
       }
   }
 
+  function send_mail_comment(id) {
+      var comment_send = new XMLHttpRequest();
+      comment_send.onreadystatechange = function() {
+          if (comment_send.readyState == 4 && comment_send.status == 200) {
+              const bool = JSON.parse(comment_send.responseText);
+              console.log(bool);
+              if (bool == "true") {
+                  alert('non non non non non');
+                  return;
+              }
+          	}
+  				};
+          const data = {
+              iduser: id
+          };
+          comment_send.open("POST", "ajax/comment_mailsend.php", true);
+          comment_send.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          comment_send.send(JSON.stringify(data));
+        }
+
   function comment_picture(element) {
         var comment = new XMLHttpRequest();
         comment.onreadystatechange = function() {
@@ -52,6 +72,7 @@
                   // alert('ok');
                   // erase_all_child(document.getElementById('preview'));
                   display_picture();
+                  send_mail_comment(element.dataset.userid);
                     return;
                 } else {
                     // alert('like');
@@ -99,7 +120,7 @@
       //  new_picture.innerHTML += "<a href='#' class='number_liked' data-id="+data[`id_photo`]+"data-userid="+data[`id_user`]+" >"+return_number_like(data)+"</i> </a>";
        new_picture.innerHTML += "<a href='#' class='comments' data-id="+data[`id_photo`]+"> <i class='fa fa-comments' aria-hidden='true'></i> &nbsp"+return_number_comments(data)+" </a>";
        new_picture.innerHTML += "<div class='comments_zone' data-id="+data[`id_photo`]+">"+display_comments(data)+"</div>"
-       new_picture.innerHTML += "<div class='comments_write' data-id="+data[`id_photo`]+"><form  data-id="+data[`id_photo`]+" method='post'><input class='form_comment' type='text' name='comment' maxlength='100' placeholder='write a comment' </form></div>"
+       new_picture.innerHTML += "<div class='comments_write' data-id="+data[`id_photo`]+"><form  data-id="+data[`id_photo`]+"  method='post'><input class='form_comment' data-userid="+data[`id_user`]+" type='text' name='comment' maxlength='100' placeholder='write a comment' </form></div>"
 
       //  new_picture.innerHTML += "<a href='#' class='number_comments' data-id="+data[`id_photo`]+">"+return_number_comments(data)+"</i> </a>";
      }
@@ -109,12 +130,16 @@
     document.getElementById('preview').appendChild(new_picture);
     // console.log(document.getElementsByClassName('form_comment')[index]);
     var form = document.getElementsByClassName('form_comment')[index];
-    form.addEventListener('keyup', function(){
-      if (event.keyCode == 13 && form.value.length > 0)
-      {
-        comment_picture(form);
-      }
-    }, false);
+    // console.log(form);
+    if(form !== undefined)
+    {
+      form.addEventListener('keyup', function(){
+        if (event.keyCode == 13 && form.value.length > 0)
+        {
+          comment_picture(form);
+        }
+      }, false);
+    }
   }
 
 
