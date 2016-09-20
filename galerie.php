@@ -19,6 +19,7 @@
 	require_once($rootname.'/nav/menu.php');
   	menu();
 ?>
+<div id="pagination"></div>
 <div id="preview">
 </div>
 <!-- <div id="overlay" ></div> -->

@@ -4,6 +4,9 @@ require_once('../config/function_sql.php');
 
 $connect = connectToDatabase();
 
+if(!$connect)
+  exit();
+
 
 //
 // function first_comment($connect,$comment,$new_comment)
@@ -55,7 +58,7 @@ function other_comment($connect, $comment, $result, $new_comment)
       'tableau' => $result
     ));
 
-    echo(json_encode("true"));
+    echo($result);
     return;
 }
 
@@ -92,14 +95,12 @@ function other_comment($connect, $comment, $result, $new_comment)
 //   return(FALSE);
 // }
 
-if(!$connect)
-  exit();
 
 	 $comment = ((array)json_decode(file_get_contents('php://input')));
    $new_comment = array('id_user' => $comment['id_user'], 'comment' => $comment['comment']);
-  $result = get_comment($connect ,$comment);
+   $result = get_comment($connect ,$comment);
 
-  other_comment($connect, $comment, $result, $new_comment);
+   other_comment($connect, $comment, $result, $new_comment);
 
 
 ?>

@@ -6,7 +6,7 @@ body{
  	src: url("crayon.ttf");
  }
 /*Css general*/
-#preview{
+#preview,#pagination{
   margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
@@ -27,9 +27,9 @@ body{
   /*align-items: : flex-end;*/
   flex: 1;
   /*width: 470px;*/
-  height: 800px;
+  height: 734px;
   /*background-color: green;*/
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 
 .picture_preview{
@@ -104,7 +104,7 @@ body{
   margin-left: auto;
   margin-right: auto;
   font-family: "crayon";
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .comments_write{
@@ -131,4 +131,18 @@ body{
 }
 .comments_write input:focus{
    outline : none;
+}
+
+#pagination{
+  display: none;
+  justify-content: space-between;
+  height: 50px;
+  line-height: 50px;
+  align-items: center;
+}
+
+#pagination a{
+  text-decoration: none;
+  color:black;
+  font-family: "crayon";
 }

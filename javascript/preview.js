@@ -26,6 +26,23 @@
     }
   }
 
+  function refresh_comments(data)
+  {
+    console.log(data[0]);
+    if(data['comment'] === null)
+       return("<p>No comment yet</p>");
+    else {
+      // var comments = JSON.parse(data);
+      var tableau = [];
+      for(var index = 0; index < data.length; index++)
+      {
+//           console.log(comments[index]['id_user']);
+        tableau[index] = data[index]['id_user']+" : "+data[index]['comment']+'<br>';
+      }
+      return(tableau);
+    }
+  }
+
   function display_comments(data)
   {
      if(data['comments'] === null)
@@ -35,7 +52,7 @@
         var tableau = [];
         for(var index = 0; index < comments.length; index++)
         {
-          console.log(comments[index]['id_user']);
+//           console.log(comments[index]['id_user']);
           tableau[index] = comments[index]['id_user']+" : "+comments[index]['comment']+'<br>';
         }
         return(tableau);
@@ -49,7 +66,7 @@
               const bool = JSON.parse(comment_send.responseText);
               console.log(bool);
               if (bool == "true") {
-                  alert('non non non non non');
+                  // alert('non non non non non');
                   return;
               }
           	}
@@ -68,10 +85,15 @@
             if (comment.readyState == 4 && comment.status == 200) {
                 const bool = JSON.parse(comment.responseText);
                 console.log(bool);
-                if (bool == "true") {
+                if (bool) {
                   // alert('ok');
                   // erase_all_child(document.getElementById('preview'));
-                  display_picture();
+                  // display_picture();
+                  document.getElementsByClassName('comments_zone')[0].innerHTML = refresh_comments(bool);
+                  document.getElementsByClassName('comments')[0].innerHTML = "<i class='fa fa-comments' aria-hidden='true'></i> &nbsp"+bool.length;
+                  element.value = "";
+                  console.log(document.getElementsByClassName('comments_zone')[0]);
+                  // element.innerHTML += "<a href='#' class='liked' data-id="+data[`id_photo`]+" data-userid="+data[`id_user`]+"> <i class='fa fa-heart-o' aria-hidden='true'></i> &nbsp"+  return_number_like(data)+" </a>";
                   send_mail_comment(element.dataset.userid);
                     return;
                 } else {
@@ -94,8 +116,6 @@
   function create_preview(data,index){
 
     var id = document.getElementById('html').dataset.idnumber;
-    //  console.log(id);
-    //  console.log(data[`id_user`]);
     var username = document.getElementById('html').dataset.username;
     var new_picture = document.createElement("div");
     new_picture.setAttribute('id_user', data['id_user']);
@@ -117,20 +137,26 @@
      if (id !== "")
      {
        new_picture.innerHTML += "<a href='#' class='liked' data-id="+data[`id_photo`]+" data-userid="+data[`id_user`]+"> <i class='fa fa-heart-o' aria-hidden='true'></i> &nbsp"+  return_number_like(data)+" </a>";
-      //  new_picture.innerHTML += "<a href='#' class='number_liked' data-id="+data[`id_photo`]+"data-userid="+data[`id_user`]+" >"+return_number_like(data)+"</i> </a>";
        new_picture.innerHTML += "<a href='#' class='comments' data-id="+data[`id_photo`]+"> <i class='fa fa-comments' aria-hidden='true'></i> &nbsp"+return_number_comments(data)+" </a>";
        new_picture.innerHTML += "<div class='comments_zone' data-id="+data[`id_photo`]+">"+display_comments(data)+"</div>"
        new_picture.innerHTML += "<div class='comments_write' data-id="+data[`id_photo`]+"><form  data-id="+data[`id_photo`]+"  method='post'><input class='form_comment' data-userid="+data[`id_user`]+" type='text' name='comment' maxlength='100' placeholder='write a comment' </form></div>"
-
-      //  new_picture.innerHTML += "<a href='#' class='number_comments' data-id="+data[`id_photo`]+">"+return_number_comments(data)+"</i> </a>";
      }
-    //  console.log(document.getElementsByClassName('picture_preview')[index]);
+    // document.getElementById('preview').appendChild(new_picture);
 
-    //  <form method='post'><input type='text' name='comment' maxlength='100' </form>
-    document.getElementById('preview').appendChild(new_picture);
-    // console.log(document.getElementsByClassName('form_comment')[index]);
-    var form = document.getElementsByClassName('form_comment')[index];
-    // console.log(form);
+    return(new_picture);
+  }
+
+  // function display_img(img)
+  // {
+  //   erase_all_child(document.getElementById('preview'));
+  //   document.getElementById('preview').appendChild();
+  // }
+
+
+  function active_form()
+  {
+    var form = document.getElementsByClassName('form_comment')[0];
+
     if(form !== undefined)
     {
       form.addEventListener('keyup', function(){
@@ -140,7 +166,41 @@
         }
       }, false);
     }
-  }
+}
+
+
+  function pagination(tableau,index)
+  {
+    var page = document.getElementById('pagination');
+    var preview = document.getElementById('preview');
+    page.style.display = "flex";
+
+    for(var i = index - 1; i < index + 20 && i < tableau.length ; i++)
+        {
+          var element = document.createElement("a");
+          element.setAttribute('href', '#');
+          element.innerHTML = i;
+          element.setAttribute('data-index', element.innerHTML);
+          // console.log(element);
+          page.appendChild(element);
+        }
+        document.addEventListener('click', function(ev){
+          if(event.target.dataset.index){
+            erase_all_child(preview);
+            preview.appendChild(tableau[event.target.dataset.index]);
+            console.log(event.target.formactive);
+            if(event.target.formactive != 1)
+            {
+              active_form();
+              event.target.formactive = 1;
+            }
+            erase_all_child(page);
+            pagination(tableau,event.target.dataset.index);
+          }
+        },true)
+
+    }
+
 
 
   function delete_picture(cross) {
@@ -182,10 +242,23 @@
               } else {
                   console.log(bool.length);
                   erase_all_child(document.getElementById('preview'));
-                  create_preview(bool[0],0);
+                  // create_preview(bool[0],0);
+                  var tableau = [];
                   for( var index = 1; index < bool.length; index++)
                   {
-                    create_preview(bool[index],index);
+                    tableau[index] = create_preview(bool[index],index);
+                  }
+
+                  // console.log(tableau);
+                  // if (tableau[1])
+                  // {
+                  //   document.getElementById('preview').appendChild(tableau[1]);
+                  // }
+                  if (tableau[1])
+                  {
+                    document.getElementById('preview').appendChild(tableau[1]);
+                    active_form();
+                    pagination(tableau, 1);
                   }
                   return;
               }
@@ -212,12 +285,18 @@ function like_picture(element) {
           if (liked.readyState == 4 && liked.status == 200) {
               const bool = JSON.parse(liked.responseText);
               console.log(bool);
-              if (bool == "true") {
-                // erase_all_child(document.getElementById('preview'));
-                display_picture();
+              if (bool) {
+                console.log(bool.length);
+                // element.parentNode.innerHTML = "";
+
+                element.parentNode.innerHTML = "<i class='fa fa-heart-o' aria-hidden='true'></i> &nbsp"+ bool.length;
+
+                //  erase_all_child(document.getElementById('preview'));
+                // display_picture();
+                // element.innerHTML="zebi";
                   return;
               } else {
-                  // alert('like');
+                   alert('error');
                   return;
               }
           }
@@ -234,7 +313,7 @@ function like_picture(element) {
 
 
   document.body.addEventListener("click", function(ev) {
-    console.log(event.target.className);
+//     console.log(event.target.className);
     if(Object.is(event.target.className,"delete_pic")){
       if (confirm("Are you sure you want to delete this picture ?"))
            delete_picture(event.target);

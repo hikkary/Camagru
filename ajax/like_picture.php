@@ -5,24 +5,24 @@ require_once('../config/function_sql.php');
 $connect = connectToDatabase();
 
 
-
-function first_like($connect,$likes,$new_like)
-{
-    $new_tab[] = $new_like ;
-    $new_tab = json_encode($new_tab);
-
-    $first_like = $connect->prepare(
-    "UPDATE `photo` SET liked = :tableau WHERE id_photo = :photo_id "
-    );
-
-    $first_like->execute(array(
-      'photo_id' => $likes['id_photo'],
-      'tableau' => $new_tab
-    ));
-
-    echo(json_encode("true"));
-    return;
-}
+// 
+// function first_like($connect,$likes,$new_like)
+// {
+//     $new_tab[] = $new_like ;
+//     $new_tab = json_encode($new_tab);
+//
+//     $first_like = $connect->prepare(
+//     "UPDATE `photo` SET liked = :tableau WHERE id_photo = :photo_id "
+//     );
+//
+//     $first_like->execute(array(
+//       'photo_id' => $likes['id_photo'],
+//       'tableau' => $new_tab
+//     ));
+//
+//     echo(json_encode("true"));
+//     return;
+// }
 
 function other_likes($connect, $likes, $result, $new_like)
 {
@@ -39,7 +39,7 @@ function other_likes($connect, $likes, $result, $new_like)
       'tableau' => $result
     ));
 
-    echo(json_encode("true"));
+    echo($result);
     return;
 }
 
@@ -56,7 +56,8 @@ function delete_likes($connect, $likes, $result)
       'tableau' => $result
     ));
 
-    echo(json_encode("true"));
+
+    echo($result);
     return;
 }
 
@@ -86,7 +87,7 @@ if(!$connect)
    if($result)
    {
      if($result['liked'] === NULL)
-        first_like($connect, $likes, $new_like);
+        other_likes($connect, $likes,$result, $new_like);
      else
      {
         if(check_if_user_liked($result,$likes) === FALSE)
@@ -102,7 +103,7 @@ if(!$connect)
 
    }
    else {
-      echo(json_encode("true"));
+      echo(json_encode("false"));
       return;
    }
 ?>
