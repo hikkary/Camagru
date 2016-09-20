@@ -135,7 +135,7 @@ body{
 
 #pagination{
   display: none;
-  justify-content: space-between;
+  justify-content: center;;
   height: 50px;
   line-height: 50px;
   align-items: center;
@@ -145,4 +145,5 @@ body{
   text-decoration: none;
   color:black;
   font-family: "crayon";
+  margin: 10px;
 }

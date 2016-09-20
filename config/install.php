@@ -53,7 +53,7 @@ error_reporting(E_ALL);
 					. " id_user INT NOT NULL,\n"
 					. " photo_url VARCHAR(255) UNIQUE NOT NULL,\n"
 					. " date_creation DATETIME NOT NULL,\n"
-					. " comments LONGTEXT,\n"
+					. " comments LONGTEXT ,\n"
 					. " liked LONGTEXT,\n"
 					. " FOREIGN KEY(id_user) REFERENCES cam_users(id_users) ON DELETE CASCADE,\n"
 					. " PRIMARY KEY(id_photo)) ENGINE=InnoDB;");

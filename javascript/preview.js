@@ -175,7 +175,7 @@
     var preview = document.getElementById('preview');
     page.style.display = "flex";
 
-    for(var i = index - 1; i < index + 20 && i < tableau.length ; i++)
+    for(var i = index; i < index + 20 && i < tableau.length ; i++)
         {
           var element = document.createElement("a");
           element.setAttribute('href', '#');
@@ -194,8 +194,8 @@
               active_form();
               event.target.formactive = 1;
             }
-            erase_all_child(page);
-            pagination(tableau,event.target.dataset.index);
+            // erase_all_child(page);
+            // pagination(tableau,event.target.dataset.index);
           }
         },true)
 
@@ -244,7 +244,7 @@
                   erase_all_child(document.getElementById('preview'));
                   // create_preview(bool[0],0);
                   var tableau = [];
-                  for( var index = 1; index < bool.length; index++)
+                  for( var index = 0; index <  bool.length; index++)
                   {
                     tableau[index] = create_preview(bool[index],index);
                   }
@@ -254,13 +254,11 @@
                   // {
                   //   document.getElementById('preview').appendChild(tableau[1]);
                   // }
-                  if (tableau[1])
-                  {
-                    document.getElementById('preview').appendChild(tableau[1]);
+                    console.log(tableau);
+                    document.getElementById('preview').appendChild(tableau[0]);
                     active_form();
-                    pagination(tableau, 1);
-                  }
-                  return;
+                    pagination(tableau, 0);
+                    return;
               }
           }
       };

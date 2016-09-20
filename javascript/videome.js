@@ -308,10 +308,10 @@ function listen_to_valdidate_image(url) {
 
 // photo apres 3 seconde
   retardateur.addEventListener('click', function(ev){
+    summon_photo_buttons("none");
      setTimeout(function()
      {
       	takepicture(sauvegarder);// on appelle la fonction takepicture quand on cliq srr le bouton
-        summon_photo_buttons("none");
     	ev.preventDefault();
   	}, 3000);
   }, false);
