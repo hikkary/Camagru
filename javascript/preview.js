@@ -174,16 +174,30 @@
     var page = document.getElementById('pagination');
     var preview = document.getElementById('preview');
     page.style.display = "flex";
-
+    console.log(index);
     for(var i = index; i < index + 20 && i < tableau.length ; i++)
         {
           var element = document.createElement("a");
           element.setAttribute('href', '#');
-          element.innerHTML = i;
+          // element.innerHTML = i + 1;
+          element.innerHTML = i ;
           element.setAttribute('data-index', element.innerHTML);
           // console.log(element);
           page.appendChild(element);
+
         }
+        console.log(i);
+        console.log(tableau[i]);
+        if(tableau[i])
+        {
+          var element = document.createElement("a");
+          element.setAttribute('href', '#');
+          element.innerHTML = ">>";
+          // element.setAttribute('class', 'next');
+          element.setAttribute('data-nextindex', i);
+          page.appendChild(element);
+        }
+
         document.addEventListener('click', function(ev){
           if(event.target.dataset.index){
             erase_all_child(preview);
@@ -194,9 +208,20 @@
               active_form();
               event.target.formactive = 1;
             }
+
+
             // erase_all_child(page);
             // pagination(tableau,event.target.dataset.index);
           }
+          if(event.target.dataset.nextindex) //finir sa
+          {
+            console.log("ace");
+            erase_all_child(page);
+            erase_all_child(preview);
+            preview.appendChild(tableau[event.target.dataset.nextindex]);
+            pagination(tableau, event.target.dataset.nextindex);
+          }
+
         },true)
 
     }
@@ -235,7 +260,7 @@
       display_pic.onreadystatechange = function() {
           if (display_pic.readyState == 4 && display_pic.status == 200) {
               const bool = JSON.parse(display_pic.responseText);
-              console.log(bool);
+//               console.log(bool);
               if (bool == "true") {
                   preview.innerHTML = " No Photo Yet";
                   return;
@@ -254,7 +279,7 @@
                   // {
                   //   document.getElementById('preview').appendChild(tableau[1]);
                   // }
-                    console.log(tableau);
+//                     console.log(tableau);
                     document.getElementById('preview').appendChild(tableau[0]);
                     active_form();
                     pagination(tableau, 0);
