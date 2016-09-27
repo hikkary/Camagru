@@ -94,12 +94,12 @@
       display_pic.onreadystatechange = function() {
           if (display_pic.readyState == 4 && display_pic.status == 200) {
               const bool = JSON.parse(display_pic.responseText);
-              console.log(bool);
+//               console.log(bool);
               if (bool == "true") {
                   preview.innerHTML = "no photo yet";
                   return;
               } else {
-                  console.log(bool.length);
+//                   console.log(bool.length);
                   erase_all_child(document.getElementById('preview'));
                   for( var index = 0; index < bool.length; ++index)
                   {

@@ -1,5 +1,5 @@
 (function(){
-
+  // event = event || window.event;
   var preview = document.getElementById('preview');
 
   function erase_all_child(node){
@@ -174,9 +174,19 @@
     var page = document.getElementById('pagination');
     var preview = document.getElementById('preview');
     page.style.display = "flex";
-    console.log(index);
+//     console.log(index);
+    if (index !== 1)
+    {
+      var element = document.createElement("a");
+      element.setAttribute('href', '#');
+      element.innerHTML = "<<";
+      // element.setAttribute('class', 'next');
+      element.setAttribute('data-formerindex', index - 1);
+      page.appendChild(element);
+    }
     for(var i = index; i < index + 20 && i < tableau.length ; i++)
         {
+//           console.log(i);
           var element = document.createElement("a");
           element.setAttribute('href', '#');
           // element.innerHTML = i + 1;
@@ -186,8 +196,8 @@
           page.appendChild(element);
 
         }
-        console.log(i);
-        console.log(tableau[i]);
+//         console.log(i);
+//         console.log(tableau[i]);
         if(tableau[i])
         {
           var element = document.createElement("a");
@@ -198,17 +208,16 @@
           page.appendChild(element);
         }
 
-        document.addEventListener('click', function(ev){
+        document.addEventListener('click', function(event){
           if(event.target.dataset.index){
             erase_all_child(preview);
-            preview.appendChild(tableau[event.target.dataset.index]);
+            preview.appendChild(tableau[event.target.dataset.index - 1]);
             console.log(event.target.formactive);
             if(event.target.formactive != 1)
             {
               active_form();
               event.target.formactive = 1;
             }
-
 
             // erase_all_child(page);
             // pagination(tableau,event.target.dataset.index);
@@ -218,10 +227,17 @@
             console.log("ace");
             erase_all_child(page);
             erase_all_child(preview);
-            preview.appendChild(tableau[event.target.dataset.nextindex]);
-            pagination(tableau, event.target.dataset.nextindex);
+            preview.appendChild(tableau[Number(event.target.dataset.nextindex - 1)] );
+            pagination(tableau,Number(event.target.dataset.nextindex));
           }
+          if(event.target.dataset.formerindex)
+          {
+            erase_all_child(page);
+            erase_all_child(preview);
+            preview.appendChild(tableau[Number(event.target.dataset.formerindex) - 1] );
+            pagination(tableau,Number(event.target.dataset.formerindex - 19));
 
+          }
         },true)
 
     }
@@ -265,7 +281,7 @@
                   preview.innerHTML = " No Photo Yet";
                   return;
               } else {
-                  console.log(bool.length);
+//                   console.log(bool.length);
                   erase_all_child(document.getElementById('preview'));
                   // create_preview(bool[0],0);
                   var tableau = [];
@@ -282,7 +298,7 @@
 //                     console.log(tableau);
                     document.getElementById('preview').appendChild(tableau[0]);
                     active_form();
-                    pagination(tableau, 0);
+                    pagination(tableau, 1);
                     return;
               }
           }
@@ -335,8 +351,9 @@ function like_picture(element) {
 
 
 
-  document.body.addEventListener("click", function(ev) {
+  document.body.addEventListener("click", function(event) {
 //     console.log(event.target.className);
+
     if(Object.is(event.target.className,"delete_pic")){
       if (confirm("Are you sure you want to delete this picture ?"))
            delete_picture(event.target);

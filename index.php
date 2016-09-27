@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	// session_destroy();
-	var_dump($_SESSION);
+	// var_dump($_SESSION);
 
 ?>
 <!DOCTYPE html>
@@ -20,12 +20,30 @@
 	require_once($rootname.'/nav/menu.php');
   	menu();
 ?>
+<?php
+	$rootname = getcwd();
+	require_once($rootname.'/script/script.php');
+  	script();
+?>
 <div id="hero">
 	<img src="img/inscription.png" width="100%">
+<p><?php
+	 if($_SESSION)
+	 {
+		 if($_SESSION['username'] !== "")
+		 {
+			 echo "You are already connected";
+			 return;
+		 }
+	 }
+	?>
+</p>
 </div>
+
 <div id="popup">
 <p id="ptext" style="opacity: 0;"></p>
 </div>
+
 <div id="redirect">
 <p id="sendmail">Please confirm your email to finish the inscription</p>
 </div>
@@ -52,10 +70,6 @@
 </body>
 
 <script type="text/javascript" src="javascript/index.js"></script>
-<?php
-	$rootname = getcwd();
-	require_once($rootname.'/script/script.php');
-  	script();
-?>
+
 
 </html>

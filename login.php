@@ -52,4 +52,9 @@
 
 </body>
 <script type="text/javascript" src="javascript/login.js"></script>
+<?php
+	$rootname = getcwd();
+	require_once($rootname.'/script/script.php');
+		script();
+?>
 </html>

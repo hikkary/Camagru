@@ -23,9 +23,12 @@ function connect(username,password){
 		{
 			const bool = JSON.parse(connect.responseText);
 			console.log(bool);
-			if(bool == "false")
+			if(bool === "false")
 				window.location.href = "app.php";
-			else
+			else if (bool === "confirm") {
+        changetext("Please Confirm Your Email To Connect",document.getElementById('message'),"red", null);	     
+			}
+      else
       {
 				changetext(error,document.getElementById('message'),"red", null);
       }

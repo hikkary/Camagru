@@ -5,6 +5,8 @@ body{
  	font-family: "crayon";
  	src: url("crayon.ttf");
  }
+
+
 /*Css general*/
 #preview,#pagination{
   margin-top: 10px;
@@ -31,6 +33,18 @@ body{
   /*background-color: green;*/
   overflow-y: hidden;
 }
+/*
+#preview::-webkit-scrollbar {
+    width: 1em;
+}
+#preview::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+#preview::-webkit-scrollbar-thumb {
+  background-color: blue;
+  outline: 1px solid slategrey;
+}*/
 
 .picture_preview{
   margin : 3px;

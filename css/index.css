@@ -115,6 +115,13 @@ display:none;
 /* 	align-content: center; */
 }
 
+#hero p{
+	text-align: center;
+	font-family: "crayon";
+	font-size : 7vh;
+	
+}
+
 #footer img{
 	position: absolute;
 	float: right;
