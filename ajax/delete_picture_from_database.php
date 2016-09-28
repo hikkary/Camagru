@@ -36,9 +36,15 @@ $id = ((array)json_decode(file_get_contents('php://input')));
 
 // str_replace("..","",$id['t_url']);
 
-if((unlink($id['t_url']) === TRUE))
+if($id['t_url'])
 {
-  delete_picture_from_database($id['user_id'], $id['photo_id'], $connect );
+  if(unlink($id['t_url']) !== FALSE)
+  {
+    delete_picture_from_database($id['user_id'], $id['photo_id'], $connect );
+  }
+  else {
+    delete_picture_from_database($id['user_id'], $id['photo_id'], $connect );
+  }
   return;
 }
 else{

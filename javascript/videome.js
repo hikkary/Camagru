@@ -63,6 +63,15 @@
       node.innerHTML = "";
   }
 
+  function active_camera()
+  {
+       takepicture(document.getElementById('sauvegarder'));// on appelle la fonction takepicture quand on cliq srr le bouton
+       summon_photo_buttons("none");
+      //  console.log(getImageData(canvas));
+       event.preventDefault();
+
+  }
+
   function create_preview(data){
     // console.log(data);
     // erase_all_child(document.getElementById('preview'));
@@ -273,6 +282,8 @@ function listen_to_valdidate_image(url) {
     mergepictures(data,datamask,sauvegarder);
     formphoto.setAttribute('value', data);
     sauvegarder.setAttribute('download', "CamHero "+jour+"-"+mois+"-"+an+" "+heure+"h"+min+"m"+sec);
+    document.getElementById('startbutton').removeEventListener('mouseup', active_camera, false);
+
   }
 
 
@@ -285,26 +296,6 @@ function listen_to_valdidate_image(url) {
   }
 
 
-
-// prise de photo
- startbutton.addEventListener('mouseup', function(ev){
-    takepicture(sauvegarder);// on appelle la fonction takepicture quand on cliq srr le bouton
-    summon_photo_buttons("none");
-    ev.preventDefault();
-  }, false);
-
-//ecoute du clavier
- // document.addEventListener("keydown",function(ev){
- //  	// alert(event.keyCode);
- // 	if (event.keyCode==13){
- // 		takepicture(sauvegarder);
- //      summon_photo_buttons("none");
- //      ev.preventDefault();
- // }
- // if (event.keyCode==46){
- // 		clearcanvas(sauvegarder,photo);
- // }
- // },true);
 
 // photo apres 3 seconde
   retardateur.addEventListener('click', function(ev){
@@ -354,8 +345,17 @@ function listen_to_valdidate_image(url) {
 
   }
 
-mask.addEventListener('mousedown', function(ev){
+
+
+mask.addEventListener('mousedown', function(event){
    movemask(mask,iron,video);
+  //  active_camera(startbutton, sauvegarder, canvas);
+   startbutton.addEventListener('mouseup', active_camera, false);
+  //  startbutton.removeEventListener('mouseup', active_camera, false);
+
+  //  startbutton.removeEventListener(event,function(event){
+  //      active_camera(startbutton, sauvegarder, canvas);
+  //   }, false);
 }, true);
 
 
@@ -438,6 +438,27 @@ display_picture();
  //  video.removeAttribute('src')
  //  stop.style.opacity = 0;
  //  },false)
+
+
+ // prise de photo
+  // startbutton.addEventListener('mouseup', function(ev){
+  //    takepicture(sauvegarder);// on appelle la fonction takepicture quand on cliq srr le bouton
+  //    summon_photo_buttons("none");
+  //    ev.preventDefault();
+  //  }, false);
+
+ //ecoute du clavier
+  // document.addEventListener("keydown",function(ev){
+  //  	// alert(event.keyCode);
+  // 	if (event.keyCode==13){
+  // 		takepicture(sauvegarder);
+  //      summon_photo_buttons("none");
+  //      ev.preventDefault();
+  // }
+  // if (event.keyCode==46){
+  // 		clearcanvas(sauvegarder,photo);
+  // }
+  // },true);
 
 
 })();

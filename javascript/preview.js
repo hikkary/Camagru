@@ -169,18 +169,55 @@
 }
 
 
-  function pagination(tableau,index)
+  function event_manager(tableau,page,preview)
   {
+    if(event.target.dataset.index){
+      // document.removeEventListener('click', event_manager, true);
+      erase_all_child(preview);
+      preview.appendChild(tableau[event.target.dataset.index - 1]);
+      // console.log(event.target.formactive);
+      // if(event.target.formactive != 1)
+      // {
+         active_form();
+        //  event.target.formactive = 1;
+      // }
+      // document.removeEventListener('click', event_manager, true);
+
+      return;
+    }
+    if(event.target.dataset.nextindex) //finir sa
+    {
+      console.log("ace");
+      erase_all_child(page);
+      erase_all_child(preview);
+      preview.appendChild(tableau[Number(event.target.dataset.nextindex - 1)] );
+      pagination(tableau,Number(event.target.dataset.nextindex), 1 );
+      return;
+    }
+    if(event.target.dataset.formerindex)
+    {
+      erase_all_child(page);
+      erase_all_child(preview);
+      preview.appendChild(tableau[Number(event.target.dataset.formerindex) - 1] );
+      pagination(tableau,Number(event.target.dataset.formerindex - 19), 1);
+      return;
+    }
+  }
+
+  function pagination(tableau,index,key)
+  {
+    // document.removeEventListener('click', event_manager, true);
+    document.removeEventListener('click', function(event){
+        event_manager(tableau,page, preview)},true);
+
     var page = document.getElementById('pagination');
     var preview = document.getElementById('preview');
     page.style.display = "flex";
-//     console.log(index);
     if (index !== 1)
     {
       var element = document.createElement("a");
       element.setAttribute('href', '#');
       element.innerHTML = "<<";
-      // element.setAttribute('class', 'next');
       element.setAttribute('data-formerindex', index - 1);
       page.appendChild(element);
     }
@@ -208,38 +245,11 @@
           page.appendChild(element);
         }
 
-        document.addEventListener('click', function(event){
-          if(event.target.dataset.index){
-            erase_all_child(preview);
-            preview.appendChild(tableau[event.target.dataset.index - 1]);
-            console.log(event.target.formactive);
-            if(event.target.formactive != 1)
-            {
-              active_form();
-              event.target.formactive = 1;
-            }
-
-            // erase_all_child(page);
-            // pagination(tableau,event.target.dataset.index);
-          }
-          if(event.target.dataset.nextindex) //finir sa
-          {
-            console.log("ace");
-            erase_all_child(page);
-            erase_all_child(preview);
-            preview.appendChild(tableau[Number(event.target.dataset.nextindex - 1)] );
-            pagination(tableau,Number(event.target.dataset.nextindex));
-          }
-          if(event.target.dataset.formerindex)
-          {
-            erase_all_child(page);
-            erase_all_child(preview);
-            preview.appendChild(tableau[Number(event.target.dataset.formerindex) - 1] );
-            pagination(tableau,Number(event.target.dataset.formerindex - 19));
-
-          }
-        },true)
-
+        if(key === 0)
+        {
+          document.addEventListener('click', function(event){
+            event_manager(tableau,page, preview)},true);
+        }
     }
 
 
@@ -298,7 +308,7 @@
 //                     console.log(tableau);
                     document.getElementById('preview').appendChild(tableau[0]);
                     active_form();
-                    pagination(tableau, 1);
+                    pagination(tableau, 1, 0);
                     return;
               }
           }

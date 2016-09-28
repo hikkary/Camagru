@@ -2,7 +2,6 @@
 	session_start();
 
  ?>
-?>
 <!DOCTYPE html>
 <html id="html" data-username="<?php require_once("function/get_session.php"); echo(get_username_session());?>" data-idnumber="<?php require_once("function/get_session.php"); echo(get_id_session());?>">
 <head>
