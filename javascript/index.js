@@ -251,9 +251,10 @@ function send_form(mail, username, random) {
 	}, true);
 
 	username.addEventListener('blur', function(ev){
-		if ((username.value.length < 5 || username.value.length >= 60) && username.value.length !== 0)
+		var username_regex = new RegExp("^[a-zA-Z0-9\-]*$", "g");
+		if ((username.value.length < 5 || username.value.length >= 60) && username.value.length !== 0  || username_regex.test(username.value) === false)
 		{
-			var error = "X Username Must be at least 5 character";
+			var error = "X Username Must be at least 5 alphabetical characters ";
 			errorpopup(username, popup, error);
 		}
 		else if (username.value.length >= 5 && username.value.length <= 60)
@@ -263,17 +264,29 @@ function send_form(mail, username, random) {
 	}, true);
 
 	first_name.addEventListener('blur', function(ev){
-		if (first_name.value)
-			checklength(first_name.value,first_name,popup);
-		else
+		var first_name_regex = new RegExp("^[a-zA-Z\-]*$", "g");
+		if ((first_name.value.length >= 2 && first_name.value.length <= 60) && first_name_regex.test(first_name.value) === true)
+			allgreen(first_name);
+		else if (first_name.value.length === 0)
 			recovery(first_name);
+		else {
+			var error = "X Must be at least 2 alphabetical characters";
+			// allred(first_name);
+			errorpopup(first_name, popup, error);
+		}
 	}, true);
 
 	last_name.addEventListener('blur', function(ev){
-		if (last_name.value)
-			checklength(last_name.value,last_name, popup);
-		else
+		var last_name_regex = new RegExp("^[a-zA-Z\-]*$", "g");
+		if ((last_name.value.length >= 2 && last_name.value.length <= 60) && last_name_regex.test(last_name.value) === true)
+			allgreen(last_name);
+		else if (last_name.value.length === 0)
 			recovery(last_name);
+		else {
+			var error = "X Must be at least 2 alphabetical characters";
+			// allred(last_name);
+			errorpopup(last_name, popup, error);
+		}
 	}, true);
 
 	password.addEventListener('blur', function(ev){

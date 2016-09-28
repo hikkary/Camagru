@@ -69,6 +69,16 @@
        summon_photo_buttons("none");
       //  console.log(getImageData(canvas));
        event.preventDefault();
+  }
+
+  function active_retardateur()
+  {
+    summon_photo_buttons("none");
+     setTimeout(function()
+     {
+       takepicture(sauvegarder);// on appelle la fonction takepicture quand on cliq srr le bouton
+   }, 3000);
+    event.preventDefault();
 
   }
 
@@ -283,6 +293,7 @@ function listen_to_valdidate_image(url) {
     formphoto.setAttribute('value', data);
     sauvegarder.setAttribute('download', "CamHero "+jour+"-"+mois+"-"+an+" "+heure+"h"+min+"m"+sec);
     document.getElementById('startbutton').removeEventListener('mouseup', active_camera, false);
+    document.getElementById('retardateur').removeEventListener('mouseup', active_retardateur, false);
 
   }
 
@@ -298,14 +309,7 @@ function listen_to_valdidate_image(url) {
 
 
 // photo apres 3 seconde
-  retardateur.addEventListener('click', function(ev){
-    summon_photo_buttons("none");
-     setTimeout(function()
-     {
-      	takepicture(sauvegarder);// on appelle la fonction takepicture quand on cliq srr le bouton
-    	ev.preventDefault();
-  	}, 3000);
-  }, false);
+
 
   // sauvegarder.addEventListener('click', function(ev){
   //     download(sauvegarder, canvas);// on appelle la fonction takepicture quand on cliq srr le bouton
@@ -347,10 +351,12 @@ function listen_to_valdidate_image(url) {
 
 
 
+
 mask.addEventListener('mousedown', function(event){
    movemask(mask,iron,video);
   //  active_camera(startbutton, sauvegarder, canvas);
    startbutton.addEventListener('mouseup', active_camera, false);
+   retardateur.addEventListener('mouseup', active_retardateur, false);
   //  startbutton.removeEventListener('mouseup', active_camera, false);
 
   //  startbutton.removeEventListener(event,function(event){
