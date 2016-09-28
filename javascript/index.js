@@ -291,11 +291,11 @@ function send_form(mail, username, random) {
 
 	password.addEventListener('blur', function(ev){
 		var passregexp = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.).*$", "g");
-		if (passregexp.test(password.value) === true && password.value.length >= 8)
+		if (passregexp.test(password.value) === true && password.value.length >= 8 && password.value.length <= 60)
 			allgreen(password);
 		else
 		{
-			var error = "Must contain at least 8 character, 1 uppercase and 1 number";
+			var error = "Must contain at least 8 character (Max 60), 1 uppercase and 1 number";
 			errorpopup(password,popup, error);
 		}
 
