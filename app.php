@@ -121,11 +121,12 @@
 
 <div id="montage">
 
-	<img id="m1" src="mask/iron-man.png" >
+	<!-- <img id="m1" src="mask/iron-man.png" >
 	<img id="m2" src="mask/captain-america.png" >
-	<form action="javascript/supp.php" method="post">
-	<script type="text/javascript" src="javascript/resize_img.js"></script>
+	<form action="javascript/supp.php" method="post"> -->
 </div>
+<script type="text/javascript" src="javascript/resize_img.js"></script>
+
 </body>
 	<!-- <script type="text/javascript" src="javascript/preview.js"></script> -->
 	<script type="text/javascript" src="javascript/videome.js"></script>

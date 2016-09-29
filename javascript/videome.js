@@ -67,6 +67,10 @@
   {
        takepicture(document.getElementById('sauvegarder'));// on appelle la fonction takepicture quand on cliq srr le bouton
        summon_photo_buttons("none");
+       setTimeout(function()
+       {
+         display_picture();
+       }, 1000);
       //  console.log(getImageData(canvas));
        event.preventDefault();
   }
@@ -78,6 +82,10 @@
      {
        takepicture(sauvegarder);// on appelle la fonction takepicture quand on cliq srr le bouton
    }, 3000);
+   setTimeout(function()
+   {
+     display_picture();
+   }, 1000);
     event.preventDefault();
 
   }
@@ -220,9 +228,6 @@ function valid_picture(url) {
     validate_pic.send(JSON.stringify(data));
 }
 
-
-
-
 function listen_to_delete_image(url) {
     document.getElementById('corbeille').addEventListener('click', function(ev) {
         clearcanvas(sauvegarder, photo, mask);
@@ -327,45 +332,37 @@ function listen_to_valdidate_image(url) {
     contextmask.drawImage(themask,360,220);
   }
 
-  function movemask(mask, themask,video){
+  function movemask(mask, id, video){
+    console.log(id);
+    console.log(mask);
+   var themask = document.getElementById(id);
    var maskcontext = mask.getContext('2d');
    var x = event.clientX - mask.offsetLeft - (themask.width * 4)/2 - mask.scrollTop ;
    var y = event.clientY - mask.offsetTop - (themask.height * 4)/2 + document.getElementById("body").scrollTop;
-
-   // console.log(document.getElementById("body").scrollTop);
-   // console.log(mask.offsetLeft);
-   // console.log(mask.offsetTop);
-   // console.log(x);
-   // console.log(y);
-
-
    mask.width = width ;
    mask.height = height;
    maskcontext.clearRect(0,0,width,height);
    maskcontext.drawImage(themask,x,y);
-   // mask.addEventListener('click', function(ev){
-   //   // alert('Vous avez cliqué au point de coordonnés: ' + x + ', ' + y );
-   // },true);
-
   }
 
 
 
+document.body.addEventListener("click", function(event){
+ var regmask = new RegExp("^m{1}[0-9]{1,3}","g");
+ console.log(event.target.id);
+ if (regmask.test(event.target.id) === true)
+ {
+   var idmask = event.target.id;
+   console.log("regok");
+    mask.addEventListener('mousedown', function(event){
+       movemask(mask,idmask,video);
+       startbutton.addEventListener('mouseup', active_camera, false);
+       retardateur.addEventListener('mouseup', active_retardateur, false);
+    }, true);
+ }
+ })
 
-mask.addEventListener('mousedown', function(event){
-   movemask(mask,iron,video);
-  //  active_camera(startbutton, sauvegarder, canvas);
-   startbutton.addEventListener('mouseup', active_camera, false);
-   retardateur.addEventListener('mouseup', active_retardateur, false);
-  //  startbutton.removeEventListener('mouseup', active_camera, false);
-
-  //  startbutton.removeEventListener(event,function(event){
-  //      active_camera(startbutton, sauvegarder, canvas);
-  //   }, false);
-}, true);
-
-
-document.body.addEventListener("click", function(ev) {
+document.body.addEventListener("click", function(event) {
   console.log(event.target.className);
   if(Object.is(event.target.className,"delete_pic")){
     if (confirm("Are you sure you want to delete this picture ?"))

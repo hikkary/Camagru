@@ -63,6 +63,12 @@ error_reporting(E_ALL);
 					else
 						echo "TABLE photo SUCESSFULLY CREATED"."\n";
 
+				$addmask = $connect->query(
+				"INSERT INTO `mask` (`id_mask`, `mask_url`) VALUES (NULL,'mask/m1.png'),(NULL,'mask/m2.png'),(NULL,'mask/m3.png'),(NULL,'mask/m4.png'),(NULL,'mask/m5.png'),(NULL,'mask/m6.png'),(NULL,'mask/m7.png')"	);
 
+			if(!$addmask)
+				exit('FAILED TO ADD MASKS'."\n");
+			else
+				echo "MASKS SUCESSFULLY ADDED"."\n";
 
 	?>

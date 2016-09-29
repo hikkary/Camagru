@@ -1,10 +1,18 @@
 <?php
+	// header('Content-Type: application/json');
+	// header('Content-Type: text/html; charset="iso-8859-1"');
+	//
+	// ini_set("SMTP","smtp.free.fr");
+	// ini_set("smtp_port","25");
+	// ini_set("sendmail_from","z.kerkeb@gmail.com");
+
 	header('Content-Type: application/json');
 	header('Content-Type: text/html; charset="iso-8859-1"');
 
-	ini_set("SMTP","smtp.free.fr");
+	ini_set("SMTP","smtp.sfr.fr");
 	ini_set("smtp_port","25");
-	ini_set("sendmail_from","z.kerkeb@gmail.com");
+	ini_set("sendmail_from","z.kerkeb@sfr.fr");
+
 
   $headers   = array();
 	$headers[] = "MIME-Version: 1.0";
