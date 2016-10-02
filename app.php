@@ -1,22 +1,22 @@
 <?php
 	session_start();
-	require_once("function/redirect.php");
-	if($_SESSION)
-	{
-		if($_SESSION['username'] === "")
-		{
-			echo "Please Login or register";
-			redirect("login.php");
-
-			return;
-		}
-	}
-	else {
-		echo "Please Login or register";
-		redirect("login.php");
-
-			return;
-	}
+	// require_once("function/redirect.php");
+	// if($_SESSION)
+	// {
+	// 	if($_SESSION['username'] === "")
+	// 	{
+	// 		echo "Please Login or register";
+	// 		redirect("login.php");
+	//
+	// 		return;
+	// 	}
+	// }
+	// else {
+	// 	echo "Please Login or register";
+	// 	redirect("login.php");
+	//
+	// 		return;
+	// }
 ?>
 <!DOCTYPE html>
 <html id="html" data-username="<?php require_once("function/get_session.php"); echo(get_username_session());?>" data-idnumber="<?php require_once("function/get_session.php"); echo(get_id_session());?>">

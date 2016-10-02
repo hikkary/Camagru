@@ -20,8 +20,8 @@
 
 <div id="redirect">
 <p> <?php
-	require_once('/config/function_sql.php');
-	require_once('/function/redirect.php');
+	require_once('config/function_sql.php');
+	require_once('function/redirect.php');
 
 	function verif_account($username,$bdd)
 	{

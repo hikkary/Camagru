@@ -2,20 +2,34 @@
 
 ini_set('display_errors','on');
 error_reporting(E_ALL);
+date_default_timezone_set('Europe/Paris');
 	require_once('function_sql.php');
 
-	// try{
-	// 	require_once('database.php');
-	// 	$connect = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
-	// } catch (PDOException $e) {
-	// 	echo "Connection Failed, like your life :" . $e->getMessage();
+	// eio_fchown
+	//  try{
+	//  	$connect = new PDO('mysql:host='.$DB_HOST.';dbname='$DB_NAME, $DB_USER, $DB_PASSWORD, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
+	//  } catch (PDOException $e) {
+ // 		echo "Connection Failed, like your life :" . $e->getMessage();
 	// }
 
 	$connect = connectToDatabase();
 
 
 	if(!$connect)
-		exit();
+		die("Failed to connect");
+
+
+
+	// $users2 = $connect->query("CREATE TABLE IF NOT EXISTS cam_users");
+	// $users2 = $connect->query("SELECT * ");
+	//
+	// var_dump($users2);
+	//
+	//
+	//   if(!$users2)
+ //  		exit('TABLE users2 FAILED TO CREATE'."\n");
+ //  	else
+ //  		echo "TABLE users2 SUCESSFULLY CREATED"."\n";
 
 	$users = $connect->query(
 	  "CREATE TABLE IF NOT EXISTS cam_users(\n"
@@ -27,8 +41,9 @@ error_reporting(E_ALL);
     . " mail VARCHAR(255) NOT NULL,\n"
     . " mail_check INT NOT NULL DEFAULT 0,\n"
     . " mail_key INT NOT NULL,\n"
-		.	"mask VARCHAR(255),\n"
+	. " mask VARCHAR(255),\n"
     . " PRIMARY KEY(id_users)) ENGINE=InnoDB;");
+
 
 
 	if(!$users)
