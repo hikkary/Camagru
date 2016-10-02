@@ -1,4 +1,51 @@
 (function() {
+	var form = document.getElementById('formImage');
+	var imageToUpload = document.getElementById('imageToUpload');
+
+	form.addEventListener('submit', get_uploaded_image);
+	imageToUpload.addEventListener('change', convertImage);
+
+	function convertImage(evt) {
+		var img = new Image();
+		img.onload = function() {
+			// c une image
+			var reader = new FileReader();
+			reader.onload = function() {
+				var photo = document.querySelector('#photo');
+				photo.src = reader.result;
+				photo.style.opacity = 1;
+			};
+			reader.readAsDataURL(evt.target.files[0]);
+		};
+		img.onerror = function() {
+			e.target.value = '';
+		};
+		_URL = window.URL || window.webkitURL;
+		img.src = _URL.createObjectURL(evt.target.files[0]);
+	}
+
+	function get_uploaded_image(event)
+    {
+	console.log(imageToUpload.value);
+	  event.preventDefault();
+  	  var get_image = new XMLHttpRequest();
+  	  get_image.onreadystatechange = function() {
+  		  if (get_image.readyState == 4 && get_image.status == 200) {
+  			  var bool = JSON.parse(get_image.responseText);
+                console.log(bool);
+  			  if (bool == "true") {
+  				  alert("image ok");
+  				  return;
+  			  } else {
+  				  alert('not an image');
+  				  return;
+  			  }
+  		  }
+  	  };
+  	  get_image.open("POST", "ajax/upload.php", true);
+  	  get_image.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  	  get_image.send(null);
+    }
 
 
   var streaming = false,
@@ -7,6 +54,7 @@
       canvas       = document.querySelector('#canvas'),
       photo        = document.querySelector('#photo'),
       startbutton  = document.querySelector('#startbutton'),
+	  upload 	   = document.querySelector('#upload'),
       corbeille	   = document.querySelector('#corbeille'),
       retardateur  = document.querySelector('#retardateur'),
   	  sauvegarder  = document.querySelector('#sauvegarder'),
@@ -39,14 +87,45 @@
         var vendorURL = window.URL || window.webkitURL;
         video.src = vendorURL.createObjectURL(stream);
       // }
-      video.play();
-
-
+    //   video.play();
+	  if (video.play()) {
+  		upload.addEventListener('click',function(event){
+  		 	alert('Please disable your camera');
+  		})
+		}
+	//  else {
+	// 	 upload.addEventListener('click',function(event){
+	// 		 // alert('ok');
+	// 		 document.getElementById('imageToUpload').click();
+	 //
+	// 		//  document.getElementById('imageToUpload').submit();
+	// 	 })
+	//  }
     },
     function(err) {
+		upload.addEventListener('click', function(event){
+			// alert('ok');
+			document.getElementById('imageToUpload').click();
+			validate_picture.style.display = "";
+			validate_picture.addEventListener('mouseup',function(event){
+				// document.getElementById('submitImage').addEventListener('click', function(event){
+					// console.log(document.getElementById('imageToUpload'));
+					// get_uploaded_image();
+					//  document.getElementById('formImage').submit();
+					//  document.getElementById('formImage').preventDefault();
+
+				// }, false)
+
+				 document.getElementById('submitImage').click();
+			}, false);
+		});
       console.log("An error occured! " + err);
     }
   );
+
+
+
+
 
   video.addEventListener('canplay', function(ev){
     if (!streaming) { // streaming sera false par defaut, on l'active uniquement apres avoir lancer la video pour pouvoir recupere correctement la taille
@@ -58,6 +137,7 @@
       streaming = true;
     }
   }, false);
+
 
   function erase_all_child(node){
       node.innerHTML = "";

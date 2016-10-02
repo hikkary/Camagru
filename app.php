@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	ini_set("file_uploads","on");
 	// require_once("function/redirect.php");
 	// if($_SESSION)
 	// {
@@ -35,6 +36,8 @@
 	$rootname = getcwd();
 	require_once($rootname.'/nav/menu.php');
   	menu();
+	echo "dendi"."\n";
+	var_dump($_FILES);
 ?>
 
 <p id="ntm"></p>
@@ -61,7 +64,7 @@
 		<div class="button"></div>
 		<div class="button"></div>
 		<a href="#" class="button" id="startbutton" ><div><i id="camera" class="fa fa-camera" aria-hidden="true"></i></div></a>
-		<a href="#" class="button" id="retardateur" ><div>	<i class="fa fa-clock-o" aria-hidden="true"></i></div></a>
+		<a href="#" class="button" id="retardateur" ><div><i class="fa fa-clock-o" aria-hidden="true"></i></div></a>
 		<a href="#" class="button" id="upload" ><div>	<i class="fa fa-arrow-up" aria-hidden="true"></i></div></a>
 		<a href="#" class="button" id="valid_picture" style="display: none"><div ><i class="fa fa-check" aria-hidden="true"></i></div></a>
 		<a href="#" class="button" id="corbeille" style="display: none"><div ><i class="fa fa-trash" aria-hidden="true"></i></div></a>
@@ -76,6 +79,11 @@
 		<div class="button"></div>
 		<div class="button"></div>
 		<div class="button"></div>
+		<form action="ajax/upload.php" method="post" enctype="multipart/form-data" id="formImage">
+			<input type="file" name="imageToUpload" id="imageToUpload">
+			<input type="submit" value="Upload Image" id="submitImage" name="submit">
+		</form>
+
 	</div>
 	<form id="formulaire" action="merge.php" method="post">
 		<input id="dp" type="text" name="dataphoto"> </input>

@@ -20,7 +20,7 @@
                     var element = document.createElement("a");
                     var img = document.createElement("img");
                     // console.log(bool);
-                    console.log(bool[index]['mask_url']);
+//                     console.log(bool[index]['mask_url']);
                     img.setAttribute("src",bool[index]['mask_url']);
                     img.setAttribute("id", "m"+index);
                     img.style.height = "100px";

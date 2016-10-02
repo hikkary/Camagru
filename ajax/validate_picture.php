@@ -36,6 +36,7 @@
 	if(!$result)
 	{
 		echo (json_encode("true"));
+		return;
 		// faire redirection page d'erreur
 	}
 	else {
@@ -50,8 +51,12 @@
 		));
 
 		if($photo)
+		{
 			echo (json_encode("false"));
-		else
+			return;
+		}
+		else{
 			echo (json_encode("true"));
+		}
 	}
 ?>
