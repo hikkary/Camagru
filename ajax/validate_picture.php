@@ -11,6 +11,7 @@
 	if(!$_SESSION || !$_SESSION['username'])
 		{
 			echo(json_encode("true"));
+			return;
 		}
 
 	 $path = ((array)json_decode(file_get_contents('php://input')));
@@ -57,6 +58,7 @@
 		}
 		else{
 			echo (json_encode("true"));
+			return;
 		}
 	}
 ?>

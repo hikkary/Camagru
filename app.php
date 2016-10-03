@@ -79,7 +79,7 @@
 		<div class="button"></div>
 		<div class="button"></div>
 		<div class="button"></div>
-		<form action="ajax/upload.php" method="post" enctype="multipart/form-data" id="formImage">
+		<form action="#" method="post" enctype="multipart/form-data" id="formImage">
 			<input type="file" name="imageToUpload" id="imageToUpload">
 			<input type="submit" value="Upload Image" id="submitImage" name="submit">
 		</form>

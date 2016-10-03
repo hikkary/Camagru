@@ -2,7 +2,7 @@
 	var form = document.getElementById('formImage');
 	var imageToUpload = document.getElementById('imageToUpload');
 
-	form.addEventListener('submit', get_uploaded_image);
+	form.addEventListener('submit', takepicture);
 	imageToUpload.addEventListener('change', convertImage);
 
 	function convertImage(evt) {
@@ -18,34 +18,36 @@
 			reader.readAsDataURL(evt.target.files[0]);
 		};
 		img.onerror = function() {
-			e.target.value = '';
+			alert('nsm');
+			evt.target.value = '';
 		};
 		_URL = window.URL || window.webkitURL;
 		img.src = _URL.createObjectURL(evt.target.files[0]);
+		console.log(img);
 	}
 
-	function get_uploaded_image(event)
-    {
-	console.log(imageToUpload.value);
-	  event.preventDefault();
-  	  var get_image = new XMLHttpRequest();
-  	  get_image.onreadystatechange = function() {
-  		  if (get_image.readyState == 4 && get_image.status == 200) {
-  			  var bool = JSON.parse(get_image.responseText);
-                console.log(bool);
-  			  if (bool == "true") {
-  				  alert("image ok");
-  				  return;
-  			  } else {
-  				  alert('not an image');
-  				  return;
-  			  }
-  		  }
-  	  };
-  	  get_image.open("POST", "ajax/upload.php", true);
-  	  get_image.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  	  get_image.send(null);
-    }
+	// function get_uploaded_image(event)
+    // {
+	// console.log(imageToUpload.value);
+	//   event.preventDefault();
+ //  	  var get_image = new XMLHttpRequest();
+ //  	  get_image.onreadystatechange = function() {
+ //  		  if (get_image.readyState == 4 && get_image.status == 200) {
+ //  			  var bool = JSON.parse(get_image.responseText);
+    //             console.log(bool);
+ //  			  if (bool == "true") {
+ //  				  alert("image ok");
+ //  				  return;
+ //  			  } else {
+ //  				  alert('not an image');
+ //  				  return;
+ //  			  }
+ //  		  }
+ //  	  };
+ //  	  get_image.open("POST", "ajax/upload.php", true);
+ //  	  get_image.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+ //  	  get_image.send(null);
+    // }
 
 
   var streaming = false,
@@ -68,7 +70,7 @@
  	  n = 0,
   	  // clavier 	   = event.which,
       width = 720,
-      height = 0; // on definira sa plus tard
+      height = 540; // on definira sa plus tard
 
   navigator.getMedia = ( navigator.getUserMedia ||
                          navigator.webkitGetUserMedia ||
@@ -89,6 +91,7 @@
       // }
     //   video.play();
 	  if (video.play()) {
+		  video.check = 1;
   		upload.addEventListener('click',function(event){
   		 	alert('Please disable your camera');
   		})
@@ -103,6 +106,7 @@
 	//  }
     },
     function(err) {
+		video.check = 0;
 		upload.addEventListener('click', function(event){
 			// alert('ok');
 			document.getElementById('imageToUpload').click();
@@ -318,7 +322,7 @@ function listen_to_delete_image(url) {
     }, false);
 }
 
-function listen_to_valdidate_image(url) {
+function listen_to_validate_image(url) {
       document.getElementById('valid_picture').addEventListener('mouseup', function(ev) {
           valid_picture(url);
           clearcanvas(sauvegarder, photo, mask);
@@ -337,10 +341,10 @@ function listen_to_valdidate_image(url) {
         console.log(picture_data);
         document.getElementById("photo").setAttribute('src' , picture_data[`picture`]);
         document.getElementById("photo").style.opacity = "1";
-        sauvegarder.setAttribute('href', picture_data);
+        // sauvegarder.setAttribute('href', picture_data);
         summon_buttons("");
         listen_to_delete_image(picture_data[`url`]);
-        listen_to_valdidate_image(picture_data[`url`]);
+        listen_to_validate_image(picture_data[`url`]);
         return(picture_data);
       }
       };
@@ -356,27 +360,34 @@ function listen_to_valdidate_image(url) {
 
   //creer une fonction qui renvoi une str de la date.
 
-  function takepicture(sauvegarder) {
+  function takepicture() {
   	// console.log(d);
+	event.preventDefault();
     var form = document.querySelector('#formulaire');
     var formphoto = document.querySelector("#dp");
     var formcanvas = document.querySelector("#dc");
-  	var ladate = new Date();
-  	var jour = ladate.getDate();
-  	var mois = ladate.getMonth() + 1;
-  	var an = ladate.getFullYear();
-  	var heure = ladate.getHours();
-  	var min = ladate.getMinutes();
-  	var sec = ladate.getSeconds();
+ //  	var ladate = new Date();
+ //  	var jour = ladate.getDate();
+ //  	var mois = ladate.getMonth() + 1;
+ //  	var an = ladate.getFullYear();
+ //  	var heure = ladate.getHours();
+ //  	var min = ladate.getMinutes();
+ //  	var sec = ladate.getSeconds();
     canvas.width = width ;
     canvas.height = height;
-    canvas.getContext('2d').drawImage(video, 0, 0, width, height); //	context.drawImage(img,x,y,width,height);
-    var datamask = mask.toDataURL('image/png')
+
+	//FINIR SA ! 
+	if(video.check === 1)
+    	canvas.getContext('2d').drawImage(video, 0, 0, width, height); //	context.drawImage(img,x,y,width,height);
+	else {
+	    canvas.getContext('2d').drawImage(video, 0, 0, width, height); //	context.drawImage(img,x,y,width,height);
+	}
+	var datamask = mask.toDataURL('image/png')
     var data = canvas.toDataURL('image/png');
     formcanvas.setAttribute('value', datamask);
     mergepictures(data,datamask,sauvegarder);
     formphoto.setAttribute('value', data);
-    sauvegarder.setAttribute('download', "CamHero "+jour+"-"+mois+"-"+an+" "+heure+"h"+min+"m"+sec);
+    // sauvegarder.setAttribute('download', "CamHero "+jour+"-"+mois+"-"+an+" "+heure+"h"+min+"m"+sec);
     document.getElementById('startbutton').removeEventListener('mouseup', active_camera, false);
     document.getElementById('retardateur').removeEventListener('mouseup', active_retardateur, false);
 

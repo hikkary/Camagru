@@ -221,7 +221,7 @@
       element.setAttribute('data-formerindex', index - 1);
       page.appendChild(element);
     }
-    for(var i = index; i < index + 20 && i < tableau.length ; i++)
+    for(var i = index; i < index + 20 && i <= tableau.length ; i++)
         {
 //           console.log(i);
           var element = document.createElement("a");
