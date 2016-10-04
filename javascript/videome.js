@@ -2,53 +2,31 @@
 	var form = document.getElementById('formImage');
 	var imageToUpload = document.getElementById('imageToUpload');
 
-	form.addEventListener('submit', takepicture);
+
 	imageToUpload.addEventListener('change', convertImage);
 
-	function convertImage(evt) {
+	function convertImage(event) {
 		var img = new Image();
 		img.onload = function() {
-			// c une image
 			var reader = new FileReader();
 			reader.onload = function() {
 				var photo = document.querySelector('#photo');
 				photo.src = reader.result;
 				photo.style.opacity = 1;
+				photo.style.width = "720px";
+				photo.style.height = "540px";
+				photo.check = 1;
 			};
-			reader.readAsDataURL(evt.target.files[0]);
+			reader.readAsDataURL(event.target.files[0]);
 		};
 		img.onerror = function() {
-			alert('nsm');
-			evt.target.value = '';
+			alert('Please Upload a Valid File');
+			photo.check = 0;
+			event.target.value = '';
 		};
 		_URL = window.URL || window.webkitURL;
-		img.src = _URL.createObjectURL(evt.target.files[0]);
-		console.log(img);
+		img.src = _URL.createObjectURL(event.target.files[0]);
 	}
-
-	// function get_uploaded_image(event)
-    // {
-	// console.log(imageToUpload.value);
-	//   event.preventDefault();
- //  	  var get_image = new XMLHttpRequest();
- //  	  get_image.onreadystatechange = function() {
- //  		  if (get_image.readyState == 4 && get_image.status == 200) {
- //  			  var bool = JSON.parse(get_image.responseText);
-    //             console.log(bool);
- //  			  if (bool == "true") {
- //  				  alert("image ok");
- //  				  return;
- //  			  } else {
- //  				  alert('not an image');
- //  				  return;
- //  			  }
- //  		  }
- //  	  };
- //  	  get_image.open("POST", "ajax/upload.php", true);
- //  	  get_image.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
- //  	  get_image.send(null);
-    // }
-
 
   var streaming = false,
       video        = document.querySelector('#video'), //
@@ -68,7 +46,6 @@
       create = document.querySelector('#newcanvas'),
       k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
  	  n = 0,
-  	  // clavier 	   = event.which,
       width = 720,
       height = 540; // on definira sa plus tard
 
@@ -83,53 +60,28 @@
       audio: false // et je coupe le son
     },
     function(stream) {
-      // if (navigator.mozGetUserMedia) {
       //   video.mozSrcObject = stream;
       // } else {
         var vendorURL = window.URL || window.webkitURL;
         video.src = vendorURL.createObjectURL(stream);
       // }
-    //   video.play();
 	  if (video.play()) {
 		  video.check = 1;
+		  upload.style.display = "none";
   		upload.addEventListener('click',function(event){
   		 	alert('Please disable your camera');
   		})
 		}
-	//  else {
-	// 	 upload.addEventListener('click',function(event){
-	// 		 // alert('ok');
-	// 		 document.getElementById('imageToUpload').click();
-	 //
-	// 		//  document.getElementById('imageToUpload').submit();
-	// 	 })
-	//  }
     },
     function(err) {
 		video.check = 0;
+		startbutton.style.display = "none";
+		retardateur.style.display = "none";
 		upload.addEventListener('click', function(event){
-			// alert('ok');
 			document.getElementById('imageToUpload').click();
-			validate_picture.style.display = "";
-			validate_picture.addEventListener('mouseup',function(event){
-				// document.getElementById('submitImage').addEventListener('click', function(event){
-					// console.log(document.getElementById('imageToUpload'));
-					// get_uploaded_image();
-					//  document.getElementById('formImage').submit();
-					//  document.getElementById('formImage').preventDefault();
-
-				// }, false)
-
-				 document.getElementById('submitImage').click();
-			}, false);
 		});
-      console.log("An error occured! " + err);
     }
   );
-
-
-
-
 
   video.addEventListener('canplay', function(ev){
     if (!streaming) { // streaming sera false par defaut, on l'active uniquement apres avoir lancer la video pour pouvoir recupere correctement la taille
@@ -154,8 +106,7 @@
        setTimeout(function()
        {
          display_picture();
-       }, 1000);
-      //  console.log(getImageData(canvas));
+	 }, 3000);
        event.preventDefault();
   }
 
@@ -169,16 +120,13 @@
    setTimeout(function()
    {
      display_picture();
-   }, 1000);
+ }, 3000);
     event.preventDefault();
 
   }
 
   function create_preview(data){
-    // console.log(data);
-    // erase_all_child(document.getElementById('preview'));
     var id = document.getElementById('html').dataset.idnumber;
-//     console.log(data);
     var username = document.getElementById('html').dataset.username;
     var new_picture = document.createElement("div");
     new_picture.setAttribute('id_user', data['id_user']);
@@ -205,12 +153,10 @@
       display_pic.onreadystatechange = function() {
           if (display_pic.readyState == 4 && display_pic.status == 200) {
               const bool = JSON.parse(display_pic.responseText);
-//               console.log(bool);
               if (bool == "true") {
                   preview.innerHTML = "no photo yet";
                   return;
               } else {
-//                   console.log(bool.length);
                   erase_all_child(document.getElementById('preview'));
                   for( var index = 0; index < bool.length; ++index)
                   {
@@ -225,19 +171,15 @@
       display_pic.send(null);
   }
 
-
-
-
   function summon_buttons(display){
     document.getElementById('corbeille').style.display = display;
-    document.getElementById('sauvegarder').style.display = display;
     document.getElementById('valid_picture').style.display = display;
+	document.getElementById('valid_picture').style.color = "green";
   }
 
   function summon_photo_buttons(display){
     document.getElementById('startbutton').style.display = display;
     document.getElementById('retardateur').style.display = display;
-    document.getElementById('upload').style.display = display;
   }
 
 function delete_picture(url)
@@ -247,7 +189,6 @@ function delete_picture(url)
     if (delete_pic.readyState == 4 && delete_pic.status == 200)
     {
       const bool = JSON.parse(delete_pic.responseText);
-      console.log(bool);
       if (bool == "true"){
         return;
       }
@@ -265,12 +206,10 @@ function delete_picture(url)
 }
 
 function delete_picture_from_database(cross) {
-    console.log(cross.dataset.url);
     var delete_pic = new XMLHttpRequest();
     delete_pic.onreadystatechange = function() {
         if (delete_pic.readyState == 4 && delete_pic.status == 200) {
             const bool = JSON.parse(delete_pic.responseText);
-            console.log(bool);
             if (bool == "true") {
               erase_all_child(document.getElementById('preview'));
               display_picture();
@@ -296,8 +235,8 @@ function valid_picture(url) {
     validate_pic.onreadystatechange = function() {
         if (validate_pic.readyState == 4 && validate_pic.status == 200) {
             const bool = JSON.parse(validate_pic.responseText);
-            console.log(bool);
             if (bool == "true") {
+				photo.check = 0;
                 return;
             } else {
                 return;
@@ -314,34 +253,36 @@ function valid_picture(url) {
 
 function listen_to_delete_image(url) {
     document.getElementById('corbeille').addEventListener('click', function(ev) {
-        clearcanvas(sauvegarder, photo, mask);
+        clearcanvas(photo, mask);
         delete_picture(url);
         summon_buttons("none")
-        summon_photo_buttons("");
+		if(video.check === 1)
+        	summon_photo_buttons("");
         ev.preventDefault();
+		photo.check = 0;
     }, false);
 }
 
 function listen_to_validate_image(url) {
-      document.getElementById('valid_picture').addEventListener('mouseup', function(ev) {
+      document.getElementById('valid_picture').addEventListener('mouseup', function validate_2(event) {
           valid_picture(url);
-          clearcanvas(sauvegarder, photo, mask);
+          clearcanvas(photo, mask);
           summon_buttons("none")
-          summon_photo_buttons("");
+		  if(video.check === 1)
+          	summon_photo_buttons("");
           display_picture();
-      }, true);
+		  this.removeEventListener('mouseup', validate_2);
+      });
 }
 
-  function mergepictures(dataphoto,datamask,sauvegarder){
+  function mergepictures(dataphoto,datamask){
     var merge = new XMLHttpRequest();
     merge.onreadystatechange = function(){
       if (merge.readyState == 4 && merge.status == 200)
       {
         const picture_data = JSON.parse(merge.responseText);
-        console.log(picture_data);
         document.getElementById("photo").setAttribute('src' , picture_data[`picture`]);
         document.getElementById("photo").style.opacity = "1";
-        // sauvegarder.setAttribute('href', picture_data);
         summon_buttons("");
         listen_to_delete_image(picture_data[`url`]);
         listen_to_validate_image(picture_data[`url`]);
@@ -357,75 +298,37 @@ function listen_to_validate_image(url) {
     merge.send(JSON.stringify(data)); // on envoi rien en cas de GET et une string en cas de POST
     };
 
-
-  //creer une fonction qui renvoi une str de la date.
-
   function takepicture() {
-  	// console.log(d);
 	event.preventDefault();
     var form = document.querySelector('#formulaire');
     var formphoto = document.querySelector("#dp");
     var formcanvas = document.querySelector("#dc");
- //  	var ladate = new Date();
- //  	var jour = ladate.getDate();
- //  	var mois = ladate.getMonth() + 1;
- //  	var an = ladate.getFullYear();
- //  	var heure = ladate.getHours();
- //  	var min = ladate.getMinutes();
- //  	var sec = ladate.getSeconds();
     canvas.width = width ;
     canvas.height = height;
-
-	//FINIR SA ! 
 	if(video.check === 1)
     	canvas.getContext('2d').drawImage(video, 0, 0, width, height); //	context.drawImage(img,x,y,width,height);
 	else {
-	    canvas.getContext('2d').drawImage(video, 0, 0, width, height); //	context.drawImage(img,x,y,width,height);
+	    canvas.getContext('2d').drawImage(photo, 0, 0, width, height); //	context.drawImage(img,x,y,width,height);
 	}
 	var datamask = mask.toDataURL('image/png')
     var data = canvas.toDataURL('image/png');
     formcanvas.setAttribute('value', datamask);
-    mergepictures(data,datamask,sauvegarder);
+    mergepictures(data,datamask);
     formphoto.setAttribute('value', data);
-    // sauvegarder.setAttribute('download', "CamHero "+jour+"-"+mois+"-"+an+" "+heure+"h"+min+"m"+sec);
     document.getElementById('startbutton').removeEventListener('mouseup', active_camera, false);
     document.getElementById('retardateur').removeEventListener('mouseup', active_retardateur, false);
-
   }
 
-
-  function clearcanvas(sauvegarder, photo,mask){
+  function clearcanvas(photo,mask){
     var context = mask.getContext('2d');
     photo.setAttribute('src', "img/nphoto.png");
     photo.style.opacity = "0";
     context.clearRect(0, 0, canvas.width, canvas.height);
-    sauvegarder.removeAttribute('href');
-  }
-
-
-
-// photo apres 3 seconde
-
-
-  // sauvegarder.addEventListener('click', function(ev){
-  //     download(sauvegarder, canvas);// on appelle la fonction takepicture quand on cliq srr le bouton
-  //   ev.preventDefault();
-  // }, false);
-
-  //effacer le canvas
-
-
-
-
-
-  function masktocanvas(themask){
-    var contextmask = mask.getContext("2d");
-    contextmask.drawImage(themask,360,220);
+	photo.check = 0;
+	form.check = 0;
   }
 
   function movemask(mask, id, video){
-    console.log(id);
-    console.log(mask);
    var themask = document.getElementById(id);
    var maskcontext = mask.getContext('2d');
    var x = event.clientX - mask.offsetLeft - (themask.width * 4)/2 - mask.scrollTop ;
@@ -436,25 +339,51 @@ function listen_to_validate_image(url) {
    maskcontext.drawImage(themask,x,y);
   }
 
-
-
 document.body.addEventListener("click", function(event){
  var regmask = new RegExp("^m{1}[0-9]{1,3}","g");
- console.log(event.target.id);
- if (regmask.test(event.target.id) === true)
- {
-   var idmask = event.target.id;
-   console.log("regok");
-    mask.addEventListener('mousedown', function(event){
-       movemask(mask,idmask,video);
-       startbutton.addEventListener('mouseup', active_camera, false);
-       retardateur.addEventListener('mouseup', active_retardateur, false);
-    }, true);
+	  if (regmask.test(event.target.id) === true)
+	 {
+		 if(video.check === 1)
+		 {
+		   var idmask = event.target.id;
+		    mask.addEventListener('mousedown', function mask_active(event){
+		       movemask(mask,idmask,video);
+		       startbutton.addEventListener('mouseup', active_camera, false);
+		       retardateur.addEventListener('mouseup', active_retardateur, false);
+		    }, true);
+		 }
+		 else if(photo.check === 1)
+		 {
+			 var idmask = event.target.id;
+			 if(form.check !== 1)
+			 {
+				 mask.addEventListener('mousedown', function mask_active(event){
+	 		       movemask(mask,idmask,video);
+	 		       startbutton.addEventListener('mouseup', active_camera, false);
+	 		       retardateur.addEventListener('mouseup', active_retardateur, false);
+	 		    }, true);
+
+			 validate_picture.style.display = "";
+			 validate_picture.style.color = "blue";
+ 			validate_picture.addEventListener('mouseup',function valid_upload(event){
+ 				 document.getElementById('submitImage').click();
+				 corbeille.style.display = "";
+				 this.removeEventListener('mouseup', valid_upload);
+ 			}, false);
+			}
+			if(form.check !== 1){
+			form.addEventListener('submit', takepicture);
+			}
+			form.check = 1;
+		 }
+		 else
+		 {
+			 alert('please upload a picture or activate your camera first');
+		 }
  }
- })
+  })
 
 document.body.addEventListener("click", function(event) {
-  console.log(event.target.className);
   if(Object.is(event.target.className,"delete_pic")){
     if (confirm("Are you sure you want to delete this picture ?"))
          delete_picture_from_database(event.target);
@@ -462,97 +391,5 @@ document.body.addEventListener("click", function(event) {
 }, false);
 
 display_picture();
-
-//arreter le flux video REGLER CE PB
-
-// poser un masque
-// mask.addEventListener('click', function(ev){
-//   // video.getContext('2d').drawImage("mask/iron-man.png", 0, 0, 600, 600)
-//   //addimage(video);
-//   ntm();
-// },true);
-
-
-
- // iron.addEventListener('click', function(ev){
-
- //    // mask.getContext("2d").drawImage("mask/iron-man.png", 0, 0, 600, 600);
- //    // addimage(video);
- //    // ntm();
- //    masktocanvas(iron);
- //  },true);
-
- // function addimage(){
-   // var newcanvas = document.createElement("canvas");
-   // newcanvas.style.position = "absolute";
-   // newcanvas.setAttribute("id", "wesh");
-
-   // if (height != 0)
-   //   newcanvas.height = height;
-   // else
-   //   newcanvas.height = 540;
-
-   // newcanvas.width = width;
-
-   // create.appendChild(newcanvas);
- //    newcanvas  = document.querySelector('#mask'),
- //    context = newcanvas.getContext("2d");
- //    newcanvas.getContext('2d').drawImage(mask, 0, 0, mask.width, mask.height); // context.drawImage(img,x,y,width,height);
- //    var data = newcanvas.toDataURL('image/png');
- // }
-
- // function download(sauvegarder, canvas)
- // {
- // 	window.location.assign(sauvegarder);
- //  }
-
-   //   function ntm(){
- //   var request = new XMLHttpRequest(); // on initialise un nouvel objet XMLHttpRequest() qui permet de converser avec le serveur
- //   request.onreadystatechange = function() { //stocke une fonction qui sera appeler si l'etat la propriete readyState change
- //     if (request.readyState == 4 && request.status == 200) // les etats vont de 1 a 4, voir http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp pour plus d'info, le 200 signifie que le statut de la requete/page est "ok"
- //     {
- //       const errors = JSON.parse(request.responseText); //errors stock les donnee renvoyer par la page php
- //       console.log(errors);
- //       document.getElementById("ntm").innerHTML = errors['fawfawf']; // je place dans la balise dont l'idee est ntm , la case fawfawf du tableau envoyer au php
- //     }
- //   };
- //   const data = {
- //     test : "coucou",
- //     fawfawf : "lol"
- //   };
- //   request.open("POST", "./javascript/supp.php", true);//  http://www.w3schools.com/ajax/ajax_xmlhttprequest_send.asp
- //   request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
- //   request.send(JSON.stringify(data)); // on envoi rien en cas de GET et une string en cas de POST
- // }
-
- // Tentative arret de camera
- // console.log(video.src);
- // cam.addEventListener('click', function(ev){
- //  // vendorURL.revokeObjectURL(video);
- //  video.removeAttribute('src')
- //  stop.style.opacity = 0;
- //  },false)
-
-
- // prise de photo
-  // startbutton.addEventListener('mouseup', function(ev){
-  //    takepicture(sauvegarder);// on appelle la fonction takepicture quand on cliq srr le bouton
-  //    summon_photo_buttons("none");
-  //    ev.preventDefault();
-  //  }, false);
-
- //ecoute du clavier
-  // document.addEventListener("keydown",function(ev){
-  //  	// alert(event.keyCode);
-  // 	if (event.keyCode==13){
-  // 		takepicture(sauvegarder);
-  //      summon_photo_buttons("none");
-  //      ev.preventDefault();
-  // }
-  // if (event.keyCode==46){
-  // 		clearcanvas(sauvegarder,photo);
-  // }
-  // },true);
-
 
 })();

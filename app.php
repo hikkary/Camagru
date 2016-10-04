@@ -1,23 +1,23 @@
 <?php
 	session_start();
 	ini_set("file_uploads","on");
-	// require_once("function/redirect.php");
-	// if($_SESSION)
-	// {
-	// 	if($_SESSION['username'] === "")
-	// 	{
-	// 		echo "Please Login or register";
-	// 		redirect("login.php");
-	//
-	// 		return;
-	// 	}
-	// }
-	// else {
-	// 	echo "Please Login or register";
-	// 	redirect("login.php");
-	//
-	// 		return;
-	// }
+	require_once("function/redirect.php");
+	if($_SESSION)
+	{
+		if($_SESSION['username'] === "")
+		{
+			echo "Please Login or register";
+			redirect("login.php");
+
+			return;
+		}
+	}
+	else {
+		echo "Please Login or register";
+		redirect("login.php");
+
+			return;
+	}
 ?>
 <!DOCTYPE html>
 <html id="html" data-username="<?php require_once("function/get_session.php"); echo(get_username_session());?>" data-idnumber="<?php require_once("function/get_session.php"); echo(get_id_session());?>">
@@ -36,8 +36,6 @@
 	$rootname = getcwd();
 	require_once($rootname.'/nav/menu.php');
   	menu();
-	echo "dendi"."\n";
-	var_dump($_FILES);
 ?>
 
 <p id="ntm"></p>
@@ -79,64 +77,23 @@
 		<div class="button"></div>
 		<div class="button"></div>
 		<div class="button"></div>
-		<form action="#" method="post" enctype="multipart/form-data" id="formImage">
+		<form  method="post" enctype="multipart/form-data" id="formImage">
 			<input type="file" name="imageToUpload" id="imageToUpload">
 			<input type="submit" value="Upload Image" id="submitImage" name="submit">
 		</form>
 
 	</div>
-	<form id="formulaire" action="merge.php" method="post">
+	<form id="formulaire" method="post">
 		<input id="dp" type="text" name="dataphoto"> </input>
 		<input id="dc" type="text" name="datacanvas"> </input>
 	</form>
-		<!-- <video id="video"></video>
-
-
-		<img id="ncam" src="img/ncam.png">
-		<canvas id="canvas"></canvas>
-
-
-		<button id="cam">
-			<i id="stop" class="fa fa-ban" aria-hidden="true"></i>
-			<i class="fa fa-video-camera" aria-hidden="true"></i>
-		</button>
-
-		<button id="retardateur">
-			<i class="fa fa-clock-o" aria-hidden="true"></i>
-		</button>
-
-		<form id="formulaire" action="merge.php" method="post">
-		<button id="startbutton">
-			<i id="camera" class="fa fa-camera" aria-hidden="true"></i>
-		</button>
-		<input id="dp" type="text" name="dataphoto"> </input>
-		<input id="dc" type="text" name="datacanvas"> </input>
-		</form>
-		<button id="upload">
-			<i class="fa fa-arrow-up" aria-hidden="true"></i>
-		</button>
-
-		<button id="corbeille">
-			<i class="fa fa-trash" aria-hidden="true"></i>
-		</button>
-
-		<a id="sauvegarder">
-			<button>
-				<i class="fa fa-floppy-o" aria-hidden="true"></i>
-			</button>
-		</a> -->
 
 
 <div id="montage">
-
-	<!-- <img id="m1" src="mask/iron-man.png" >
-	<img id="m2" src="mask/captain-america.png" >
-	<form action="javascript/supp.php" method="post"> -->
 </div>
 <script type="text/javascript" src="javascript/resize_img.js"></script>
 
 </body>
-	<!-- <script type="text/javascript" src="javascript/preview.js"></script> -->
 	<script type="text/javascript" src="javascript/videome.js"></script>
 	<?php
 		$rootname = getcwd();

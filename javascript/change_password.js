@@ -15,7 +15,7 @@ function change_password(password,username,rkey){
     if (password_change.readyState == 4 && password_change.status == 200)
     {
       const bool = JSON.parse(password_change.responseText);
-      console.log(bool);
+    //   console.log(bool);
       if (bool == "true")
       {
           changetext("An error Occured",document.getElementById('message'),"red",document.getElementById('message').innerHTML);

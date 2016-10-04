@@ -1,12 +1,10 @@
 <?php
 	session_start();
-	// session_destroy();
-	// var_dump($_SESSION);
-
 ?>
 <!DOCTYPE html>
 <html>
 <head>
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/menu.css">

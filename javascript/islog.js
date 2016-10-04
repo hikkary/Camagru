@@ -8,10 +8,9 @@ function logout(){
     if(log_out.readyState == 4 && log_out.status == 200)
     {
         const bool = JSON.parse(log_out.responseText);
-        console.log(bool);
+        // console.log(bool);
         if(bool == "true")
         {
-          // alert("pas connecter");
           login_logout(login, link, 1);
           window.location.href = "login.php";
         }
@@ -53,7 +52,6 @@ function islog(login, link){
         const bool = JSON.parse(log.responseText);
         if(bool == "true")
         {
-          // alert("pas connecter");
           login_logout(login, link, 1);
         }
         else {

@@ -28,7 +28,7 @@
 
   function refresh_comments(data)
   {
-    console.log(data[0]);
+    // console.log(data[0]);
     if(data['comment'] === null)
        return("<p>No comment yet</p>");
     else {
@@ -64,7 +64,7 @@
       comment_send.onreadystatechange = function() {
           if (comment_send.readyState == 4 && comment_send.status == 200) {
               const bool = JSON.parse(comment_send.responseText);
-              console.log(bool);
+            //   console.log(bool);
               if (bool == "true") {
                   // alert('non non non non non');
                   return;
@@ -84,7 +84,7 @@
         comment.onreadystatechange = function() {
             if (comment.readyState == 4 && comment.status == 200) {
                 const bool = JSON.parse(comment.responseText);
-                console.log(bool);
+                // console.log(bool);
                 if (bool) {
                   // alert('ok');
                   // erase_all_child(document.getElementById('preview'));
@@ -92,7 +92,7 @@
                   document.getElementsByClassName('comments_zone')[0].innerHTML = refresh_comments(bool);
                   document.getElementsByClassName('comments')[0].innerHTML = "<i class='fa fa-comments' aria-hidden='true'></i> &nbsp"+bool.length;
                   element.value = "";
-                  console.log(document.getElementsByClassName('comments_zone')[0]);
+                //   console.log(document.getElementsByClassName('comments_zone')[0]);
                   // element.innerHTML += "<a href='#' class='liked' data-id="+data[`id_photo`]+" data-userid="+data[`id_user`]+"> <i class='fa fa-heart-o' aria-hidden='true'></i> &nbsp"+  return_number_like(data)+" </a>";
                   send_mail_comment(element.dataset.userid);
                     return;
@@ -187,7 +187,7 @@
     }
     if(event.target.dataset.nextindex) //finir sa
     {
-      console.log("ace");
+    //   console.log("ace");
       erase_all_child(page);
       erase_all_child(preview);
       preview.appendChild(tableau[Number(event.target.dataset.nextindex - 1)] );
@@ -255,14 +255,15 @@
 
 
   function delete_picture(cross) {
-      console.log(cross.dataset.url);
+    //   console.log(cross.dataset.url);
       var delete_pic = new XMLHttpRequest();
       delete_pic.onreadystatechange = function() {
           if (delete_pic.readyState == 4 && delete_pic.status == 200) {
               const bool = JSON.parse(delete_pic.responseText);
-              console.log(bool);
+            //   console.log(bool);
               if (bool == "true") {
                 erase_all_child(document.getElementById('preview'));
+				erase_all_child(document.getElementById('pagination'));
                 display_picture();
                   return;
               } else {
@@ -333,9 +334,9 @@ function like_picture(element) {
       liked.onreadystatechange = function() {
           if (liked.readyState == 4 && liked.status == 200) {
               const bool = JSON.parse(liked.responseText);
-              console.log(bool);
+            //   console.log(bool);
               if (bool) {
-                console.log(bool.length);
+                // console.log(bool.length);
                 // element.parentNode.innerHTML = "";
 
                 element.parentNode.innerHTML = "<i class='fa fa-heart-o' aria-hidden='true'></i> &nbsp"+ bool.length;

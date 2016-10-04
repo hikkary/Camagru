@@ -107,8 +107,12 @@ body{
 
 
 /*formulaire cachÃƒÆ’Ã‚Â©*/
-#formulaire{
-	display: none;
+#formulaire input{
+	/*display: flex;
+	width: 800px;
+	height: 200px;*/
+
+	/*display: none;*/
 }
 /*Canvas*/
 #mask{

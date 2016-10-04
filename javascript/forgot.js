@@ -21,7 +21,7 @@
  		if (mail_forgot.readyState == 4 && mail_forgot.status == 200)
  		{
  			const bool = JSON.parse(mail_forgot.responseText);
- 			console.log(bool);
+ 		// 	console.log(bool);
  			if(bool == "false")
       {
         alert('mail sent ! ')
@@ -47,7 +47,7 @@ function mail_forgot(username){
 		if (forgot.readyState == 4 && forgot.status == 200)
 		{
 			const bool = JSON.parse(forgot.responseText);
-			console.log(bool);
+			// console.log(bool);
 			if(bool['check'] == "false")
 				mail_forgot_send(bool);
 			else

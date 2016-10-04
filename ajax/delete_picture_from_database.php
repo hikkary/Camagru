@@ -38,8 +38,9 @@ $id = ((array)json_decode(file_get_contents('php://input')));
 
 if($id['t_url'])
 {
-  if(unlink($id['t_url']) !== FALSE)
+  if(file_exists($id['t_url']) !== FALSE)
   {
+	unlink($id['t_url']);
     delete_picture_from_database($id['user_id'], $id['photo_id'], $connect );
   }
   else {
