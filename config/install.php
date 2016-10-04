@@ -5,31 +5,12 @@ error_reporting(E_ALL);
 date_default_timezone_set('Europe/Paris');
 	require_once('function_sql.php');
 
-	// eio_fchown
-	//  try{
-	//  	$connect = new PDO('mysql:host='.$DB_HOST.';dbname='$DB_NAME, $DB_USER, $DB_PASSWORD, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
-	//  } catch (PDOException $e) {
- // 		echo "Connection Failed, like your life :" . $e->getMessage();
-	// }
-
 	$connect = connectToDatabase();
 
 
 	if(!$connect)
 		die("Failed to connect");
 
-
-
-	// $users2 = $connect->query("CREATE TABLE IF NOT EXISTS cam_users");
-	// $users2 = $connect->query("SELECT * ");
-	//
-	// var_dump($users2);
-	//
-	//
-	//   if(!$users2)
- //  		exit('TABLE users2 FAILED TO CREATE'."\n");
- //  	else
- //  		echo "TABLE users2 SUCESSFULLY CREATED"."\n";
 
 	$users = $connect->query(
 	  "CREATE TABLE IF NOT EXISTS cam_users(\n"

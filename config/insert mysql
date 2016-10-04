@@ -1,1 +1,0 @@
-INSERT INTO `cam_users` (`id_users`, `first_name`, `last_name`, `login`, `password`, `mail`, `mail_check`) VALUES ('0', 'Zakaria', 'Kerkeb', 'admin', 'zebi', 'z.kerkeb@gmail.com', '0');

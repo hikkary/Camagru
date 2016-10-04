@@ -2,12 +2,6 @@
 body
 {
 	background-color: #ccf2ff;
-/* 	width: 100%; */
-/* 	height: 100%; */
-}
-html{
-/* 	width: 100%; */
-/* 	height: 0px; */
 }
 @font-face{
 	font-family: "crayon";
@@ -38,7 +32,6 @@ display: block;
 }
 
 #redirect form{
-/*background-color:#6dc2f8 ;*/
 position: relative;
 margin-left: auto;
 margin-right: auto;

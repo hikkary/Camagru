@@ -103,14 +103,22 @@
     .hide_mobile {
         display: none !important;
     }
-
-    /* Un message personnalisé */
-
-    /*body:before {
-        content: "Version mobile du site";
-        display: block;
-        text-align: center;
-        font-style: italic;
-        color: #777;
-    }*/
+	#app{
+		/*margin: 5px;*/
+		font-size: 20vh;
+		top : 5%;
+		left : 50%;
+	}
+	#album{
+		/*margin: 5px;*/
+		font-size: 20vh;
+		top : 5%;
+		left : 65%;
+	}
+	#croix{
+		/*margin: 5px;*/
+		font-size: 20vh;
+		top : 5%;
+		left : 80%;
+	}
 }

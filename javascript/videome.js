@@ -60,13 +60,17 @@
       audio: false // et je coupe le son
     },
     function(stream) {
-      //   video.mozSrcObject = stream;
-      // } else {
+		 if (navigator.mozGetUserMedia) {
+        video.mozSrcObject = stream;
+		video.check = 1;
+		
+      } else {
         var vendorURL = window.URL || window.webkitURL;
         video.src = vendorURL.createObjectURL(stream);
-      // }
+      }
 	  if (video.play()) {
 		  video.check = 1;
+		  console.log(video.check);
 		  upload.style.display = "none";
   		upload.addEventListener('click',function(event){
   		 	alert('Please disable your camera');
@@ -299,7 +303,8 @@ function listen_to_validate_image(url) {
     };
 
   function takepicture() {
-	event.preventDefault();
+	  if(event)
+		event.preventDefault();
     var form = document.querySelector('#formulaire');
     var formphoto = document.querySelector("#dp");
     var formcanvas = document.querySelector("#dc");
@@ -328,8 +333,17 @@ function listen_to_validate_image(url) {
 	form.check = 0;
   }
 
+
   function movemask(mask, id, video){
+
+	  if (photo.check === 1)
+	  {
+		  validate_picture.style.display = "";
+		  validate_picture.style.color = "blue";
+	  }
+
    var themask = document.getElementById(id);
+
    var maskcontext = mask.getContext('2d');
    var x = event.clientX - mask.offsetLeft - (themask.width * 4)/2 - mask.scrollTop ;
    var y = event.clientY - mask.offsetTop - (themask.height * 4)/2 + document.getElementById("body").scrollTop;
@@ -363,8 +377,7 @@ document.body.addEventListener("click", function(event){
 	 		       retardateur.addEventListener('mouseup', active_retardateur, false);
 	 		    }, true);
 
-			 validate_picture.style.display = "";
-			 validate_picture.style.color = "blue";
+
  			validate_picture.addEventListener('mouseup',function valid_upload(event){
  				 document.getElementById('submitImage').click();
 				 corbeille.style.display = "";

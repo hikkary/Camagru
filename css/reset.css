@@ -42,32 +42,14 @@ summary { /* 1 */
   display: block;
 }
 
-/**
- * Add the correct display in IE 9-.
- */
 
-audio,
-canvas,
-progress,
-video {
-  display: inline-block;
-}
-
-/**
- * Add the correct display in iOS 4-7.
- */
-
-audio:not([controls]) {
-  display: none;
-  height: 0;
-}
 
 /**
  * Add the correct vertical alignment in Chrome, Firefox, and Opera.
  */
 
 progress {
-  vertical-align: baseline;
+  /*vertical-align: baseline;*/
 }
 
 /**

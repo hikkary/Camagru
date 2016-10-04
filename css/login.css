@@ -2,12 +2,8 @@
 body
 {
 	background-color: #ccf2ff;
-/* 	width: 100%; */
-/* 	height: 100%; */
 }
 html{
-/* 	width: 100%; */
-/* 	height: 0px; */
 }
 @font-face{
 	font-family: "crayon";
@@ -42,12 +38,9 @@ margin-left: auto;
 margin-right: auto;
 width: 50vh;
 height: 5vh;
-
-/*min-width: 800px*/
 font-family: "crayon";
 font-size: 5vw;
 text-align : center;
-/*line-height: 20px;*/
 display: block;
 }
 
@@ -56,7 +49,6 @@ display: block;
 	background-color: #ccf2ff;
 	width: inherit;
 	height: 2vw;
-	/* line-height: 20px; */
 	width: 50%;
 	text-align: center;
 	margin-right: auto;
@@ -159,13 +151,13 @@ a{
 		width: 100%;
 		margin: 0;
 	}
-    /* Un message personnalisé */
 
-    /*body:before {
-        content: "Version mobile du site";
-        display: block;
-        text-align: center;
-        font-style: italic;
-        color: #777;
-    }*/
+	#forgot {
+		/*background-color:#6dc2f8;*/
+		line-height: 50vh;
+		height: 50vh;
+		width: 100%;
+		font-size: 10vh;
+	}
+
 }

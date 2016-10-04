@@ -53,6 +53,9 @@
 
 		<video id="video"></video>
 	</div>
+	<div id ="void2">
+
+	</div>
 	<div id="preview">
 
 	</div>

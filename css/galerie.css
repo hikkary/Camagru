@@ -161,3 +161,176 @@ body{
   font-family: "crayon";
   margin: 10px;
 }
+
+@media (max-width: 640px) {
+    * {
+        box-sizing: border-box;
+    }
+
+    /* passer body (et tous les éléments de largeur fixe) en largeur automatique */
+
+    body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* fixer une largeur maximale de 100% aux éléments potentiellement problématiques */
+
+    img,
+    table,
+    td,
+    blockquote,
+    code,
+    pre,
+    textarea,
+    input,
+    iframe,
+    object,
+    embed,
+    video {
+        max-width: 100%;
+    }
+
+    /* conserver le ratio des images */
+
+    img {
+        height: auto;
+    }
+
+    /* gestion des mots longs */
+
+    textarea,
+    table,
+    td,
+    th,
+    code,
+    pre,
+    samp {
+        -webkit-hyphens: auto; /* césure propre */
+        -moz-hyphens: auto;
+        hyphens: auto;
+        word-wrap: break-word; /* passage à la ligne forcé */
+    }
+
+    code,
+    pre,
+    samp {
+        white-space: pre-wrap; /* passage à la ligne spécifique pour les éléments à châsse fixe */
+    }
+
+    /* Passer à une seule colonne (à appliquer aux éléments multi-colonnes) */
+
+    .element1,
+    .element2 {
+        float: none;
+        width: auto;
+    }
+
+    /* masquer les éléments superflus */
+
+    .hide_mobile {
+        display: none !important;
+    }
+
+	#pagination{
+		height: 20vh;
+		font-size: 8vh;
+	}
+
+	#preview{
+		height: 1757px;
+	}
+	.picture_preview{
+		width: 100% !important;
+		height: 100% !important;
+	}
+	.delete_pic {
+		left: 1117px !important;
+		font-size: 8pc !important;
+	}
+	.comments_zone{
+	  position: relative;
+	  width: 100%;
+	  height: 500px;
+	  background-color: rgb(221, 221, 221);
+	  top: 1020px;
+	  margin-left: auto;
+	  margin-right: auto;
+	  font-family: "crayon";
+	  overflow-y: scroll;
+	  font-size: 10vh;
+	}
+	.comments_write{
+	  position: relative;
+	  width: 100%;
+	  height: 20px;
+	  margin-left: auto;
+	  margin-right: auto;
+	}
+	.comments_write input{
+	  position: relative;
+	  width: 142%;
+	  height: 81px;
+	  /*background-color: rgb(255, 255, 255);*/
+	  top: 1024px;
+	  left: 2px;
+	  /*margin-left: auto;*/
+	  /*margin-right: auto;*/
+	  border-style: groove;
+	  font-family: "crayon";
+	  text-align: center;
+	  font-size: 10vh;
+	  /* border-width: 2px; */
+	}
+	.comments_write input:focus{
+	   outline : none;
+	   /*width: 100%;*/
+	}
+
+	.picture_preview .liked{
+	  position: fixed !important;
+	  font-family: "crayon";
+	  font-weight: bold;
+	  position: relative;
+	  /* bottom: 0px; */
+	  /* right: 420px; */
+	  left: 800px;
+	  top: 1312px;
+	  font-size: 8pc;
+	  color: #ce4747;
+	  text-decoration: none;
+	  z-index: 2;
+	}
+
+
+
+	.picture_preview .comments{
+	  position: fixed !important;
+	  font-family: "crayon";
+	  font-weight: bold;
+	  position: relative;
+	  /* bottom: 0px; */
+	  /* left: -12px; */
+	  left: 30px;
+	  top: 1300px;
+	  font-size: 8pc;
+	  color: #ce4747;
+	  text-decoration: none;
+	}
+
+	.picture_preview .number_comments{
+	  font-family: "crayon";
+	  font-weight: bold;
+	  position: relative;
+	  /* bottom: 0px; */
+	  /* left: -12px; */
+	  right: 31px;
+	  top: 153px;
+	  color : black;
+	  text-decoration: none;
+	}
+
+	.picture_preview{
+		background-size: 1100px 810px !important;
+	}

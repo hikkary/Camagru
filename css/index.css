@@ -48,21 +48,7 @@ display:none;
 	border : 1px solid #6dc2f8;
 	font-size : 5vh;
 	line-height: 60px;
-	/*display: none;*/
-	/*opacity: 0;*/
-	/*transition : opacity 2s linear;*/
 }
-
-/* #inscription
-{
-	width: 80%;
-	height: 170px;
-	margin-left: auto;
-	margin-right:auto;
-	margin-top: 20px;
-	text-align: center;
-
-} */
 
 #formulaire label,input,h1,button{
 	position:relative;
@@ -127,7 +113,6 @@ display:none;
 /*Icone Formulaire*/
 
 #err_mail {
-	/*position: absolute;*/
 	right: 50px;
 	z-index: 2;
 }
@@ -202,15 +187,6 @@ display:none;
         display: none !important;
     }
 
-    /* Un message personnalisé */
-
-    /*body:before {
-        content: "Version mobile du site";
-        display: block;
-        text-align: center;
-        font-style: italic;
-        color: #777;
-    }*/
 	#inscription{
 		display: flex;
 		flex-direction: column;
@@ -263,7 +239,6 @@ display:none;
 		display: none;
 	}
 	#redirect p{
-		/*display: flex;*/
 		height: 50vh;
 
 	}

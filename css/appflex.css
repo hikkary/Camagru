@@ -15,16 +15,13 @@ body{
   max-width: 1600px;
   background-color: #6dc2f8;
   box-shadow : 0px 0px 10px;
-
 }
 
 /*Zone video*/
 #bv{
   display: flex;
-  /*justify-content: flex-start;*/
   flex-wrap: nowrap;
   height: 560px;
-  /*max-width: 1600px;*/
   background-color: #6dc2f8;
   margin-bottom: 10px;
 }
@@ -36,17 +33,13 @@ body{
 #void1{
   width: 100px;
   height: 540px;
-  /*background-color: blue;*/
 }
 
 #photo{
-  /*display: none;*/
   position: absolute;
-
 }
 
 #webcam{
-
   width: 720px;
   height: 540px;
   background-image: url("../img/ncam.png");
@@ -55,22 +48,17 @@ body{
 /*zone bouton*/
 #preview{
   display: flex;
-  /*flex-direction: row-reverse;*/
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  /*align-items: : flex-end;*/
   flex: 1;
-  /*width: 470px;*/
   height: 540px;
-  /*background-color: green;*/
   overflow-y: scroll;
 }
 
 #remote{
   display: flex;
   justify-content: space-between;
-  /*margin-top: 5px;*/
   padding-top: 5px;
   height: 55px;
   margin-top: 0px;
@@ -107,19 +95,11 @@ body{
 
 
 /*formulaire cachÃƒÆ’Ã‚Â©*/
-#formulaire input{
-	/*display: flex;
-	width: 800px;
-	height: 200px;*/
 
-	/*display: none;*/
-}
 /*Canvas*/
 #mask{
-  /*display: flex;*/
   z-index: 3;
   position: absolute;
-  /*background-color: aliceblue;*/
   height: 540px;
   width: 720px;
   margin-left: auto;
@@ -146,7 +126,6 @@ body{
 .picture_preview a{
   font-family: "crayon";
   position: relative;
-  /* bottom: 0px; */
   left: 179px;
   bottom: 4px;
   color : red;
@@ -155,5 +134,115 @@ body{
 
 #imgToUpload form,input{
 	display: none;
+}
+@media (max-width: 640px) {
+    * {
+        box-sizing: border-box;
+    }
+
+    /* passer body (et tous les éléments de largeur fixe) en largeur automatique */
+
+    body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* fixer une largeur maximale de 100% aux éléments potentiellement problématiques */
+
+    img,
+    table,
+    td,
+    blockquote,
+    code,
+    pre,
+    textarea,
+    input,
+    iframe,
+    object,
+    embed,
+    video {
+        max-width: 100%;
+    }
+
+    /* conserver le ratio des images */
+
+    img {
+        height: auto;
+    }
+
+    /* gestion des mots longs */
+
+    textarea,
+    table,
+    td,
+    th,
+    code,
+    pre,
+    samp {
+        -webkit-hyphens: auto; /* césure propre */
+        -moz-hyphens: auto;
+        hyphens: auto;
+        word-wrap: break-word; /* passage à la ligne forcé */
+    }
+
+    code,
+    pre,
+    samp {
+        white-space: pre-wrap; /* passage à la ligne spécifique pour les éléments à châsse fixe */
+    }
+
+    /* Passer à une seule colonne (à appliquer aux éléments multi-colonnes) */
+
+    .element1,
+    .element2 {
+        float: none;
+        width: auto;
+    }
+
+    /* masquer les éléments superflus */
+
+    .hide_mobile {
+        display: none !important;
+    }
+
+	#photo{
+		/*border: 133px solid black;*/
+		max-width: 500% !important;
+	}
+
+	/*.picture_preview{
+		width: 650px;
+	}*/
+
+	#montage{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		height: 800px;
+		overflow-y: scroll;
+	}
+	#montage img{
+		/*width: 800px !important;*/
+		/*height: 800px !important;*/
+	}
+
+	#remote{
+		height: 35vh;
+	}
+
+	.button{
+		line-height: 40vh;
+		width: 60vh;
+		height: 30vh;
+	}
+	.button i{
+		font-size: 20vh;
+	}
+
+	.button:nth-child(4),.button:nth-child(5),.button:nth-child(6)
+	,.button:nth-child(6){
+	  border: 5px solid #00beff;
+	}
 
 }
