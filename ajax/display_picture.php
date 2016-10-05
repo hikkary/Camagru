@@ -17,8 +17,16 @@
 
 	$result = $user->fetchAll(PDO::FETCH_ASSOC);
 
-	// var_dump($result);
+	$i = 0;
+	foreach ($result as $key => $value) {
 
+		if((file_exists("..".$value['photo_url'])) === false)
+		{
+			unset($result[$i]);
+		}
+		$i++;
+
+	}
 	if(!$result)
 	{
 		// faire redirection page d'erreur
@@ -27,6 +35,6 @@
 	}
 	else
 	{
-		echo (json_encode($result));
+		echo (json_encode(array_values($result)));
 	}
 ?>
