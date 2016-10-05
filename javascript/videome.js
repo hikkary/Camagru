@@ -52,17 +52,22 @@
   navigator.getMedia = ( navigator.getUserMedia ||
                          navigator.webkitGetUserMedia ||
                          navigator.mozGetUserMedia ||
-                         navigator.msGetUserMedia); // recupere la video de la cam selon les navigateurs
+						 navigator.msGetUserMedia); // recupere la video de la cam selon les navigateurs
 
+  // if(navigator.getMedia === navigator.mozGetUserMedia)
+  // {
+  //  navigator.getMedia = navigator.mediaDevices.getUserMedia;
+  // }
   navigator.getMedia(
     {
-      video: true,
-      audio: false // et je coupe le son
+
+      audio: false, // et je coupe le son
+	  video: true
     },
     function(stream) {
 		 if (navigator.mozGetUserMedia) {
 			 video.mozSrcObject = stream
-			 console.log(video);
+			//  console.log(video);
         if(video)
 		{
 			video.check = 1;
@@ -82,7 +87,6 @@
       }
 	  if (video.play()) {
 		  video.check = 1;
-		//   console.log(video.check);
 		  upload.style.display = "none";
   		upload.addEventListener('click',function(event){
   		 	alert('Please disable your camera');
