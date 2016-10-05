@@ -153,13 +153,13 @@
   // }
 
 
-  function active_form()
+  function active_form(event)
   {
     var form = document.getElementsByClassName('form_comment')[0];
-
+	// event = event.keyCode;
     if(form !== undefined)
     {
-      form.addEventListener('keyup', function(){
+      form.addEventListener('keyup', function(event){
         if (event.keyCode == 13 && form.value.length > 0)
         {
           comment_picture(form);
@@ -169,7 +169,7 @@
 }
 
 
-  function event_manager(tableau,page,preview)
+  function event_manager(tableau,page,preview,event)
   {
     if(event.target.dataset.index){
       // document.removeEventListener('click', event_manager, true);
@@ -178,7 +178,7 @@
       // console.log(event.target.formactive);
       // if(event.target.formactive != 1)
       // {
-         active_form();
+         active_form(event);
         //  event.target.formactive = 1;
       // }
       // document.removeEventListener('click', event_manager, true);
@@ -204,11 +204,11 @@
     }
   }
 
-  function pagination(tableau,index,key)
+  function pagination(tableau,index,key,event)
   {
     // document.removeEventListener('click', event_manager, true);
     document.removeEventListener('click', function(event){
-        event_manager(tableau,page, preview)},true);
+        event_manager(tableau,page, preview, event)},true);
 
     var page = document.getElementById('pagination');
     var preview = document.getElementById('preview');
@@ -248,13 +248,13 @@
         if(key === 0)
         {
           document.addEventListener('click', function(event){
-            event_manager(tableau,page, preview)},true);
+            event_manager(tableau,page, preview, event)},true);
         }
     }
 
 
 
-  function delete_picture(cross) {
+  function delete_picture(cross,event) {
     //   console.log(cross.dataset.url);
       var delete_pic = new XMLHttpRequest();
       delete_pic.onreadystatechange = function() {
@@ -264,7 +264,7 @@
               if (bool == "true") {
                 erase_all_child(document.getElementById('preview'));
 				erase_all_child(document.getElementById('pagination'));
-                display_picture();
+                display_picture(event);
                   return;
               } else {
                 alert('an error occured');
@@ -282,7 +282,7 @@
       delete_pic.send(JSON.stringify(data));
   }
 
-  function display_picture() {
+  function display_picture(event) {
       var display_pic = new XMLHttpRequest();
       display_pic.onreadystatechange = function() {
           if (display_pic.readyState == 4 && display_pic.status == 200) {
@@ -309,7 +309,7 @@
 //                     console.log(tableau);
                     document.getElementById('preview').appendChild(tableau[0]);
                     active_form();
-                    pagination(tableau, 1, 0);
+                    pagination(tableau, 1, 0,event);
                     return;
               }
           }
@@ -367,7 +367,7 @@ function like_picture(element) {
 
     if(Object.is(event.target.className,"delete_pic")){
       if (confirm("Are you sure you want to delete this picture ?"))
-           delete_picture(event.target);
+           delete_picture(event.target,event);
       }
     if(Object.is(event.target.className,"fa fa-heart-o")){
              like_picture(event.target);

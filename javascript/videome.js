@@ -61,16 +61,28 @@
     },
     function(stream) {
 		 if (navigator.mozGetUserMedia) {
-        video.mozSrcObject = stream;
-		video.check = 1;
-		
+			 video.mozSrcObject = stream
+			 console.log(video);
+        if(video)
+		{
+			video.check = 1;
+		}
+		else {
+			video.check = 0;
+			startbutton.style.display = "none";
+			retardateur.style.display = "none";
+			upload.addEventListener('click', function(event){
+				document.getElementById('imageToUpload').click();
+			});
+		}
+
       } else {
         var vendorURL = window.URL || window.webkitURL;
         video.src = vendorURL.createObjectURL(stream);
       }
 	  if (video.play()) {
 		  video.check = 1;
-		  console.log(video.check);
+		//   console.log(video.check);
 		  upload.style.display = "none";
   		upload.addEventListener('click',function(event){
   		 	alert('Please disable your camera');
@@ -103,9 +115,9 @@
       node.innerHTML = "";
   }
 
-  function active_camera()
+  function active_camera(event)
   {
-       takepicture(document.getElementById('sauvegarder'));// on appelle la fonction takepicture quand on cliq srr le bouton
+       takepicture(event);// on appelle la fonction takepicture quand on cliq srr le bouton
        summon_photo_buttons("none");
        setTimeout(function()
        {
@@ -114,12 +126,12 @@
        event.preventDefault();
   }
 
-  function active_retardateur()
+  function active_retardateur(event)
   {
     summon_photo_buttons("none");
      setTimeout(function()
      {
-       takepicture(sauvegarder);// on appelle la fonction takepicture quand on cliq srr le bouton
+       takepicture(event);// on appelle la fonction takepicture quand on cliq srr le bouton
    }, 3000);
    setTimeout(function()
    {
@@ -302,7 +314,7 @@ function listen_to_validate_image(url) {
     merge.send(JSON.stringify(data)); // on envoi rien en cas de GET et une string en cas de POST
     };
 
-  function takepicture() {
+  function takepicture(event) {
 	  if(event)
 		event.preventDefault();
     var form = document.querySelector('#formulaire');
@@ -334,7 +346,7 @@ function listen_to_validate_image(url) {
   }
 
 
-  function movemask(mask, id, video){
+  function movemask(mask, id, video, event){
 
 	  if (photo.check === 1)
 	  {
@@ -361,7 +373,7 @@ document.body.addEventListener("click", function(event){
 		 {
 		   var idmask = event.target.id;
 		    mask.addEventListener('mousedown', function mask_active(event){
-		       movemask(mask,idmask,video);
+		       movemask(mask,idmask,video,event);
 		       startbutton.addEventListener('mouseup', active_camera, false);
 		       retardateur.addEventListener('mouseup', active_retardateur, false);
 		    }, true);
@@ -372,7 +384,7 @@ document.body.addEventListener("click", function(event){
 			 if(form.check !== 1)
 			 {
 				 mask.addEventListener('mousedown', function mask_active(event){
-	 		       movemask(mask,idmask,video);
+	 		       movemask(mask,idmask,video,event);
 	 		       startbutton.addEventListener('mouseup', active_camera, false);
 	 		       retardateur.addEventListener('mouseup', active_retardateur, false);
 	 		    }, true);
