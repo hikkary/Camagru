@@ -2,9 +2,6 @@
 	session_start();
 	header('Content-Type: application/json');
 	header('Content-Type: text/html; charset="iso-8859-1"');
-	// ini_set("SMTP","smtp.free.fr");
-	// ini_set("smtp_port","25");
-	// ini_set("sendmail_from","z.kerkeb@gmail.com");
 
 	 ini_set("SMTP","smtp.numericable.fr");
 	 ini_set("smtp_port","25");

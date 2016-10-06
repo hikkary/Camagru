@@ -94,6 +94,10 @@
 
 <div id="montage">
 </div>
+<div id="footer">
+	<img src="img/yjuni.png" />
+</div>
+
 <script type="text/javascript" src="javascript/resize_img.js"></script>
 
 </body>

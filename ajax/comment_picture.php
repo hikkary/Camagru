@@ -8,24 +8,6 @@ if(!$connect)
   exit();
 
 
-//
-// function first_comment($connect,$comment,$new_comment)
-// {
-//     $new_tab[] = $new_comment ;
-//     $new_tab = json_encode($new_tab);
-//
-//     $first_comment = $connect->prepare(
-//     "UPDATE `photo` SET comment = :tableau WHERE id_photo = :photo_id "
-//     );
-//
-//     $first_comment->execute(array(
-//       'photo_id' => $comment['id_photo'],
-//       'tableau' => $new_tab
-//     ));
-//
-//     echo(json_encode("true"));
-//     return;
-// }
 
 function get_comment($connect, $comment)
 {
@@ -61,40 +43,6 @@ function other_comment($connect, $comment, $result, $new_comment)
     echo($result);
     return;
 }
-
-// function delete_likes($connect, $comment, $result)
-// {
-//     $result = json_encode($result);
-//
-//     $other_like = $connect->prepare(
-//     "UPDATE `photo` SET liked = :tableau WHERE id_photo = :photo_id "
-//     );
-//
-//     $other_like->execute(array(
-//       'photo_id' => $comment['id_photo'],
-//       'tableau' => $result
-//     ));
-//
-//     echo(json_encode("true"));
-//     return;
-// }
-//
-
-//
-// function check_if_user_liked($result,$likes)
-// {
-//   $result = json_decode($result['liked'],true);
-//
-//   foreach ($result as $key => $value) {
-//         if($value['id_user'] === $likes['id_user'])
-//           {
-//               unset($result[$key]);
-//               return($result);
-//           }
-//   }
-//   return(FALSE);
-// }
-
 
 	 $comment = ((array)json_decode(file_get_contents('php://input')));
    $new_comment = array('id_user' => $comment['id_user'], 'comment' => $comment['comment']);

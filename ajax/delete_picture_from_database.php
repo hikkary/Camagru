@@ -1,6 +1,4 @@
 <?php
-// on peux optimiser via delete_picture
-// voir si j'ajoute verification de session
 
 function delete_picture_from_database($id_user, $id_photo, $bdd)
 {
@@ -34,7 +32,6 @@ if(!$connect)
 
 $id = ((array)json_decode(file_get_contents('php://input')));
 
-// str_replace("..","",$id['t_url']);
 
 if($id['t_url'])
 {

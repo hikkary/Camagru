@@ -43,17 +43,8 @@ if(!$connect)
 		$path2 = array_slice(explode('/', $_SERVER['SCRIPT_NAME']), 0, -1);
 
 		$message = '
-		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-		<html xmlns:v="urn:schemas-microsoft-com:vml">
-      <head>
-      </head>
-      <body>
-       <p>Hi.'.$pseudo.'</p>
-       <p>You have a new comment in your picture</p>
-       </body>
-    </html>
-    ';
+		Hi.'.$pseudo.'
+		You have a new comment in your picture';
     return($message);
 	}
 	// print_r($value);

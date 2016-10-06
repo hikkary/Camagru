@@ -4,26 +4,6 @@ require_once('../config/function_sql.php');
 
 $connect = connectToDatabase();
 
-
-// 
-// function first_like($connect,$likes,$new_like)
-// {
-//     $new_tab[] = $new_like ;
-//     $new_tab = json_encode($new_tab);
-//
-//     $first_like = $connect->prepare(
-//     "UPDATE `photo` SET liked = :tableau WHERE id_photo = :photo_id "
-//     );
-//
-//     $first_like->execute(array(
-//       'photo_id' => $likes['id_photo'],
-//       'tableau' => $new_tab
-//     ));
-//
-//     echo(json_encode("true"));
-//     return;
-// }
-
 function other_likes($connect, $likes, $result, $new_like)
 {
     $result = json_decode($result['liked'],true);

@@ -25,12 +25,10 @@
 
 	if(!$result)
 	{
-		// faire redirection page d'erreur
 		echo (json_encode("true"));
 		return;
 	}
 
-	// print_r($result['mail_key']);
 	if($result['mail_key'] === '0')
 	{
 		echo(json_encode("confirm"));

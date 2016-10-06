@@ -38,7 +38,6 @@
 	{
 		echo (json_encode("true"));
 		return;
-		// faire redirection page d'erreur
 	}
 	else {
 		$photo = $connect->prepare(

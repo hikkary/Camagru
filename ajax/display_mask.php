@@ -7,7 +7,6 @@
 	if(!$connect)
 		exit();
 
-	//  $users = ((array)json_decode(file_get_contents('php://input')));
 
 	$user = $connect->prepare(
 		"SELECT * FROM `mask` "
@@ -17,12 +16,9 @@
 
 	$result = $user->fetchAll(PDO::FETCH_ASSOC);
 
-	// print_r($result);
-	// var_dump($result);
 
 	if(!$result)
 	{
-		// faire redirection page d'erreur
 		echo (json_encode("true"));
 		return;
 	}

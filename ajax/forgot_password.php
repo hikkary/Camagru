@@ -25,7 +25,6 @@
 	if(!$result)
 	{
 		echo (json_encode("true"));
-		// faire redirection page d'erreur
 	}
 
 	if($username === $result['login'] || $username === $result['mail'])
@@ -33,5 +32,4 @@
 		$result['check'] = "false";
 		echo (json_encode($result)); // foutre le login dans la variable session
 	}
-		// $_SESSION['username'] = $username;
 ?>

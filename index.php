@@ -61,10 +61,7 @@
 	</form>
 	<button id="sub">Submit</button>
 </div>
-<!-- <div id="footer">
-	<a href="app.php">app</a>
-	<img src="img/yjuni.png">
-</div> -->
+
 </body>
 
 <script type="text/javascript" src="javascript/index.js"></script>
