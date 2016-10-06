@@ -18,20 +18,14 @@
   	menu();
 ?>
 
-<!-- <div id="hero">
-	<img src="img/inscription.png" width="100%">
-</div> -->
 
 <div id="redirect">
 <p id="message"> Please enter your Username or Email </p>
 <form id="decathlon" method="post">
 		<input id="username" type="text" placeholder="Username or Email">
-		<!-- <input id="password" type="password" placeholder="Type Password"> -->
 		<div id="submit">
 		<a href="#"><p>Submit</p>
 		</div></a>
-		<!-- <a id="forgot" href="forgot.php">I forgot my password</a> -->
-		 <!-- id="sub" type="submit" name="s'inscrire"> -->
 	</form>
 </div>
 

@@ -3,11 +3,6 @@
  var username = document.getElementById('username');
  var message = document.getElementById('message');
 
- function include(fileName){
-   document.write("<script type='text/javascript' src='javascript/"+fileName+"'></script>" );
- }
-
-include("function.js");
 
 function changetext(message,element,color,original_message)
 {

@@ -49,59 +49,59 @@
       width = 720,
       height = 540; // on definira sa plus tard
 
-  navigator.getMedia = ( navigator.getUserMedia ||
-                         navigator.webkitGetUserMedia ||
-                         navigator.mozGetUserMedia ||
-						 navigator.msGetUserMedia); // recupere la video de la cam selon les navigateurs
+	  var options = {
+		  audio: false,
+		  video: true,
+	  };
 
-  // if(navigator.getMedia === navigator.mozGetUserMedia)
-  // {
-  //  navigator.getMedia = navigator.mediaDevices.getUserMedia;
-  // }
-  navigator.getMedia(
-    {
+	  var handleStream = function(stream) {
+		  if (navigator.mozGetUserMedia) {
+  			 video.mozSrcObject = stream;
+			if (video) {
+  				video.check = 1;
+  			} else {
+	  			video.check = 0;
+	  			startbutton.style.display = "none";
+	  			retardateur.style.display = "none";
+	  			upload.addEventListener('click', function(event) {
+	  				document.getElementById('imageToUpload').click();
+	  			});
+  			}
+        } else {
+          var vendorURL = window.URL || window.webkitURL;
+          video.src = vendorURL.createObjectURL(stream);
+        }
+		if (video.play()) {
+	  		video.check = 1;
+	  		upload.style.display = "none";
+	    	upload.addEventListener('click', function(event) {
+	    		alert('Please disable your camera');
+	    	});
+  		}
+	};
 
-      audio: false, // et je coupe le son
-	  video: true
-    },
-    function(stream) {
-		 if (navigator.mozGetUserMedia) {
-			 video.mozSrcObject = stream
-			//  console.log(video);
-        if(video)
-		{
-			video.check = 1;
-		}
-		else {
-			video.check = 0;
-			startbutton.style.display = "none";
-			retardateur.style.display = "none";
-			upload.addEventListener('click', function(event){
-				document.getElementById('imageToUpload').click();
-			});
-		}
-
-      } else {
-        var vendorURL = window.URL || window.webkitURL;
-        video.src = vendorURL.createObjectURL(stream);
-      }
-	  if (video.play()) {
-		  video.check = 1;
-		  upload.style.display = "none";
-  		upload.addEventListener('click',function(event){
-  		 	alert('Please disable your camera');
-  		})
-		}
-    },
-    function(err) {
+	var handleError = function(err) {
 		video.check = 0;
 		startbutton.style.display = "none";
 		retardateur.style.display = "none";
-		upload.addEventListener('click', function(event){
+		upload.addEventListener('click', function(event) {
 			document.getElementById('imageToUpload').click();
 		});
-    }
-  );
+    };
+
+	console.log(navigator);
+	console.log(navigator.appCodeName);
+
+	if (navigator.appCodeName.includes('Mozilla')) {
+		navigator.mediaDevices.getUserMedia(options).then(handleStream);
+	} else {
+		navigator.getMedia = ( navigator.getUserMedia ||
+	                           navigator.webkitGetUserMedia ||
+	                           navigator.mozGetUserMedia ||
+	  						   navigator.msGetUserMedia);
+
+		navigator.getMedia(options, handleStream, handleError);
+	}
 
   video.addEventListener('canplay', function(ev){
     if (!streaming) { // streaming sera false par defaut, on l'active uniquement apres avoir lancer la video pour pouvoir recupere correctement la taille

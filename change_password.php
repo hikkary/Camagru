@@ -18,15 +18,12 @@
   	menu();
 ?>
 
-<!-- <div id="hero">
-	<img src="img/inscription.png" width="100%">
-</div> -->
 
 <div id="redirect">
 <p id="message"><?php
 require_once('config/function_sql.php');
 
-// var_dump($_GET);
+
 
 $connect = connectToDatabase();
 
@@ -56,17 +53,13 @@ if($_GET['uname'] === "" || $_GET['rkey'] === ""){
 		<input id="rkey" type="text" placeholder="Username or Email" value=<?php echo $_GET['rkey'] ?> >
 		<input id="password" type="password" placeholder="type password">
 		<input id="password_check" type="password" placeholder="type password again">
-		<!-- <input id="password" type="password" placeholder="Type Password"> -->
 		<div id="submit">
 		<a href="#"><p>Submit</p>
 		</div></a>
-		<!-- <a id="forgot" href="forgot.php">I forgot my password</a> -->
-		 <!-- id="sub" type="submit" name="s'inscrire"> -->
 	</form>
 </div>
 
 </body>
-<!-- <script type="text/javascript" src="javascript/function.js"></script> -->
 <script type="text/javascript" src="javascript/change_password.js"></script>
 <?php
 	$rootname = getcwd();

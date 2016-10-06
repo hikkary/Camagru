@@ -34,17 +34,14 @@
 
 		$result_verif = $verif->fetch(PDO::FETCH_ASSOC);
 
-		// echo($result_verif['mail_key'])."\n";
 		if($result_verif['mail_key'] === "1")
 		{
  			echo ("Account already verified");
  			redirect("login.php");
- 			// faire redirecte vers une page d'erreur
  			exit();
 		}
 
 	}
-// header('Content-Type: application/json');
 
 
 
@@ -56,7 +53,6 @@
 	if( !$_GET || !$_GET['uname'] || !$_GET['rkey'])
 		exit();
 
-	// echo($_GET['uname']);
 
 	verif_account($_GET['uname'],$connect);
 
@@ -64,7 +60,6 @@
 		"SELECT mail_check FROM `cam_users` WHERE login = :username"
 	);
 
-	// $id->execute();
 
 	$id->execute(array(
 			'username' => $_GET['uname']
@@ -72,8 +67,6 @@
 
 	$result_id = $id->fetch(PDO::FETCH_ASSOC);
 
-	// var_dump($result_id);
-	// echo $result_id['mail_check'];
 
 
 	function validate_account($username,$bdd)
@@ -109,5 +102,4 @@
   	script();
 ?>
 
-<!-- <script type="text/javascript" src="javascript/index.js"></script> -->
 </html>

@@ -4,7 +4,6 @@
 	function check_change($username,$bdd)
 	{
 		 $random = rand(100000,999999);
-		 // $random = 0;
 
 		$key_change = $bdd->prepare(
 		"UPDATE `cam_users` SET `mail_check` = :random WHERE login = :username OR mail = :username");

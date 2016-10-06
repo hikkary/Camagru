@@ -23,14 +23,8 @@
 <div id="pagination"></div>
 <div id="preview">
 </div>
-<!-- <div id="overlay" ></div> -->
-<!-- <div id="popup">
-	<divclass="popupcontrols"></div>
- 	<divclass="popupcontent"></div>
-</div> -->
 </body>
 	<script type="text/javascript" src="javascript/preview.js"></script>
-	<!-- <script type="text/javascript" src="javascript/videome.js"></script> -->
 	<?php
 		$rootname = getcwd();
 		require_once($rootname.'/script/script.php');

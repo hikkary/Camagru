@@ -30,19 +30,9 @@
 		$path1 = $_SERVER['HTTP_HOST'];
 		$path2 = array_slice(explode('/', $_SERVER['SCRIPT_NAME']), 0, -1);
 
-		$message = '
-		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-		<html xmlns:v="urn:schemas-microsoft-com:vml">
-      <head>
-      </head>
-      <body>
-       <p>Hi.'.$pseudo.'</p>
-       <p>To change your password, click on the link Below</p>
-       <a href='.$path1.'/'.$path2[1].'/change_password.php?rkey='.$key.'&uname='.$pseudo.'>change my password</a>
-       </body>
-    </html>
-    ';
+		$message = ' Hi '.$pseudo.'
+        To change your password, click on the link Below
+		http://'.$path1.'/'.$path2[1].'/change_password.php?rkey='.$key.'&uname='.$pseudo;
     return($message);
 	}
 

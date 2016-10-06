@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/menu.css">
@@ -57,7 +56,6 @@
 		<input id="password" type="password" placeholder="Type Password">
 		<input id="password_check" type="password" placeholder="Type Password Again">
 
-		 <!-- id="sub" type="submit" name="s'inscrire"> -->
 	</form>
 	<button id="sub">Submit</button>
 </div>
