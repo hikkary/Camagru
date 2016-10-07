@@ -5,6 +5,14 @@
 
 	imageToUpload.addEventListener('change', convertImage);
 
+	function recovery(elem, color)
+	{
+		elem.style.color = color;
+		elem.style.border= "";
+		elem.style.boxShadow="";
+		elem.verif = 0;
+	}
+
 	function convertImage(event) {
 		var img = new Image();
 		img.onload = function() {
@@ -24,8 +32,9 @@
 			photo.check = 0;
 			event.target.value = '';
 		};
+		if(event.target.files[0]){
 		_URL = window.URL || window.webkitURL;
-		img.src = _URL.createObjectURL(event.target.files[0]);
+		img.src = _URL.createObjectURL(event.target.files[0]);}
 	}
 
   var streaming = false,
@@ -54,6 +63,10 @@
 		  video: true,
 	  };
 
+	  function up(event) {
+		  document.getElementById('imageToUpload').click();
+	  }
+
 	  var handleStream = function(stream) {
 		  if (navigator.mozGetUserMedia) {
   			 video.mozSrcObject = stream;
@@ -63,9 +76,7 @@
 	  			video.check = 0;
 	  			startbutton.style.display = "none";
 	  			retardateur.style.display = "none";
-	  			upload.addEventListener('click', function(event) {
-	  				document.getElementById('imageToUpload').click();
-	  			});
+	  			upload.addEventListener('click', up(event));
   			}
         } else {
           var vendorURL = window.URL || window.webkitURL;
@@ -84,22 +95,19 @@
 		video.check = 0;
 		startbutton.style.display = "none";
 		retardateur.style.display = "none";
-		upload.addEventListener('click', function(event) {
+		upload.addEventListener('mouseup', function(event) {
 			document.getElementById('imageToUpload').click();
 		});
     };
 
-	console.log(navigator);
-	console.log(navigator.appCodeName);
-
-	if (navigator.appCodeName.includes('Mozilla')) {
-		navigator.mediaDevices.getUserMedia(options).then(handleStream);
+	var verify = false;
+	if (!navigator.vendor.includes('Google')) {
+		navigator.mediaDevices.getUserMedia(options).then(handleStream).catch(handleError);
 	} else {
 		navigator.getMedia = ( navigator.getUserMedia ||
 	                           navigator.webkitGetUserMedia ||
 	                           navigator.mozGetUserMedia ||
 	  						   navigator.msGetUserMedia);
-
 		navigator.getMedia(options, handleStream, handleError);
 	}
 
@@ -192,8 +200,10 @@
   }
 
   function summon_buttons(display){
-    document.getElementById('corbeille').style.display = display;
-    document.getElementById('valid_picture').style.display = display;
+	  if(video.check === 1){
+    	document.getElementById('corbeille').style.display = display;
+	}
+	document.getElementById('valid_picture').style.display = display;
 	document.getElementById('valid_picture').style.color = "green";
   }
 
@@ -304,8 +314,8 @@ function listen_to_validate_image(url) {
         document.getElementById("photo").setAttribute('src' , picture_data[`picture`]);
         document.getElementById("photo").style.opacity = "1";
         summon_buttons("");
-        listen_to_delete_image(picture_data[`url`]);
-        listen_to_validate_image(picture_data[`url`]);
+    	listen_to_delete_image(picture_data[`url`]);
+	    listen_to_validate_image(picture_data[`url`]);
         return(picture_data);
       }
       };
@@ -342,9 +352,9 @@ function listen_to_validate_image(url) {
 
   function clearcanvas(photo,mask){
     var context = mask.getContext('2d');
+	context.clearRect(0, 0, canvas.width, canvas.height);
     photo.setAttribute('src', "img/nphoto.png");
     photo.style.opacity = "0";
-    context.clearRect(0, 0, canvas.width, canvas.height);
 	photo.check = 0;
 	form.check = 0;
   }
@@ -396,7 +406,7 @@ document.body.addEventListener("click", function(event){
 
  			validate_picture.addEventListener('mouseup',function valid_upload(event){
  				 document.getElementById('submitImage').click();
-				 corbeille.style.display = "";
+				//  corbeille.style.display = "";
 				 this.removeEventListener('mouseup', valid_upload);
  			}, false);
 			}

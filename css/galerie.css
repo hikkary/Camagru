@@ -235,7 +235,7 @@ body{
 
 	#pagination{
 		height: 20vh;
-		font-size: 8vh;
+		font-size: 6vh;
 	}
 
 	#preview{
@@ -334,3 +334,4 @@ body{
 	.picture_preview{
 		background-size: 1100px 810px !important;
 	}
+}

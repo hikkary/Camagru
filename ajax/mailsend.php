@@ -23,7 +23,7 @@
 
 		$message = 'Hi '.$pseudo.'
        To verify your mail, click on the link Below
-       '.$path1.'/'.$path2[1].'/mail_keycheck.php?rkey='.$key.'&uname='.$pseudo;
+       http://'.$path1.'/'.$path2[1].'/mail_keycheck.php?rkey='.$key.'&uname='.$pseudo;
 
     return($message);
 	}
