@@ -1,3 +1,4 @@
+<!-- Validate the  user's mail -->
 <!DOCTYPE html>
 <html>
 <head>

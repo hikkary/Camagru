@@ -44,8 +44,13 @@ function other_comment($connect, $comment, $result, $new_comment)
     return;
 }
 
-	 $comment = ((array)json_decode(file_get_contents('php://input')));
+   $comment = ((array)json_decode(file_get_contents('php://input')));
    $new_comment = array('id_user' => $comment['id_user'], 'comment' => $comment['comment']);
+   if(ctype_alnum($comment['comment']) === FALSE){
+		echo(json_encode("false"));
+		return;
+	}
+
    $result = get_comment($connect ,$comment);
 
    other_comment($connect, $comment, $result, $new_comment);

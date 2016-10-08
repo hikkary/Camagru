@@ -21,7 +21,6 @@
  		if (mail_forgot.readyState == 4 && mail_forgot.status == 200)
  		{
  			const bool = JSON.parse(mail_forgot.responseText);
- 		// 	console.log(bool);
  			if(bool == "false")
       {
         alert('mail sent ! ')
@@ -36,9 +35,6 @@
   mail_forgot.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
  	mail_forgot.send(JSON.stringify(data));
  }
-
-
-
 
 function mail_forgot(username){
   var error = "Username or Email Does not Exist";
@@ -63,8 +59,6 @@ function mail_forgot(username){
   forgot.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	forgot.send(JSON.stringify(data));
 }
-
-
 
 submit.addEventListener('click',function(ev){
 	var formfill = "Please write Username or Email";

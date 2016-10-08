@@ -3,7 +3,6 @@
  var username = document.getElementById('username');
  var message = document.getElementById('message');
 
-
 function changetext(message,element,color,original_message)
 {
  element.innerHTML = message;
@@ -39,9 +38,7 @@ function password_compare(password, password_check)
    else {
      return false;
    }
-
 }
-
 
 function regex_password(password)
 {
@@ -82,7 +79,6 @@ function change_password(password,username,rkey){
   password_change.send(JSON.stringify(data));
 
 }
-
 
 password.addEventListener('blur', function(ev){
   if (regex_password(password) === true)
@@ -127,5 +123,4 @@ submit.addEventListener('click',function(ev){
   }
 	 else
     change_password(password,username,rkey);
-  	// mail_forgot(username.value);
 },true);

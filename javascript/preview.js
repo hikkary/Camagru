@@ -1,5 +1,4 @@
 (function(){
-  // event = event || window.event;
   var preview = document.getElementById('preview');
 
   function erase_all_child(node){
@@ -28,15 +27,12 @@
 
   function refresh_comments(data)
   {
-    // console.log(data[0]);
     if(data['comment'] === null)
        return("<p>No comment yet</p>");
     else {
-      // var comments = JSON.parse(data);
       var tableau = [];
       for(var index = 0; index < data.length; index++)
       {
-//           console.log(comments[index]['id_user']);
         tableau[index] = data[index]['id_user']+" : "+data[index]['comment']+'<br>';
       }
       return(tableau);
@@ -52,7 +48,6 @@
         var tableau = [];
         for(var index = 0; index < comments.length; index++)
         {
-//           console.log(comments[index]['id_user']);
           tableau[index] = comments[index]['id_user']+" : "+comments[index]['comment']+'<br>';
         }
         return(tableau);
@@ -64,9 +59,7 @@
       comment_send.onreadystatechange = function() {
           if (comment_send.readyState == 4 && comment_send.status == 200) {
               const bool = JSON.parse(comment_send.responseText);
-            //   console.log(bool);
               if (bool == "true") {
-                  // alert('non non non non non');
                   return;
               }
           	}
@@ -79,25 +72,32 @@
           comment_send.send(JSON.stringify(data));
         }
 
+
+  function regex_comment(comment)
+  {
+	 var commentregexp = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.).*$", "g")
+	 if (commentregexp.test(comment.value) === true && comment.value.length <= 300)
+		 return true;
+	 else {
+		 alert('Only alpha-Numerical characters /Your comments is too long');
+		 return false;
+		 }
+	  }
+
+
   function comment_picture(element) {
         var comment = new XMLHttpRequest();
         comment.onreadystatechange = function() {
             if (comment.readyState == 4 && comment.status == 200) {
                 const bool = JSON.parse(comment.responseText);
-                // console.log(bool);
-                if (bool) {
-                  // alert('ok');
-                  // erase_all_child(document.getElementById('preview'));
-                  // display_picture();
+                if (bool !== "false") {
                   document.getElementsByClassName('comments_zone')[0].innerHTML = refresh_comments(bool);
                   document.getElementsByClassName('comments')[0].innerHTML = "<i class='fa fa-comments' aria-hidden='true'></i> &nbsp"+bool.length;
                   element.value = "";
-                //   console.log(document.getElementsByClassName('comments_zone')[0]);
-                  // element.innerHTML += "<a href='#' class='liked' data-id="+data[`id_photo`]+" data-userid="+data[`id_user`]+"> <i class='fa fa-heart-o' aria-hidden='true'></i> &nbsp"+  return_number_like(data)+" </a>";
                   send_mail_comment(element.dataset.userid);
                     return;
                 } else {
-                    // alert('like');
+                 	 alert('Only alpha-Numerical characters /Your comments is too long');
                     return;
                 }
             }
@@ -107,6 +107,9 @@
           id_user : document.getElementById('html').dataset.username,
           comment : element.value
         }
+
+		if(regex_comment(element.value) === false )
+			return;
         comment.open("POST", "ajax/comment_picture.php", true);
         comment.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         comment.send(JSON.stringify(data));
@@ -141,22 +144,12 @@
        new_picture.innerHTML += "<div class='comments_zone' data-id="+data[`id_photo`]+">"+display_comments(data)+"</div>"
        new_picture.innerHTML += "<div class='comments_write' data-id="+data[`id_photo`]+"><form  data-id="+data[`id_photo`]+"  method='post'><input class='form_comment' data-userid="+data[`id_user`]+" type='text' name='comment' maxlength='100' placeholder='write a comment' </form></div>"
      }
-    // document.getElementById('preview').appendChild(new_picture);
-
     return(new_picture);
   }
-
-  // function display_img(img)
-  // {
-  //   erase_all_child(document.getElementById('preview'));
-  //   document.getElementById('preview').appendChild();
-  // }
-
 
   function active_form(event)
   {
     var form = document.getElementsByClassName('form_comment')[0];
-	// event = event.keyCode;
     if(form !== undefined)
     {
       form.addEventListener('keyup', function(event){
@@ -172,22 +165,13 @@
   function event_manager(tableau,page,preview,event)
   {
     if(event.target.dataset.index){
-      // document.removeEventListener('click', event_manager, true);
       erase_all_child(preview);
       preview.appendChild(tableau[event.target.dataset.index - 1]);
-      // console.log(event.target.formactive);
-      // if(event.target.formactive != 1)
-      // {
          active_form(event);
-        //  event.target.formactive = 1;
-      // }
-      // document.removeEventListener('click', event_manager, true);
-
       return;
     }
     if(event.target.dataset.nextindex) //finir sa
     {
-    //   console.log("ace");
       erase_all_child(page);
       erase_all_child(preview);
       preview.appendChild(tableau[Number(event.target.dataset.nextindex - 1)] );
@@ -206,7 +190,6 @@
 
   function pagination(tableau,index,key,event)
   {
-    // document.removeEventListener('click', event_manager, true);
     document.removeEventListener('click', function(event){
         event_manager(tableau,page, preview, event)},true);
 
@@ -223,28 +206,21 @@
     }
     for(var i = index; i < index + 20 && i <= tableau.length ; i++)
         {
-//           console.log(i);
           var element = document.createElement("a");
           element.setAttribute('href', '#');
-          // element.innerHTML = i + 1;
           element.innerHTML = i ;
           element.setAttribute('data-index', element.innerHTML);
-          // console.log(element);
           page.appendChild(element);
 
         }
-//         console.log(i);
-//         console.log(tableau[i]);
         if(tableau[i])
         {
           var element = document.createElement("a");
           element.setAttribute('href', '#');
           element.innerHTML = ">>";
-          // element.setAttribute('class', 'next');
           element.setAttribute('data-nextindex', i);
           page.appendChild(element);
         }
-
         if(key === 0)
         {
           document.addEventListener('click', function(event){
@@ -252,15 +228,11 @@
         }
     }
 
-
-
   function delete_picture(cross,event) {
-    //   console.log(cross.dataset.url);
       var delete_pic = new XMLHttpRequest();
       delete_pic.onreadystatechange = function() {
           if (delete_pic.readyState == 4 && delete_pic.status == 200) {
               const bool = JSON.parse(delete_pic.responseText);
-            //   console.log(bool);
               if (bool == "true") {
                 erase_all_child(document.getElementById('preview'));
 				erase_all_child(document.getElementById('pagination'));
@@ -287,26 +259,16 @@
       display_pic.onreadystatechange = function() {
           if (display_pic.readyState == 4 && display_pic.status == 200) {
               const bool = JSON.parse(display_pic.responseText);
-//               console.log(bool);
               if (bool == "true") {
                   preview.innerHTML = " No Photo Yet";
                   return;
               } else {
-//                   console.log(bool.length);
                   erase_all_child(document.getElementById('preview'));
-                  // create_preview(bool[0],0);
                   var tableau = [];
                   for( var index = 0; index <  bool.length; index++)
                   {
                     tableau[index] = create_preview(bool[index],index);
                   }
-
-                  // console.log(tableau);
-                  // if (tableau[1])
-                  // {
-                  //   document.getElementById('preview').appendChild(tableau[1]);
-                  // }
-//                     console.log(tableau);
                     document.getElementById('preview').appendChild(tableau[0]);
                     active_form();
                     pagination(tableau, 1, 0,event);
@@ -320,30 +282,14 @@
   }
 
   display_picture();
-  // listen_to_delete_preview(okfunc);
-
-// function update_like(photo_id)
-// {
-//     var photo = document.getElementById(photo_id);
-//
-//     console.log(photo);
-// }
 
 function like_picture(element) {
       var liked = new XMLHttpRequest();
       liked.onreadystatechange = function() {
           if (liked.readyState == 4 && liked.status == 200) {
               const bool = JSON.parse(liked.responseText);
-            //   console.log(bool);
               if (bool) {
-                // console.log(bool.length);
-                // element.parentNode.innerHTML = "";
-
                 element.parentNode.innerHTML = "<i class='fa fa-heart-o' aria-hidden='true'></i> &nbsp"+ bool.length;
-
-                //  erase_all_child(document.getElementById('preview'));
-                // display_picture();
-                // element.innerHTML="zebi";
                   return;
               } else {
                    alert('error');
@@ -360,10 +306,7 @@ function like_picture(element) {
       liked.send(JSON.stringify(data));
   }
 
-
-
   document.body.addEventListener("click", function(event) {
-//     console.log(event.target.className);
 
     if(Object.is(event.target.className,"delete_pic")){
       if (confirm("Are you sure you want to delete this picture ?"))
@@ -374,26 +317,4 @@ function like_picture(element) {
 }
 }, false);
 
-
 })();
-
-
-// function get_session()
-// {
-//   var session = new XMLHttpRequest();
-//   session.onreadystatechange = function() {
-//       if (session.readyState == 4 && session.status == 200) {
-//         const bool = JSON.parse(session.responseText);
-//           // console.log(bool);
-//           if (bool) {
-//             console.log('ok');
-//             return (bool);
-//           } else {
-//             return (null);
-//           }
-//       }
-//   };
-//   session.open("POST", "ajax/get_session.php", true);
-//   session.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-//   session.send(null);
-// }

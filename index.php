@@ -1,3 +1,4 @@
+<!-- Register form -->
 <?php
 	session_start();
 ?>
@@ -24,6 +25,7 @@
 ?>
 <div id="hero">
 	<img src="img/inscription.png" width="100%">
+	<!-- Redirect the user if he is already connected -->
 <p><?php
 	 if($_SESSION)
 	 {

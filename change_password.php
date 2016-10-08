@@ -1,3 +1,4 @@
+<!-- Reset Password Form -->
 <?php
 	session_start();
 ?>

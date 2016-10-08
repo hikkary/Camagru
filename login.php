@@ -1,3 +1,4 @@
+<!-- Login Page -->
 <?php
 	session_start();
 ?>
@@ -43,7 +44,6 @@
 		<a href="#"><p>Submit</p>
 		</div></a>
 		<a id="forgot" href="forgot.php">I forgot my password</a>
-		 <!-- id="sub" type="submit" name="s'inscrire"> -->
 	</form>
 </div>
 

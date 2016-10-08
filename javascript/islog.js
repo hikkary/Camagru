@@ -1,14 +1,12 @@
 var login = document.getElementById('croix');
 var link =  document.getElementById('link_croix');
 
-
 function logout(){
   var log_out = new XMLHttpRequest();
   log_out.onreadystatechange = function(){
     if(log_out.readyState == 4 && log_out.status == 200)
     {
         const bool = JSON.parse(log_out.responseText);
-        // console.log(bool);
         if(bool == "true")
         {
           login_logout(login, link, 1);
@@ -42,7 +40,6 @@ function login_logout(croix, link, state){
     }
 
 }
-
 
 function islog(login, link){
   var log = new XMLHttpRequest();

@@ -1,3 +1,4 @@
+<!-- A mini app which permit to make little montage thanks to a cam or uploaded picture -->
 <?php
 	session_start();
 	ini_set("file_uploads","on");
@@ -43,7 +44,6 @@
 
 </div>
 <canvas id="canvas"></canvas>
-<!-- <img src="img/nphoto2.png" id="photo" alt="photo"> -->
 <div id ="bv">
 	<div id="void1">
 	</div>

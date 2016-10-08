@@ -1,3 +1,4 @@
+<!-- Display all the pictures Taken -->
 <?php
 	session_start();
 

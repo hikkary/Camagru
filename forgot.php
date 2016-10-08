@@ -1,3 +1,4 @@
+<!-- Forgot Id page, sends a mail to the user to reset password -->
 <?php
 	session_start();
 ?>

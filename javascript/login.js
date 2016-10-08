@@ -22,7 +22,6 @@ function connect(username,password){
 		if (connect.readyState == 4 && connect.status == 200)
 		{
 			const bool = JSON.parse(connect.responseText);
-			// console.log(bool);
 			if(bool === "false")
 				window.location.href = "app.php";
 			else if (bool === "confirm") {

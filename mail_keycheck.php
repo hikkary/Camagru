@@ -1,3 +1,4 @@
+<!-- Check the mail givem by the user -->
 <?php
 	session_start();
 ?>
